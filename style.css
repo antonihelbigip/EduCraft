@@ -1,17 +1,17 @@
 :root{
-  --bg: #f3f6f8;
-  --card: #ffffff;
-  --muted: #eef2f4;
-  --text: #0f1724;
-  --primary: #0ea5e9;     /* jasny niebieski */
-  --accent: #16a34a;      /* zieleń akcent */
-  --dark: #0b1220;
-  --radius: 10px;
-  --maxw: 1100px;
+  --bg: #f3f6f8;           /* Tło strony - można zmienić na ciemniejsze lub gradient */
+  --card: #ffffff;         /* Kolor kart i sekcji - można dodać ciemny tryb */
+  --muted: #eef2f4;        /* Jasne tło dla elementów pomocniczych */
+  --text: #0f1724;         /* Kolor głównego tekstu */
+  --primary: #0ea5e9;      /* Jasny niebieski - główny kolor akcji, przycisków */
+  --accent: #16a34a;       /* Zieleń akcentu - np. pozytywne komunikaty */
+  --dark: #0b1220;         /* Kolor ciemny dla brandu, nagłówków */
+  --radius: 10px;           /* Promień zaokrąglenia kart/przycisków */
+  --maxw: 1100px;           /* Maksymalna szerokość kontenera */
 }
 
 /* Reset / base */
-*{box-sizing:border-box}
+*{box-sizing:border-box} 
 html,body{height:100%}
 body{
   margin:0;
@@ -23,31 +23,88 @@ body{
 }
 
 /* container */
-.container{max-width:var(--maxw); margin:0 auto; padding:28px 18px;}
+.container{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:28px 18px;
+  /* Future: dodać padding responsywny zależny od szerokości ekranu */
+}
 
 /* Topbar / language */
-.topbar{background:rgba(255,255,255,0.02)}
-.top-inner{display:flex; align-items:center; justify-content:space-between; padding:10px 0;}
-.brand{font-weight:700; font-size:18px; color:var(--dark)}
-.lang-switch{display:flex; gap:8px}
-.lang-btn{background:transparent;border:1px solid rgba(11,18,32,0.06);padding:6px 8px;border-radius:6px;cursor:pointer;font-weight:600}
-.lang-btn.active{background:var(--primary); color:white; border-color:transparent}
+.topbar {
+  position: absolute;   /* poprawka – przenosi do prawego górnego rogu */
+  top: 12px;
+  right: 18px;
+  z-index: 1000;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 8px;
+}
+
+.lang-btn{
+  background:transparent;
+  border:1px solid rgba(11,18,32,0.06);
+  padding:6px 8px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+}
+.lang-btn.active{
+  background:var(--primary); 
+  color:white; 
+  border-color:transparent;
+}
 
 /* Hero */
 .hero{
-  background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(22,163,74,0.04)), url('https://zrzutka.pl/uploads/chipin/b5j6vm/news/eLK49S3ES8vxFGuL.jpg') center/cover no-repeat;
+  background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(22,163,74,0.04)), url('images/tlo.jpg') center/cover no-repeat;
   color: white;
   padding:64px 12px;
   text-align:center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.hero-inner{max-width:980px; margin:0 auto; backdrop-filter: blur(0.2px);}
-.hero h1{font-size:36px; margin:0 0 8px; text-shadow: 0 2px 8px rgba(0,0,0,0.25);}
-.lead{font-size:17px; margin:0 0 18px; opacity:0.98}
+.hero-inner{
+  max-width:980px; 
+  margin:0 auto; 
+  backdrop-filter: blur(0.2px);
+}
+.hero h1{
+  font-size:36px; 
+  margin:0 0 8px; 
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.lead{
+  font-size:17px; 
+  margin:0 0 18px; 
+  opacity:0.98;
+}
 
 /* Buttons */
-.btn{display:inline-block; padding:12px 18px; border-radius:8px; text-decoration:none; font-weight:600;}
-.btn-primary{background:var(--card); color:var(--primary); box-shadow: 0 6px 18px rgba(14,165,233,0.12);}
-.btn-outline{border:2px solid rgba(255,255,255,0.18); color: white; margin-left:12px; background:transparent;}
+.btn{
+  display:inline-block; 
+  padding:12px 18px; 
+  border-radius:8px; 
+  text-decoration:none; 
+  font-weight:600;
+  transition: all 0.3s ease;
+}
+.btn-primary{
+  background:var(--card); 
+  color:var(--primary); 
+  box-shadow: 0 6px 18px rgba(14,165,233,0.12);
+}
+.btn-outline{
+  border:2px solid rgba(255,255,255,0.18); 
+  color: white; 
+  margin-left:12px; 
+  background:transparent;
+}
 
 /* Cards */
 .card{
@@ -60,17 +117,39 @@ body{
 .muted{background:var(--muted)}
 
 /* Gallery */
-.gallery .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:12px; margin-top:12px;}
-.gallery img{width:100%; height:160px; object-fit:cover; border-radius:8px; display:block;}
+.gallery .grid{
+  display:grid; 
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); 
+  gap:12px; 
+  margin-top:12px;
+}
+.gallery img{
+  width:100%; 
+  height:160px; 
+  object-fit:cover; 
+  border-radius:8px; 
+  display:block;
+  transition: transform 0.3s ease;
+}
 
 /* support widget */
-.widget-wrap{margin-top:12px; border-radius:8px; overflow:hidden; box-shadow: 0 8px 30px rgba(11,18,32,0.06);}
+.widget-wrap{
+  margin-top:12px; 
+  border-radius:8px; 
+  overflow:hidden; 
+  box-shadow: 0 8px 30px rgba(11,18,32,0.06);
+}
 
 /* small text */
-.small{font-size:13px; color:#6b7280}
+.small{font-size:13px; color:#6b7280;}
 
 /* footer */
-.site-footer{background:transparent; padding:20px 0; text-align:center; color:#475569;}
+.site-footer{
+  background:transparent; 
+  padding:20px 0; 
+  text-align:center; 
+  color:#475569;
+}
 
 /* responsive tweaks */
 @media (max-width:760px){
