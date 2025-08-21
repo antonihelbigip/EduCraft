@@ -67,14 +67,59 @@
     </section>
 
     <!-- Gallery -->
-    <section id="gallery" class="card gallery">
-      <h3 data-i18n="gallery_title">Galeria</h3>
-      <div class="grid">
-        <img src="https://zrzutka.pl/uploads/chipin/b5j6vm/news/eLK49S3ES8vxFGuL.jpg" alt="" data-i18n-alt="gallery_img1_alt">
-        <img src="https://zrzutka.pl/uploads/chipin/b5j6vm/news/L1EvnWqKu3qNUTtY.jpg" alt="" data-i18n-alt="gallery_img2_alt">
-      </div>
-      <p class="small" data-i18n="gallery_note">Tip: wrzuć obrazy do katalogu <code>images/</code> i podmień src na lokalne.</p>
-    </section>
+<section id="gallery" class="card gallery">
+  <h3 data-i18n="gallery_title">Galeria</h3>
+  <div class="grid">
+    <!-- Zdjęcia będą dodawane dynamicznie przez skrypt -->
+  </div>
+  <p class="small" data-i18n="gallery_note">Tip: wrzuć obrazy do katalogu <code>images/</code> w repozytorium.</p>
+</section>
+
+<!-- SKRYPT: dynamiczne ładowanie obrazów z repo GitHub -->
+<script>
+(async function(){
+  const owner = 'antonihelbigip';
+  const repo = 'EduCraft';
+  const path = 'images'; // katalog w repo, jak podałeś
+  const branch = 'main';
+
+  const grid = document.querySelector('.gallery .grid');
+  if(!grid) return;
+
+  grid.innerHTML = '<p class="small">Ładowanie galerii…</p>';
+
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error('GitHub API error: ' + res.status);
+    const files = await res.json();
+    const imgs = (Array.isArray(files) ? files.filter(f => /\.(jpe?g|png|gif|webp|svg)$/i.test(f.name)) : []);
+
+    if (imgs.length === 0) {
+      grid.innerHTML = '<p class="small">Brak obrazów w katalogu images/. Dodaj pliki i zrób push.</p>';
+      return;
+    }
+
+    imgs.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
+    grid.innerHTML = '';
+
+    imgs.forEach(file => {
+      const img = document.createElement('img');
+      const filePath = path ? `${path}/${file.name}` : file.name;
+      img.src = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${encodeURIComponent(filePath)}`;
+      img.alt = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g,' ');
+      img.loading = 'lazy';
+      img.className = 'gallery-item';
+      grid.appendChild(img);
+    });
+  } catch (err) {
+    console.error(err);
+    grid.innerHTML = '<p class="small">Nie udało się załadować galerii. Sprawdź konsolę (F12).</p>';
+  }
+})();
+</script>
+
 
     <!-- Support (Zrzutka widget) -->
     <section id="support" class="card support">
