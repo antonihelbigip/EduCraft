@@ -1,70 +1,104 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EcoCraft - Minecraft OZE</title>
-<script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EcoCraft – Minecraft OZE</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>EcoCraft 🌍⚡</h1>
+      <p class="lead">Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://zrzutka.pl/b5j6vm" target="_blank" rel="noopener">Wesprzyj projekt</a>
+        <a class="btn btn-outline" href="#about">Dowiedz się więcej</a>
+      </div>
+    </div>
+  </header>
 
-<!-- Hero -->
-<section class="bg-green-600 text-white text-center py-20">
-  <h1 class="text-4xl font-bold mb-4">EcoCraft 🌍⚡</h1>
-  <p class="text-lg max-w-xl mx-auto mb-6">Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną!</p>
-  <a href="https://zrzutka.pl/b5j6vm" class="bg-white text-green-600 px-6 py-3 rounded font-bold hover:bg-gray-100 transition">Wesprzyj projekt</a>
-</section>
+  <main class="container">
+    <!-- About -->
+    <section id="about" class="card">
+      <h2>O projekcie</h2>
+      <p>
+        Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej. 
+        To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE, a przy okazji będzie mógł uczyć się przez zabawę.
+      </p>
+    </section>
 
-<!-- O projekcie -->
-<section class="py-16 px-6 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold mb-6">O projekcie</h2>
-  <p class="mb-4">Buduję pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% odnawialną energią. To połączenie gier, technologii i ekologii — z misją edukacyjną dla dzieci, młodzieży i dorosłych. Pomóż mi uruchomić ten wyjątkowy projekt i pokażmy, że Minecraft może zmieniać świat!</p>
-</section>
+    <!-- Creator -->
+    <section id="creator" class="card muted">
+      <h3>Kim jestem?</h3>
+      <p>Jestem Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”. Ten projekt to połączenie pasji i edukacji.</p>
+    </section>
 
-<!-- Kim jestem -->
-<section class="bg-gray-200 py-16 px-6 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold mb-6">Kim jestem?</h2>
-  <p class="mb-4">Mam na imię Antoni — student mechatroniki na Politechnice Śląskiej, stażysta ds. sztucznej inteligencji w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.</p>
-</section>
+    <!-- What we build -->
+    <section id="build" class="card">
+      <h3>Co buduję?</h3>
+      <ul>
+        <li>Serwer 24/7 zasilany PV + turbina wiatrowa</li>
+        <li>Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC</li>
+        <li>Realny system monitoringu energii (Raspberry Pi + Home Assistant)</li>
+      </ul>
+    </section>
 
-<!-- Co buduję -->
-<section class="py-16 px-6 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold mb-6">Co buduję?</h2>
-  <ul class="list-disc ml-6 space-y-2">
-    <li>Serwer 24/7 działający dzięki panelom słonecznym i turbinie wiatrowej</li>
-    <li>Platforma edukacyjna z zadaniami o OZE, fizyce i automatyce</li>
-    <li>Realny system zasilania i monitoringu energii</li>
-  </ul>
-</section>
+    <!-- Progress / updates -->
+    <section id="updates" class="card muted">
+      <h3>Aktualizacje</h3>
+      <ul>
+        <li>2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione</li>
+        <li>Tryby: Proxy, Lobby, PvP, EarthMC</li>
+        <li>Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap</li>
+        <li>Monitoring energii z miernika Teccus (plan: integracja z Home Assistant)</li>
+      </ul>
+    </section>
 
-<!-- Postępy -->
-<section class="bg-gray-200 py-16 px-6 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold mb-6">Aktualizacje</h2>
-  <ul class="list-disc ml-6 space-y-2">
-    <li>Postawione 2 serwery HP EliteDesk z Linuxem</li>
-    <li>Tryby gry: Proxy, Lobby, PvP, EarthMC (1:1000)</li>
-    <li>Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap</li>
-    <li>Monitoring zużycia energii przez Teccus + plan integracji z Home Assistant</li>
-  </ul>
-</section>
+    <!-- Gallery -->
+    <section id="gallery" class="card gallery">
+      <h3>Galeria</h3>
+      <div class="grid">
+        <!-- Hotlinki z Zrzutki (możesz później podmienić ścieżki na lokalne / images/) -->
+        <img src="https://zrzutka.pl/uploads/chipin/b5j6vm/news/eLK49S3ES8vxFGuL.jpg" alt="AMP panel - EcoCraft" />
+        <img src="https://zrzutka.pl/uploads/chipin/b5j6vm/news/L1EvnWqKu3qNUTtY.jpg" alt="Zdjęcie 2 - EcoCraft" />
+      </div>
+      <p class="small">Tip: wrzuć te obrazy do katalogu <code>images/</code> w repo i zmień src na <code>images/nazwa.jpg</code>.</p>
+    </section>
 
-<!-- FAQ -->
-<section class="py-16 px-6 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold mb-6">FAQ</h2>
-  <p class="mb-4"><strong>Czy serwer będzie darmowy?</strong> Tak, otwarty dla wszystkich. Bonusy dla wspierających.</p>
-  <p class="mb-4"><strong>Czy zasilanie OZE będzie realne?</strong> Tak, 100% energii z PV i turbiny wiatrowej, kontrolowane przez Raspberry Pi i Home Assistant.</p>
-</section>
+    <!-- Support (Zrzutka widget) -->
+    <section id="support" class="card support">
+      <h3>Wesprzyj projekt</h3>
+      <p>Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.</p>
 
-<!-- Wsparcie -->
-<section class="bg-green-600 text-white text-center py-16">
-  <h2 class="text-3xl font-bold mb-6">Wsparcie projektu</h2>
-  <a href="https://zrzutka.pl/b5j6vm" class="bg-white text-green-600 px-6 py-3 rounded font-bold hover:bg-gray-100 transition">Wesprzyj teraz</a>
-</section>
+      <!-- widget Zrzutka -->
+      <div class="widget-wrap">
+        <div style="position: relative; width: 100%; height: 480px; overflow: hidden;">
+          <iframe style="position: absolute; top:0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%;" 
+            src="https://zrzutka.pl/b5j6vm/widget/13" frameborder="0" scrolling="no" title="Zrzutka widget"></iframe>
+        </div>
+      </div>
+    </section>
 
-<!-- Footer -->
-<footer class="py-6 text-center text-gray-500">
-  © 2025 EcoCraft - MIT License
-</footer>
+    <!-- FAQ -->
+    <section id="faq" class="card muted">
+      <h3>FAQ</h3>
+      <details><summary>Czy serwer będzie darmowy?</summary><p>Tak — serwer będzie otwarty dla wszystkich. Wspierający dostaną dodatkowe bonusy.</p></details>
+      <details><summary>Czy zasilanie OZE będzie realne?</summary><p>Tak — planujemy PV + turbina + akumulatory LiFePO₄ oraz monitoring przez Home Assistant.</p></details>
+    </section>
 
+    <!-- Contact / Links -->
+    <section id="contact" class="card">
+      <h3>Kontakt & społeczność</h3>
+      <p>Discord (soon) • GitHub: <a href="https://github.com/your-username/ecocraft-oze" target="_blank">github.com/your-username/ecocraft-oze</a></p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© 2025 EcoCraft • MIT License • Made by Antoni</small>
+    </div>
+  </footer>
 </body>
 </html>
