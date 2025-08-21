@@ -59,7 +59,8 @@ body{
 
 /* Hero */
 .hero{
-  background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(22,163,74,0.04)), url('tlo.jpg') center/cover no-repeat;
+  background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(22,163,74,0.04)),
+              url('https://raw.githubusercontent.com/antonihelbigip/EduCraft/main/tlo.jpg') center/cover no-repeat;
   color: white;
   padding:64px 12px;
   text-align:center;
