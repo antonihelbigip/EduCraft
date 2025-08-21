@@ -29,10 +29,9 @@ body{
   padding:28px 18px;
   /* Future: dodać padding responsywny zależny od szerokości ekranu */
 }
-
 /* Topbar / language */
 .topbar {
-  position: absolute;   /* poprawka – przenosi do prawego górnego rogu */
+  position: absolute;   /* przenosi do prawego górnego rogu */
   top: 12px;
   right: 18px;
   z-index: 1000;
@@ -41,26 +40,36 @@ body{
 .lang-switch {
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 
+/* DOMYŚLNY STAN: biały tekst, lekko widoczna biała ramka */
 .lang-btn{
-  background:transparent;
-  border:1px solid rgba(11,18,32,0.06);
-  padding:6px 8px;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:600;
+  background: transparent;
+  color: white;                              /* <-- białe litery */
+  border: 1px solid rgba(255,255,255,0.12);  /* jaśniejsza ramka pasująca do tła */
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .15s, color .15s, transform .08s;
 }
+.lang-btn:hover {
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-1px);
+}
+
+/* AKTYWNY PRZYCISK: biały background + kolor tekstu z --primary */
 .lang-btn.active{
-  background:var(--primary); 
-  color:white; 
-  border-color:transparent;
+  background: white; 
+  color: var(--primary); 
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(2,6,23,0.08);
 }
 
 /* Hero */
 .hero{
-  background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(22,163,74,0.04)),
-              url('https://raw.githubusercontent.com/antonihelbigip/EduCraft/main/tlo.jpg') center/cover no-repeat;
+  background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(22,163,74,0.04)), url('images/tlo.jpg') center/cover no-repeat;
   color: white;
   padding:64px 12px;
   text-align:center;
@@ -118,20 +127,24 @@ body{
 .muted{background:var(--muted)}
 
 /* Gallery */
-.gallery .grid{
-  display:grid; 
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); 
-  gap:12px; 
-  margin-top:12px;
+.gallery .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
 }
-.gallery img{
-  width:100%; 
-  height:160px; 
-  object-fit:cover; 
-  border-radius:8px; 
-  display:block;
-  transition: transform 0.3s ease;
+
+.gallery .grid .gallery-item {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
 }
+@media (max-width:760px){
+  .gallery .grid .gallery-item { height: 140px; }
+}
+
 
 /* support widget */
 .widget-wrap{
