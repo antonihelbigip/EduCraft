@@ -164,13 +164,15 @@
     }
 
     // ustaw szerokości slajdów w procentach (flex-basis)
-    function setSlideBasis() {
-      const basis = (100 / visible) + '%';
-      slides.forEach(slide => {
-        slide.style.flex = `0 0 ${basis}`;
-      });
-      updatePosition(Math.min(currentIndex, Math.max(0, total - visible)));
-    }
+function setSlideBasis() {
+  const basis = (100 / visible) + '%';
+  slides.forEach(slide => {
+    slide.style.flex = `0 0 ${basis}`;
+    slide.style.height = `${slide.offsetWidth * 0.6}px`; // utrzymanie proporcji
+  });
+  updatePosition(Math.min(currentIndex, Math.max(0, total - visible)));
+}
+
 
     // inicjalizacja
     updateRangeMax();
