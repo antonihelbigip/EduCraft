@@ -91,10 +91,12 @@
   const branch = 'main';
 
   const gallery = document.querySelector('.gallery');
+  if (!gallery) return;
   const track = gallery.querySelector('.carousel-track');
   const range = gallery.querySelector('.carousel-range');
+  if (!track || !range) return;
 
-  // pokaż komunikat
+  // komunikat ładowania
   track.innerHTML = '<p class="small">Ładowanie galerii…</p>';
 
   const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
@@ -107,6 +109,7 @@
 
     if (imgs.length === 0) {
       track.innerHTML = '<p class="small">Brak obrazów w katalogu images/. Dodaj pliki i zrób push.</p>';
+      range.style.display = 'none';
       return;
     }
 
@@ -116,18 +119,24 @@
     // wyczyść track
     track.innerHTML = '';
 
-    // dodaj slajdy (opakowania), każdy slajd ma klasę .carousel-slide
-    const slides = imgs.map(file => {
+    // helper: tworzy poprawny raw.githubusercontent URL (koduje tylko nazwę pliku)
+    const rawUrl = (p, filename) =>
+      `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p ? p + '/' : ''}${encodeURIComponent(filename)}`;
+
+    // utwórz tablicę slides i wypełnij track
+    const slides = [];
+    imgs.forEach(file => {
       const slide = document.createElement('div');
       slide.className = 'carousel-slide';
+
       const img = document.createElement('img');
-      const filePath = path ? `${path}/${file.name}` : file.name;
-      img.src = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${encodeURIComponent(filePath)}`;
+      img.src = rawUrl(path, file.name);
       img.alt = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g,' ');
       img.loading = 'lazy';
+
       slide.appendChild(img);
       track.appendChild(slide);
-      return slide;
+      slides.push(slide);
     });
 
     // ---- KARUZELA: logika przewijania ----
@@ -148,7 +157,6 @@
     // update transform
     function updatePosition(index) {
       currentIndex = index;
-      // przesuwamy o (index * 100 / visible) procentów
       const shiftPercent = (index * (100 / visible));
       track.style.transform = `translateX(-${shiftPercent}%)`;
       range.value = index;
@@ -160,7 +168,6 @@
       slides.forEach(slide => {
         slide.style.flex = `0 0 ${basis}`;
       });
-      // reset transform (żeby obliczenia były ok)
       updatePosition(Math.min(currentIndex, Math.max(0, total - visible)));
     }
 
@@ -173,7 +180,6 @@
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        const prevVisible = visible;
         visible = window.innerWidth <= 760 ? 1 : 2;
         setSlideBasis();
         updateRangeMax();
@@ -183,7 +189,6 @@
     // obsługa suwaka ręcznego
     range.addEventListener('input', (e) => {
       updatePosition(+e.target.value);
-      // reset timera autoplay (opcjonalnie)
       restartAutoplay();
     });
 
@@ -215,7 +220,6 @@
     if (total <= visible) {
       range.style.display = 'none';
       track.style.justifyContent = 'center';
-      // ustaw slajdy na równą szerokość (np. 45%)
       slides.forEach(slide => slide.style.flex = `0 0 ${100 / total}%`);
     } else {
       range.style.display = 'block';
@@ -227,6 +231,7 @@
   } catch (err) {
     console.error(err);
     track.innerHTML = '<p class="small">Nie udało się załadować galerii. Sprawdź konsolę (F12).</p>';
+    range.style.display = 'none';
   }
 })();
 </script>
