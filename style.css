@@ -1,37 +1,43 @@
-:root{
-  --bg: #f3f6f8;           /* Tło strony - można zmienić na ciemniejsze lub gradient */
-  --card: #ffffff;         /* Kolor kart i sekcji - można dodać ciemny tryb */
+:root {
+  --bg: #f3f6f8;           /* Tło strony */
+  --card: #ffffff;         /* Kolor kart i sekcji */
   --muted: #eef2f4;        /* Jasne tło dla elementów pomocniczych */
   --text: #0f1724;         /* Kolor głównego tekstu */
-  --primary: #0ea5e9;      /* Jasny niebieski - główny kolor akcji, przycisków */
-  --accent: #16a34a;       /* Zieleń akcentu - np. pozytywne komunikaty */
-  --dark: #0b1220;         /* Kolor ciemny dla brandu, nagłówków */
-  --radius: 10px;           /* Promień zaokrąglenia kart/przycisków */
+  --primary: #0ea5e9;      /* Kolor akcji/przycisków */
+  --accent: #16a34a;       /* Zieleń akcentu */
+  --dark: #0b1220;         /* Kolor nagłówków */
+  --radius: 10px;           /* Zaokrąglenie kart/przycisków */
   --maxw: 1100px;           /* Maksymalna szerokość kontenera */
 }
 
-/* Reset / base */
-*{box-sizing:border-box} 
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: var(--bg);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  line-height:1.6;
+/* --- Reset / base --- */
+* {
+  box-sizing: border-box;
 }
 
-/* container */
-.container{
-  max-width:var(--maxw);
-  margin:0 auto;
-  padding:28px 18px;
-  /* Future: dodać padding responsywny zależny od szerokości ekranu */
+html, body {
+  height: 100%;
 }
-/* Topbar / language */
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* --- Container --- */
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 28px 18px;
+}
+
+/* --- Topbar / Language Switch --- */
 .topbar {
-  position: absolute;   /* przenosi do prawego górnego rogu */
+  position: absolute;
   top: 12px;
   right: 18px;
   z-index: 1000;
@@ -43,93 +49,100 @@ body{
   align-items: center;
 }
 
-/* DOMYŚLNY STAN: biały tekst, lekko widoczna biała ramka */
-.lang-btn{
+.lang-btn {
   background: transparent;
-  color: white;                              /* <-- białe litery */
-  border: 1px solid rgba(255,255,255,0.12);  /* jaśniejsza ramka pasująca do tła */
+  color: white;
+  border: 1px solid rgba(255,255,255,0.12);
   padding: 6px 8px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  transition: background .15s, color .15s, transform .08s;
+  transition: background 0.15s, color 0.15s, transform 0.08s;
 }
+
 .lang-btn:hover {
   background: rgba(255,255,255,0.06);
   transform: translateY(-1px);
 }
 
-/* AKTYWNY PRZYCISK: biały background + kolor tekstu z --primary */
-.lang-btn.active{
-  background: white; 
-  color: var(--primary); 
+.lang-btn.active {
+  background: white;
+  color: var(--primary);
   border-color: transparent;
   box-shadow: 0 4px 12px rgba(2,6,23,0.08);
 }
 
-/* Hero */
-.hero{
-  background: linear-gradient(180deg, rgba(14,165,233,0.10), rgba(22,163,74,0.04)), url('images/tlo.jpg') center/cover no-repeat;
+/* --- Hero Section --- */
+.hero {
+  background: linear-gradient(180deg, rgba(14,165,233,0.1), rgba(22,163,74,0.04)), url('images/tlo.jpg') center/cover no-repeat;
   color: white;
-  padding:64px 12px;
-  text-align:center;
+  padding: 64px 12px;
+  text-align: center;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.hero-inner{
-  max-width:980px; 
-  margin:0 auto; 
+
+.hero-inner {
+  max-width: 980px;
+  margin: 0 auto;
   backdrop-filter: blur(0.2px);
 }
-.hero h1{
-  font-size:36px; 
-  margin:0 0 8px; 
+
+.hero h1 {
+  font-size: 36px;
+  margin: 0 0 8px;
   text-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
-.lead{
-  font-size:17px; 
-  margin:0 0 18px; 
-  opacity:0.98;
+
+.lead {
+  font-size: 17px;
+  margin: 0 0 18px;
+  opacity: 0.98;
 }
 
-/* Buttons */
-.btn{
-  display:inline-block; 
-  padding:12px 18px; 
-  border-radius:8px; 
-  text-decoration:none; 
-  font-weight:600;
+/* --- Buttons --- */
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
-.btn-primary{
-  background:var(--card); 
-  color:var(--primary); 
+
+.btn-primary {
+  background: var(--card);
+  color: var(--primary);
   box-shadow: 0 6px 18px rgba(14,165,233,0.12);
 }
-.btn-outline{
-  border:2px solid rgba(255,255,255,0.18); 
-  color: white; 
-  margin-left:12px; 
-  background:transparent;
+
+.btn-outline {
+  border: 2px solid rgba(255,255,255,0.18);
+  color: white;
+  margin-left: 12px;
+  background: transparent;
 }
 
-/* Cards */
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
+/* --- Cards --- */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
   box-shadow: 0 6px 20px rgba(15,20,36,0.06);
-  padding:22px;
-  margin-bottom:20px;
+  padding: 22px;
+  margin-bottom: 20px;
 }
-.muted{background:var(--muted)}
 
-/* --- GALERIA / KARUZELA --- */
+.muted {
+  background: var(--muted);
+}
+
+/* --- Galeria / Karuzela --- */
 .gallery {
   padding: 2rem 1rem;
-  background: #f9f9f9;
+  background: var(--muted);
   border-radius: 1rem;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -139,6 +152,7 @@ body{
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
+  color: var(--dark);
 }
 
 .gallery .carousel {
@@ -155,7 +169,7 @@ body{
 }
 
 .gallery .carousel-slide {
-  flex: 0 0 50%; /* domyślnie 2 slajdy */
+  flex: 0 0 50%;
   box-sizing: border-box;
   border-radius: 1rem;
   overflow: hidden;
@@ -164,7 +178,7 @@ body{
 
 .gallery .carousel-slide img {
   width: 100%;
-  height: auto;        /* wysokość dopasowuje się automatycznie */
+  max-height: 300px;
   object-fit: cover;
   border-radius: 8px;
   display: block;
@@ -175,7 +189,7 @@ body{
   transform: scale(1.05);
 }
 
-/* kontrolki (suwak) */
+/* Carousel Controls */
 .carousel-controls {
   margin-top: 10px;
   display: flex;
@@ -212,32 +226,19 @@ body{
   border: none;
 }
 
-/* responsywność */
-@media (max-width: 1024px) {
-  .gallery .carousel-slide img {
-    height: calc(0.6 * 100%); /* proporcja 1:0.6 */
-  }
-}
-
-@media (max-width: 760px) {
-  .gallery .carousel-slide {
-    flex: 0 0 100%; /* 1 slajd na raz */
-  }
-  .gallery .carousel-slide img {
-    height: calc(0.6 * 100%);
-  }
-}
+/* --- FAQ --- */
 #faq details {
-  background: #f5f5f5;
+  background: var(--muted);
   padding: 12px 16px;
   margin-bottom: 8px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: background 0.3s ease;
 }
 
 #faq details[open] {
-  background: #e0f7fa;
+  background: var(--accent);
+  color: white;
 }
 
 #faq summary {
@@ -250,33 +251,65 @@ body{
   margin-top: 8px;
   margin-bottom: 0;
   line-height: 1.5;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
 }
 
+#faq details[open] p {
+  max-height: 500px;
+  padding-top: 8px;
+}
 
-
-/* support widget */
-.widget-wrap{
-  margin-top:12px; 
-  border-radius:8px; 
-  overflow:hidden; 
+/* --- Support Widget --- */
+.widget-wrap {
+  margin-top: 12px;
+  border-radius: 8px;
+  overflow: hidden;
   box-shadow: 0 8px 30px rgba(11,18,32,0.06);
 }
 
-/* small text */
-.small{font-size:13px; color:#6b7280;}
-
-/* footer */
-.site-footer{
-  background:transparent; 
-  padding:20px 0; 
-  text-align:center; 
-  color:#475569;
+/* Small text */
+.small {
+  font-size: 13px;
+  color: #6b7280;
 }
 
-/* responsive tweaks */
-@media (max-width:760px){
-  .hero{padding:36px 12px}
-  .hero h1{font-size:28px}
-  .lead{font-size:15px}
-  .gallery img{height:140px}
+/* Footer */
+.site-footer {
+  background: transparent;
+  padding: 20px 0;
+  text-align: center;
+  color: #475569;
+}
+
+/* --- Responsywność --- */
+@media (max-width: 1024px) {
+  .gallery .carousel-slide img {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 36px 12px;
+  }
+  .hero h1 {
+    font-size: 28px;
+  }
+  .lead {
+    font-size: 15px;
+  }
+  .gallery .carousel-slide {
+    flex: 0 0 100%;
+  }
+  .gallery .carousel-slide img {
+    max-height: 160px;
+  }
+  #faq details {
+    padding: 10px 12px;
+  }
+  #faq summary {
+    font-size: 0.95rem;
+  }
 }
