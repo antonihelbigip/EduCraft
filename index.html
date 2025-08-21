@@ -69,23 +69,33 @@
     <!-- Gallery -->
 <section id="gallery" class="card gallery">
   <h3 data-i18n="gallery_title">Galeria</h3>
-  <div class="grid">
-    <!-- Zdjęcia będą dodawane dynamicznie przez skrypt -->
+
+  <div class="carousel">
+    <div class="carousel-track">
+      <!-- slajdy będą dodane tutaj dynamicznie -->
+    </div>
   </div>
+
+  <div class="carousel-controls" aria-hidden="false">
+    <input type="range" class="carousel-range" min="0" value="0" step="1" />
+  </div>
+
+  <p class="small" data-i18n="gallery_note">Tip: wrzuć obrazy do katalogu <code>images/</code> w repozytorium.</p>
 </section>
 
-<!-- SKRYPT: dynamiczne ładowanie obrazów z repo GitHub -->
 <script>
 (async function(){
   const owner = 'antonihelbigip';
   const repo = 'EduCraft';
-  const path = 'images'; // katalog w repo, jak podałeś
+  const path = 'images';
   const branch = 'main';
 
-  const grid = document.querySelector('.gallery .grid');
-  if(!grid) return;
+  const gallery = document.querySelector('.gallery');
+  const track = gallery.querySelector('.carousel-track');
+  const range = gallery.querySelector('.carousel-range');
 
-  grid.innerHTML = '<p class="small">Ładowanie galerii…</p>';
+  // pokaż komunikat
+  track.innerHTML = '<p class="small">Ładowanie galerii…</p>';
 
   const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
 
@@ -96,28 +106,131 @@
     const imgs = (Array.isArray(files) ? files.filter(f => /\.(jpe?g|png|gif|webp|svg)$/i.test(f.name)) : []);
 
     if (imgs.length === 0) {
-      grid.innerHTML = '<p class="small">Brak obrazów w katalogu images/. Dodaj pliki i zrób push.</p>';
+      track.innerHTML = '<p class="small">Brak obrazów w katalogu images/. Dodaj pliki i zrób push.</p>';
       return;
     }
 
+    // sortuj po nazwie
     imgs.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
-    grid.innerHTML = '';
 
-    imgs.forEach(file => {
+    // wyczyść track
+    track.innerHTML = '';
+
+    // dodaj slajdy (opakowania), każdy slajd ma klasę .carousel-slide
+    const slides = imgs.map(file => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
       const img = document.createElement('img');
       const filePath = path ? `${path}/${file.name}` : file.name;
       img.src = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${encodeURIComponent(filePath)}`;
       img.alt = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g,' ');
       img.loading = 'lazy';
-      img.className = 'gallery-item';
-      grid.appendChild(img);
+      slide.appendChild(img);
+      track.appendChild(slide);
+      return slide;
     });
+
+    // ---- KARUZELA: logika przewijania ----
+    let visible = window.innerWidth <= 760 ? 1 : 2; // ile slide'ów widocznych
+    let currentIndex = 0;
+    const total = slides.length;
+    let maxIndex = Math.max(0, total - visible);
+
+    // ustaw range max
+    function updateRangeMax() {
+      visible = window.innerWidth <= 760 ? 1 : 2;
+      maxIndex = Math.max(0, total - visible);
+      range.max = maxIndex;
+      if (+range.value > maxIndex) range.value = maxIndex;
+      updatePosition(+range.value);
+    }
+
+    // update transform
+    function updatePosition(index) {
+      currentIndex = index;
+      // przesuwamy o (index * 100 / visible) procentów
+      const shiftPercent = (index * (100 / visible));
+      track.style.transform = `translateX(-${shiftPercent}%)`;
+      range.value = index;
+    }
+
+    // ustaw szerokości slajdów w procentach (flex-basis)
+    function setSlideBasis() {
+      const basis = (100 / visible) + '%';
+      slides.forEach(slide => {
+        slide.style.flex = `0 0 ${basis}`;
+      });
+      // reset transform (żeby obliczenia były ok)
+      updatePosition(Math.min(currentIndex, Math.max(0, total - visible)));
+    }
+
+    // inicjalizacja
+    updateRangeMax();
+    setSlideBasis();
+
+    // reaguj na resize (przelicz visible i szerokości)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const prevVisible = visible;
+        visible = window.innerWidth <= 760 ? 1 : 2;
+        setSlideBasis();
+        updateRangeMax();
+      }, 120);
+    });
+
+    // obsługa suwaka ręcznego
+    range.addEventListener('input', (e) => {
+      updatePosition(+e.target.value);
+      // reset timera autoplay (opcjonalnie)
+      restartAutoplay();
+    });
+
+    // AUTOPLAY
+    let autoplayInterval = 2500; // ms (2.5s)
+    let autoplayTimer = null;
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(() => {
+        let next = currentIndex + 1;
+        if (next > maxIndex) next = 0; // zapętlenie
+        updatePosition(next);
+      }, autoplayInterval);
+    }
+    function stopAutoplay(){
+      if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+    }
+    function restartAutoplay(){
+      stopAutoplay();
+      startAutoplay();
+    }
+
+    // pauza na hover
+    gallery.addEventListener('mouseenter', stopAutoplay);
+    gallery.addEventListener('mouseleave', startAutoplay);
+
+    // jeśli mniej slajdów niż visible — wycentruj i ukryj suwak
+    if (total <= visible) {
+      range.style.display = 'none';
+      track.style.justifyContent = 'center';
+      // ustaw slajdy na równą szerokość (np. 45%)
+      slides.forEach(slide => slide.style.flex = `0 0 ${100 / total}%`);
+    } else {
+      range.style.display = 'block';
+    }
+
+    // Start autoplay
+    startAutoplay();
+
   } catch (err) {
     console.error(err);
-    grid.innerHTML = '<p class="small">Nie udało się załadować galerii. Sprawdź konsolę (F12).</p>';
+    track.innerHTML = '<p class="small">Nie udało się załadować galerii. Sprawdź konsolę (F12).</p>';
   }
 })();
 </script>
+
 
     <!-- Support (Zrzutka widget) -->
     <section id="support" class="card support">
