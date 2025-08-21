@@ -393,27 +393,5 @@ document.querySelectorAll('.lang-btn').forEach(btn=>{
   btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
 });
 </script>
-
-
-function applyLanguage(lang){
-  const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
-  document.documentElement.lang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if(dict[key]) el.textContent = dict[key];
-  });
-  try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
-}
-
-(function initLang(){
-  const urlParams = new URLSearchParams(window.location.search);
-  let lang = urlParams.get('lang') || localStorage.getItem('educraft_lang') || navigator.language.slice(0,2);
-  if(!['pl','en','de'].includes(lang)) lang='pl';
-  applyLanguage(lang);
-})();
-
-document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang)));
-  </script>
 </body>
 </html>
