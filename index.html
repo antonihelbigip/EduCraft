@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EcoCraft – Minecraft OZE</title>
+  <title>EduCraft – Minecraft OZE</title>
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="EcoCraft – educational Minecraft server powered by renewable energy.">
+  <meta name="description" content="EduCraft – educational Minecraft server powered by renewable energy.">
 </head>
 <body>
   <header class="hero">
@@ -18,7 +18,7 @@
     </div>
 
     <div class="hero-inner container">
-      <h1 data-i18n="hero_title">EcoCraft 🌍⚡</h1>
+      <h1 data-i18n="hero_title">EduCraft 🌍⚡</h1>
       <p class="lead" data-i18n="hero_lead">Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.</p>
       <div class="hero-ctas">
         <a id="cta-support" class="btn btn-primary" href="https://zrzutka.pl/b5j6vm" target="_blank" rel="noopener" data-i18n="cta_support">Wesprzyj projekt</a>
@@ -137,13 +137,13 @@
     <!-- Contact -->
     <section id="contact" class="card">
       <h3 data-i18n="contact_title">Kontakt & społeczność</h3>
-      <p data-i18n="contact_text">Discord (wkrótce) • GitHub: <a href="https://github.com/your-username/ecocraft-oze" target="_blank">github.com/your-username/ecocraft-oze</a></p>
+      <p data-i18n="contact_text">Discord (wkrótce) • GitHub: <a href="https://github.com/your-username/educraft-oze" target="_blank">github.com/your-username/educraft-oze</a></p>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <small data-i18n="footer_text">© 2025 EcoCraft • MIT License • Made by Antoni</small>
+      <small data-i18n="footer_text">© 2025 EduCraft • MIT License • Made by Antoni</small>
     </div>
   </footer>
 
@@ -206,7 +206,7 @@
     // ALT translations
     const TRANSLATIONS_ALT={pl:{},en:{},de:{}};
     const applyAltLanguage=lang=>{slides.forEach(s=>{const img=s.querySelector('img[data-i18n-alt]'); const key=img.getAttribute('data-i18n-alt'); img.alt=(TRANSLATIONS_ALT[lang]&&TRANSLATIONS_ALT[lang][key])?TRANSLATIONS_ALT[lang][key]:key;});}
-    const initLang=localStorage.getItem('ecocraft_lang')||'pl';
+    const initLang=localStorage.getItem('educraft_lang')||'pl';
     applyAltLanguage(initLang);
     document.querySelectorAll('.lang-btn').forEach(btn=>{btn.addEventListener('click',()=>applyAltLanguage(btn.dataset.lang));});
 
@@ -218,7 +218,7 @@
 <script>
 const TRANSLATIONS = {
   pl: {
-    hero_title: "EcoCraft 🌍⚡",
+    hero_title: "EduCraft 🌍⚡",
     hero_lead: "Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.",
     cta_support: "Wesprzyj projekt",
     cta_about: "Dowiedz się więcej",
@@ -256,11 +256,11 @@ const TRANSLATIONS = {
     faq_q8: "Czy projekt będzie open-source?",
     faq_a8: "Tak — dokumentacja techniczna, kod automatyki i część materiałów edukacyjnych będzie dostępna na licencji open-source.",
     contact_title: "Kontakt & społeczność",
-    contact_text: "Discord (wkrótce) • GitHub: github.com/your-username/ecocraft-oze",
-    footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+    contact_text: "Discord (wkrótce) • GitHub: github.com/your-username/educraft-oze",
+    footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
   },
   en: {
-    hero_title: "EcoCraft 🌍⚡",
+    hero_title: "EduCraft 🌍⚡",
     hero_lead: "The first Polish educational Minecraft server powered 100% by renewable energy.",
     cta_support: "Support the project",
     cta_about: "Learn more",
@@ -298,11 +298,11 @@ const TRANSLATIONS = {
     faq_q8: "Will the project be open-source?",
     faq_a8: "Yes — technical documentation, automation code, and some educational materials will be available under an open-source license.",
     contact_title: "Contact & community",
-    contact_text: "Discord (coming soon) • GitHub: github.com/your-username/ecocraft-oze",
-    footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+    contact_text: "Discord (coming soon) • GitHub: github.com/your-username/educraft-oze",
+    footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
   },
   de: {
-    hero_title: "EcoCraft 🌍⚡",
+    hero_title: "EduCraft 🌍⚡",
     hero_lead: "Der erste polnische Bildungs-Minecraft-Server, der zu 100 % mit erneuerbarer Energie betrieben wird.",
     cta_support: "Projekt unterstützen",
     cta_about: "Mehr erfahren",
@@ -340,8 +340,8 @@ const TRANSLATIONS = {
     faq_q8: "Wird das Projekt Open-Source sein?",
     faq_a8: "Ja — technische Dokumentation, Automatisierungscode und einige Bildungsinhalte werden unter einer Open-Source-Lizenz verfügbar sein.",
     contact_title: "Kontakt & Community",
-    contact_text: "Discord (bald) • GitHub: github.com/your-username/ecocraft-oze",
-    footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+    contact_text: "Discord (bald) • GitHub: github.com/your-username/educraft-oze",
+    footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
   }
 };
 
@@ -376,14 +376,14 @@ function applyLanguage(lang){
     }
   }
 
-  try{ localStorage.setItem('ecocraft_lang', lang); } catch(e){}
+  try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
 }
 
 // inicjalizacja języka
 (function initLang(){
   const urlParams = new URLSearchParams(window.location.search);
-  let lang = urlParams.get('lang') || localStorage.getItem('ecocraft_lang') || navigator.language.slice(0,2);
+  let lang = urlParams.get('lang') || localStorage.getItem('educraft_lang') || navigator.language.slice(0,2);
   if(!['pl','en','de'].includes(lang)) lang='pl';
   applyLanguage(lang);
 })();
@@ -402,13 +402,13 @@ function applyLanguage(lang){
     const key = el.getAttribute('data-i18n');
     if(dict[key]) el.textContent = dict[key];
   });
-  try{ localStorage.setItem('ecocraft_lang', lang); } catch(e){}
+  try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
 }
 
 (function initLang(){
   const urlParams = new URLSearchParams(window.location.search);
-  let lang = urlParams.get('lang') || localStorage.getItem('ecocraft_lang') || navigator.language.slice(0,2);
+  let lang = urlParams.get('lang') || localStorage.getItem('educraft_lang') || navigator.language.slice(0,2);
   if(!['pl','en','de'].includes(lang)) lang='pl';
   applyLanguage(lang);
 })();
