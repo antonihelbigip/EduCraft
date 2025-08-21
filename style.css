@@ -126,22 +126,7 @@ body{
 }
 .muted{background:var(--muted)}
 
-/* Gallery */
-/* KARUZELA / GALERIA */
-.gallery .carousel {
-  overflow: hidden;
-  margin-top: 12px;
-}
-
-.gallery .carousel-track {
-  display: flex;
-  gap: 12px;
-  transition: transform 0.6s cubic-bezier(.22,.9,.35,1);
-  will-change: transform;
-  padding-bottom: 6px;
-}
-
-/* pojedynczy slajd (opakowanie obrazka) */
+/* --- GALERIA / KARUZELA --- */
 .gallery {
   padding: 2rem 1rem;
   background: #f9f9f9;
@@ -156,6 +141,11 @@ body{
   font-size: 1.8rem;
 }
 
+.gallery .carousel {
+  overflow: hidden;
+  margin-top: 12px;
+}
+
 .gallery .carousel-track {
   display: flex;
   gap: 12px;
@@ -165,7 +155,7 @@ body{
 }
 
 .gallery .carousel-slide {
-  flex: 0 0 50%;
+  flex: 0 0 50%; /* domyślnie 2 slajdy */
   box-sizing: border-box;
   border-radius: 1rem;
   overflow: hidden;
@@ -174,7 +164,7 @@ body{
 
 .gallery .carousel-slide img {
   width: 100%;
-  height: auto;        /* teraz automatycznie dopasowuje wysokość */
+  height: auto;        /* wysokość dopasowuje się automatycznie */
   object-fit: cover;
   border-radius: 8px;
   display: block;
@@ -203,7 +193,6 @@ body{
   outline: none;
 }
 
-/* optionally style thumb */
 .carousel-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 14px;
@@ -223,12 +212,21 @@ body{
   border: none;
 }
 
-/* responsywność: na małych ekranach pokazujemy 1 obrazek naraz */
-@media (max-width: 760px) {
-  .gallery .carousel-slide { flex: 0 0 100%; }
-  .gallery .carousel-slide img { height: 160px; }
+/* responsywność */
+@media (max-width: 1024px) {
+  .gallery .carousel-slide img {
+    height: calc(0.6 * 100%); /* proporcja 1:0.6 */
+  }
 }
 
+@media (max-width: 760px) {
+  .gallery .carousel-slide {
+    flex: 0 0 100%; /* 1 slajd na raz */
+  }
+  .gallery .carousel-slide img {
+    height: calc(0.6 * 100%);
+  }
+}
 
 
 /* support widget */
