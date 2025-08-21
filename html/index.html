@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EcoCraft – Minecraft OZE</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="EcoCraft – educational Minecraft server powered by renewable energy.">
+</head>
+<body>
+  <header class="hero">
+    <div class="topbar">
+      <div class="container top-inner">
+        <div class="brand">EcoCraft</div>
+        <div class="lang-switch">
+          <button class="lang-btn" data-lang="pl" title="Polski">PL</button>
+          <button class="lang-btn" data-lang="en" title="English">EN</button>
+          <button class="lang-btn" data-lang="de" title="Deutsch">DE</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-inner container">
+      <h1 data-i18n="hero_title">EcoCraft 🌍⚡</h1>
+      <p class="lead" data-i18n="hero_lead">Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.</p>
+      <div class="hero-ctas">
+        <a id="cta-support" class="btn btn-primary" href="https://zrzutka.pl/b5j6vm" target="_blank" rel="noopener" data-i18n="cta_support">Wesprzyj projekt</a>
+        <a class="btn btn-outline" href="#about" data-i18n="cta_about">Dowiedz się więcej</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- About -->
+    <section id="about" class="card">
+      <h2 data-i18n="about_title">O projekcie</h2>
+      <p data-i18n="about_text">
+        Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej.
+        To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE.
+      </p>
+    </section>
+
+    <!-- Creator -->
+    <section id="creator" class="card muted">
+      <h3 data-i18n="creator_title">Kim jestem?</h3>
+      <p data-i18n="creator_text">
+        Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.
+      </p>
+    </section>
+
+    <!-- What we build -->
+    <section id="build" class="card">
+      <h3 data-i18n="build_title">Co buduję?</h3>
+      <ul>
+        <li data-i18n="build_li1">Serwer 24/7 zasilany panelami PV i turbiną wiatrową</li>
+        <li data-i18n="build_li2">Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC</li>
+        <li data-i18n="build_li3">System monitoringu energii (Raspberry Pi + Home Assistant)</li>
+      </ul>
+    </section>
+
+    <!-- Progress / updates -->
+    <section id="updates" class="card muted">
+      <h3 data-i18n="updates_title">Aktualizacje</h3>
+      <ul>
+        <li data-i18n="updates_li1">2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione</li>
+        <li data-i18n="updates_li2">Tryby: Proxy, Lobby, PvP, EarthMC</li>
+        <li data-i18n="updates_li3">Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap</li>
+        <li data-i18n="updates_li4">Monitoring energii (miernik Teccus) – plan integracji z Home Assistant</li>
+      </ul>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="card gallery">
+      <h3 data-i18n="gallery_title">Galeria</h3>
+      <div class="grid">
+        <!-- domyślnie hotlinki z Zrzutki — zamień na lokalne po wrzuceniu do images/ -->
+        <img src="https://zrzutka.pl/uploads/chipin/b5j6vm/news/eLK49S3ES8vxFGuL.jpg" alt="" data-i18n-alt="gallery_img1_alt">
+        <img src="https://zrzutka.pl/uploads/chipin/b5j6vm/news/L1EvnWqKu3qNUTtY.jpg" alt="" data-i18n-alt="gallery_img2_alt">
+      </div>
+      <p class="small" data-i18n="gallery_note">Tip: wrzuć obrazy do katalogu <code>images/</code> i podmień src na lokalne.</p>
+    </section>
+
+    <!-- Support (Zrzutka widget) -->
+    <section id="support" class="card support">
+      <h3 data-i18n="support_title">Wesprzyj projekt</h3>
+      <p data-i18n="support_text">Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.</p>
+
+      <!-- widget Zrzutka -->
+      <div class="widget-wrap">
+        <div style="position: relative; width: 100%; height: 480px; overflow: hidden;">
+          <iframe style="position: absolute; top:0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%;" 
+            src="https://zrzutka.pl/b5j6vm/widget/13" frameborder="0" scrolling="no" title="Zrzutka widget"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="card muted">
+      <h3 data-i18n="faq_title">FAQ</h3>
+      <details>
+        <summary data-i18n="faq_q1">Czy serwer będzie darmowy?</summary>
+        <p data-i18n="faq_a1">Tak — serwer będzie otwarty dla wszystkich. Wspierający dostaną dodatkowe bonusy.</p>
+      </details>
+      <details>
+        <summary data-i18n="faq_q2">Czy zasilanie OZE będzie realne?</summary>
+        <p data-i18n="faq_a2">Tak — planujemy PV + turbina + akumulatory LiFePO₄ oraz monitoring przez Home Assistant.</p>
+      </details>
+    </section>
+
+    <!-- Contact / Links -->
+    <section id="contact" class="card">
+      <h3 data-i18n="contact_title">Kontakt & społeczność</h3>
+      <p data-i18n="contact_text">Discord (wkrótce) • GitHub: <a href="https://github.com/your-username/ecocraft-oze" target="_blank">github.com/your-username/ecocraft-oze</a></p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small data-i18n="footer_text">© 2025 EcoCraft • MIT License • Made by Antoni</small>
+    </div>
+  </footer>
+
+  <!-- TRANSLATIONS & SWITCHER SCRIPT -->
+  <script>
+    // translation dictionary (pl / en / de) - edit text here to tweak translations
+    const TRANSLATIONS = {
+      pl: {
+        hero_title: "EcoCraft 🌍⚡",
+        hero_lead: "Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.",
+        cta_support: "Wesprzyj projekt",
+        cta_about: "Dowiedz się więcej",
+        about_title: "O projekcie",
+        about_text: "Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej. To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE.",
+        creator_title: "Kim jestem?",
+        creator_text: "Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.",
+        build_title: "Co buduję?",
+        build_li1: "Serwer 24/7 zasilany panelami PV i turbiną wiatrową",
+        build_li2: "Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC",
+        build_li3: "System monitoringu energii (Raspberry Pi + Home Assistant)",
+        updates_title: "Aktualizacje",
+        updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione",
+        updates_li2: "Tryby: Proxy, Lobby, PvP, EarthMC",
+        updates_li3: "Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+        updates_li4: "Monitoring energii (miernik Teccus) – plan integracji z Home Assistant",
+        gallery_title: "Galeria",
+        gallery_img1_alt: "Panel kontrolny projektu EcoCraft",
+        gallery_img2_alt: "Prototyp racka / serwera",
+        gallery_note: "Tip: wrzuć obrazy do katalogu images/ i podmień src na lokalne.",
+        support_title: "Wesprzyj projekt",
+        support_text: "Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.",
+        faq_title: "FAQ",
+        faq_q1: "Czy serwer będzie darmowy?",
+        faq_a1: "Tak — serwer będzie otwarty dla wszystkich. Wspierający dostaną dodatkowe bonusy.",
+        faq_q2: "Czy zasilanie OZE będzie realne?",
+        faq_a2: "Tak — planujemy PV + turbina + akumulatory LiFePO₄ oraz monitoring przez Home Assistant.",
+        contact_title: "Kontakt & społeczność",
+        contact_text: "Discord (wkrótce) • GitHub: github.com/your-username/ecocraft-oze",
+        footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+      },
+      en: {
+        hero_title: "EcoCraft 🌍⚡",
+        hero_lead: "The first Polish educational Minecraft server powered 100% by renewable energy.",
+        cta_support: "Support the project",
+        cta_about: "Learn more",
+        about_title: "About",
+        about_text: "I'm building an open educational Minecraft server that runs 24/7 thanks to solar panels and a wind turbine. It combines gaming, technology and ecology — players will see how renewable systems work in practice.",
+        creator_title: "About the creator",
+        creator_text: "My name is Antoni — mechatronics student, AI intern at Siemens, three-time winner of the “My business idea” contest.",
+        build_title: "What we build",
+        build_li1: "24/7 server powered by PV panels and a wind turbine",
+        build_li2: "Educational platform with quests, NPC/AI and EarthMC map",
+        build_li3: "Energy monitoring system (Raspberry Pi + Home Assistant)",
+        updates_title: "Updates",
+        updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — servers deployed",
+        updates_li2: "Modes: Proxy, Lobby, PvP, EarthMC",
+        updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+        updates_li4: "Energy metering (Teccus meter) — plan to integrate with Home Assistant",
+        gallery_title: "Gallery",
+        gallery_img1_alt: "EcoCraft control panel",
+        gallery_img2_alt: "Rack / server prototype",
+        gallery_note: "Tip: upload images to the images/ folder and change src to local files.",
+        support_title: "Support the project",
+        support_text: "Support us on Zrzutka.pl — every contribution helps powering tests and educational content.",
+        faq_title: "FAQ",
+        faq_q1: "Will the server be free?",
+        faq_a1: "Yes — the server will be open to everyone. Supporters will receive bonuses.",
+        faq_q2: "Is renewable powering realistic?",
+        faq_a2: "Yes — we plan PV + turbine + LiFePO₄ batteries and monitoring with Home Assistant.",
+        contact_title: "Contact & community",
+        contact_text: "Discord (coming soon) • GitHub: github.com/your-username/ecocraft-oze",
+        footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+      },
+      de: {
+        hero_title: "EcoCraft 🌍⚡",
+        hero_lead: "Der erste polnische Bildungs-Minecraft-Server, der zu 100 % mit erneuerbarer Energie betrieben wird.",
+        cta_support: "Projekt unterstützen",
+        cta_about: "Mehr erfahren",
+        about_title: "Über das Projekt",
+        about_text: "Ich baue einen offenen Bildungs-Minecraft-Server, der rund um die Uhr dank Solarpaneelen und einer Windturbine läuft. Er verbindet Spiele, Technik und Ökologie – Spieler sehen, wie erneuerbare Systeme in der Praxis funktionieren.",
+        creator_title: "Über den Ersteller",
+        creator_text: "Ich heiße Antoni – Mechatronik-Student, AI-Praktikant bei Siemens, dreifacher Gewinner des Wettbewerbs „Meine Geschäftsidee“. ",
+        build_title: "Was wir bauen",
+        build_li1: "24/7 Server, betrieben durch PV-Module und Windturbine",
+        build_li2: "Bildungsplattform mit Aufgaben, NPC/AI und EarthMC-Karte",
+        build_li3: "Energiemonitoring-System (Raspberry Pi + Home Assistant)",
+        updates_title: "Aktualisierungen",
+        updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — Server aufgesetzt",
+        updates_li2: "Modi: Proxy, Lobby, PvP, EarthMC",
+        updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+        updates_li4: "Energie-Messung (Teccus) — Integration mit Home Assistant geplant",
+        gallery_title: "Galerie",
+        gallery_img1_alt: "EcoCraft Bedienfeld",
+        gallery_img2_alt: "Rack / Server-Prototyp",
+        gallery_note: "Tipp: Lade Bilder in den Ordner images/ und ändere src zu lokalen Dateien.",
+        support_title: "Unterstütze das Projekt",
+        support_text: "Unterstütze uns auf Zrzutka.pl — jeder Beitrag hilft beim Betriebstests und Bildungsinhalten.",
+        faq_title: "FAQ",
+        faq_q1: "Wird der Server kostenlos sein?",
+        faq_a1: "Ja — der Server wird für alle zugänglich sein. Unterstützer erhalten Boni.",
+        faq_q2: "Ist die OZE-Versorgung realistisch?",
+        faq_a2: "Ja — wir planen PV + Turbine + LiFePO₄-Batterien und Monitoring via Home Assistant.",
+        contact_title: "Kontakt & Community",
+        contact_text: "Discord (bald) • GitHub: github.com/your-username/ecocraft-oze",
+        footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+      }
+    };
+
+    // apply chosen language to all elements with data-i18n attr
+    function applyLanguage(lang) {
+      const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
+      document.documentElement.lang = lang;
+      // text nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      // alt attributes for images etc.
+      document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+        const key = el.getAttribute('data-i18n-alt');
+        if (dict[key]) el.setAttribute('alt', dict[key]);
+      });
+      // special: update CTA link text (if any)
+      const cta = document.getElementById('cta-support');
+      if (cta && dict['cta_support']) cta.textContent = dict['cta_support'];
+
+      // save preference
+      try { localStorage.setItem('ecocraft_lang', lang); } catch(e){}
+      // update URL query param without reload
+      const url = new URL(window.location);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState({}, '', url);
+      // set active button class
+      document.querySelectorAll('.lang-btn').forEach(b=> b.classList.toggle('active', b.dataset.lang === lang));
+    }
+
+    // find initial language from query param / localStorage / browser
+    (function initLang(){
+      const urlParams = new URLSearchParams(window.location.search);
+      let lang = urlParams.get('lang') || localStorage.getItem('ecocraft_lang') || navigator.language.slice(0,2);
+      if (!['pl','en','de'].includes(lang)) lang = 'pl';
+      applyLanguage(lang);
+    })();
+
+    // event listeners for switcher
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
+    });
+  </script>
+</body>
+</html>
