@@ -215,12 +215,185 @@
   </script>
 
   <!-- TRANSLATIONS & SWITCHER SCRIPT -->
-  <script>
+<script>
 const TRANSLATIONS = {
-  pl:{ hero_title:"EcoCraft 🌍⚡", hero_lead:"Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.", cta_support:"Wesprzyj projekt", cta_about:"Dowiedz się więcej", about_title:"O projekcie", about_text:"Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej. To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE.", creator_title:"Kim jestem?", creator_text:"Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.", build_title:"Co buduję?", build_li1:"Serwer 24/7 zasilany panelami PV i turbiną wiatrową", build_li2:"Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC", build_li3:"System monitoringu energii (Raspberry Pi + Home Assistant)", updates_title:"Aktualizacje", updates_li1:"2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione", updates_li2:"Tryby: Proxy, Lobby, PvP, EarthMC", updates_li3:"Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap", updates_li4:"Monitoring energii (miernik Teccus) – plan integracji z Home Assistant", gallery_title:"Galeria", support_title:"Wesprzyj projekt", support_text:"Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.", faq_title:"Najczęstsze pytania (FAQ)", contact_title:"Kontakt & społeczność", contact_text:"Discord (wkrótce) • GitHub: github.com/your-username/ecocraft-oze", footer_text:"© 2025 EcoCraft • MIT License • Made by Antoni" },
-  en:{ hero_title:"EcoCraft 🌍⚡", hero_lead:"The first Polish educational Minecraft server powered 100% by renewable energy.", cta_support:"Support the project", cta_about:"Learn more", about_title:"About", about_text:"I'm building an open educational Minecraft server that runs 24/7 thanks to solar panels and a wind turbine. It combines gaming, technology and ecology — players will see how renewable systems work in practice.", creator_title:"About the creator", creator_text:"My name is Antoni — mechatronics student, AI intern at Siemens, three-time winner of the “My business idea” contest.", build_title:"What we build", build_li1:"24/7 server powered by PV panels and a wind turbine", build_li2:"Educational platform with quests, NPC/AI and EarthMC map", build_li3:"Energy monitoring system (Raspberry Pi + Home Assistant)", updates_title:"Updates", updates_li1:"2× HP EliteDesk (Ryzen 5, 32GB, SSD) — servers deployed", updates_li2:"Modes: Proxy, Lobby, PvP, EarthMC", updates_li3:"Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap", updates_li4:"Energy metering (Teccus meter) — plan to integrate with Home Assistant", gallery_title:"Gallery", support_title:"Support the project", support_text:"Support us on Zrzutka.pl — every contribution helps powering tests and educational content.", faq_title:"FAQ", contact_title:"Contact & community", contact_text:"Discord (coming soon) • GitHub: github.com/your-username/ecocraft-oze", footer_text:"© 2025 EcoCraft • MIT License • Made by Antoni" },
-  de:{ hero_title:"EcoCraft 🌍⚡", hero_lead:"Der erste polnische Bildungs-Minecraft-Server, der zu 100 % mit erneuerbarer Energie betrieben wird.", cta_support:"Projekt unterstützen", cta_about:"Mehr erfahren", about_title:"Über das Projekt", about_text:"Ich baue einen offenen Bildungs-Minecraft-Server, der rund um die Uhr dank Solarpaneelen und einer Windturbine läuft. Er verbindet Spiele, Technik und Ökologie – Spieler sehen, wie erneuerbare Systeme in der Praxis funktionieren.", creator_title:"Über den Ersteller", creator_text:"Ich heiße Antoni – Mechatronik-Student, AI-Praktikant bei Siemens, dreifacher Gewinner des Wettbewerbs „Meine Geschäftsidee“.", build_title:"Was wir bauen", build_li1:"24/7 Server, betrieben durch PV-Module und Windturbine", build_li2:"Bildungsplattform mit Aufgaben, NPC/AI und EarthMC-Karte", build_li3:"Energiemonitoring-System (Raspberry Pi + Home Assistant)", updates_title:"Aktualisierungen", updates_li1:"2× HP EliteDesk (Ryzen 5, 32GB, SSD) — Server aufgesetzt", updates_li2:"Modi: Proxy, Lobby, PvP, EarthMC", updates_li3:"Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap", updates_li4:"Energie-Messung (Teccus) — Integration mit Home Assistant geplant", gallery_title:"Galerie", support_title:"Unterstütze das Projekt", support_text:"Unterstütze uns auf Zrzutka.pl — jeder Beitrag hilft beim Betriebstests und Bildungsinhalten.", faq_title:"FAQ", contact_title:"Kontakt & Community", contact_text:"Discord (bald) • GitHub: github.com/your-username/ecocraft-oze", footer_text:"© 2025 EcoCraft • MIT License • Made by Antoni" }
+  pl: {
+    hero_title: "EcoCraft 🌍⚡",
+    hero_lead: "Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.",
+    cta_support: "Wesprzyj projekt",
+    cta_about: "Dowiedz się więcej",
+    about_title: "O projekcie",
+    about_text: "Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej. To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE.",
+    creator_title: "Kim jestem?",
+    creator_text: "Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.",
+    build_title: "Co buduję?",
+    build_li1: "Serwer 24/7 zasilany panelami PV i turbiną wiatrową",
+    build_li2: "Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC",
+    build_li3: "System monitoringu energii (Raspberry Pi + Home Assistant)",
+    updates_title: "Aktualizacje",
+    updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione",
+    updates_li2: "Tryby: Proxy, Lobby, PvP, EarthMC",
+    updates_li3: "Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+    updates_li4: "Monitoring energii (miernik Teccus) – plan integracji z Home Assistant",
+    gallery_title: "Galeria",
+    support_title: "Wesprzyj projekt",
+    support_text: "Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.",
+    faq_title: "Najczęstsze pytania (FAQ)",
+    faq_q1: "Czy serwer będzie darmowy?",
+    faq_a1: "Tak — serwer będzie otwarty, bez whitelisty, bez kont premium. Wspierający dostaną dodatkowe bonusy (role, skiny, tabliczki).",
+    faq_q2: "Czy zasilanie OZE będzie realne?",
+    faq_a2: "Tak — panele PV, turbina wiatrowa i akumulatory LiFePO₄ zapewnią 100% energii. Całość zarządzana przez Raspberry Pi i Home Assistant.",
+    faq_q3: "Czy mam zgodę na odwzorowanie kampusu?",
+    faq_a3: "Złożyłem wniosek — rozpocznę odwzorowywanie po jej uzyskaniu. Mam wstępne poparcie uczelni.",
+    faq_q4: "Czy można pomóc w budowie lub treściach?",
+    faq_a4: "Tak — planuję otwartą rekrutację edukatorów i budowniczych. Wspierający otrzymają wcześniejszy dostęp przez Discorda.",
+    faq_q5: "Co, jeśli nie zbierzemy całej kwoty?",
+    faq_a5: "Każdy etap ma określone minimum. Zrealizuję tyle, ile się uda — zaczynając od etapu 1: zasilania i podstawowego serwera.",
+    faq_q6: "Jak śledzić postępy?",
+    faq_a6: "Postępy będą publikowane na stronie zrzutki, stronie projektu oraz Discordzie. Będzie publiczny pasek postępu i wizualizacje.",
+    faq_q7: "Czy to tylko zabawa?",
+    faq_a7: "Nie! To edukacyjny projekt z misją. Minecraft to świetna platforma do nauki o OZE, automatyce i fizyce w przystępnej formie.",
+    faq_q8: "Czy projekt będzie open-source?",
+    faq_a8: "Tak — dokumentacja techniczna, kod automatyki i część materiałów edukacyjnych będzie dostępna na licencji open-source.",
+    contact_title: "Kontakt & społeczność",
+    contact_text: "Discord (wkrótce) • GitHub: github.com/your-username/ecocraft-oze",
+    footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+  },
+  en: {
+    hero_title: "EcoCraft 🌍⚡",
+    hero_lead: "The first Polish educational Minecraft server powered 100% by renewable energy.",
+    cta_support: "Support the project",
+    cta_about: "Learn more",
+    about_title: "About",
+    about_text: "I'm building an open educational Minecraft server that runs 24/7 thanks to solar panels and a wind turbine. It combines gaming, technology and ecology — players will see how renewable systems work in practice.",
+    creator_title: "About the creator",
+    creator_text: "My name is Antoni — mechatronics student, AI intern at Siemens, three-time winner of the “My business idea” contest.",
+    build_title: "What we build",
+    build_li1: "24/7 server powered by PV panels and a wind turbine",
+    build_li2: "Educational platform with quests, NPC/AI and EarthMC map",
+    build_li3: "Energy monitoring system (Raspberry Pi + Home Assistant)",
+    updates_title: "Updates",
+    updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — servers deployed",
+    updates_li2: "Modes: Proxy, Lobby, PvP, EarthMC",
+    updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+    updates_li4: "Energy metering (Teccus meter) — plan to integrate with Home Assistant",
+    gallery_title: "Gallery",
+    support_title: "Support the project",
+    support_text: "Support us on Zrzutka.pl — every contribution helps powering tests and educational content.",
+    faq_title: "FAQ",
+    faq_q1: "Will the server be free?",
+    faq_a1: "Yes — the server will be open, without whitelist or premium accounts. Supporters will receive extra bonuses (roles, skins, signs).",
+    faq_q2: "Is renewable energy supply feasible?",
+    faq_a2: "Yes — PV panels, a wind turbine, and LiFePO₄ batteries will provide 100% energy. Everything is managed by Raspberry Pi and Home Assistant.",
+    faq_q3: "Do I have permission to replicate the campus?",
+    faq_a3: "I’ve submitted a request — I will start replication after approval. I have preliminary support from the university.",
+    faq_q4: "Can I help with building or content?",
+    faq_a4: "Yes — I plan open recruitment for educators and builders. Supporters will get early access via Discord.",
+    faq_q5: "What if we don’t raise the full amount?",
+    faq_a5: "Each stage has a minimum. I will implement as much as possible — starting from Stage 1: energy supply and basic server.",
+    faq_q6: "How can I track progress?",
+    faq_a6: "Progress will be published on the crowdfunding page, project website, and Discord. There will be a public progress bar and visualizations.",
+    faq_q7: "Is this just for fun?",
+    faq_a7: "No! This is an educational project with a mission. Minecraft is a great platform to learn about renewable energy, automation, and physics in a practical way.",
+    faq_q8: "Will the project be open-source?",
+    faq_a8: "Yes — technical documentation, automation code, and some educational materials will be available under an open-source license.",
+    contact_title: "Contact & community",
+    contact_text: "Discord (coming soon) • GitHub: github.com/your-username/ecocraft-oze",
+    footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+  },
+  de: {
+    hero_title: "EcoCraft 🌍⚡",
+    hero_lead: "Der erste polnische Bildungs-Minecraft-Server, der zu 100 % mit erneuerbarer Energie betrieben wird.",
+    cta_support: "Projekt unterstützen",
+    cta_about: "Mehr erfahren",
+    about_title: "Über das Projekt",
+    about_text: "Ich baue einen offenen Bildungs-Minecraft-Server, der rund um die Uhr dank Solarpaneelen und einer Windturbine läuft. Er verbindet Spiele, Technik und Ökologie – Spieler sehen, wie erneuerbare Systeme in der Praxis funktionieren.",
+    creator_title: "Über den Ersteller",
+    creator_text: "Ich heiße Antoni – Mechatronik-Student, AI-Praktikant bei Siemens, dreifacher Gewinner des Wettbewerbs „Meine Geschäftsidee“.",
+    build_title: "Was wir bauen",
+    build_li1: "24/7 Server, betrieben durch PV-Module und Windturbine",
+    build_li2: "Bildungsplattform mit Aufgaben, NPC/AI und EarthMC-Karte",
+    build_li3: "Energiemonitoring-System (Raspberry Pi + Home Assistant)",
+    updates_title: "Aktualisierungen",
+    updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — Server aufgesetzt",
+    updates_li2: "Modi: Proxy, Lobby, PvP, EarthMC",
+    updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+    updates_li4: "Energie-Messung (Teccus) — Integration mit Home Assistant geplant",
+    gallery_title: "Galerie",
+    support_title: "Unterstütze das Projekt",
+    support_text: "Unterstütze uns auf Zrzutka.pl — jeder Beitrag hilft beim Betriebstests und Bildungsinhalten.",
+    faq_title: "FAQ",
+    faq_q1: "Wird der Server kostenlos sein?",
+    faq_a1: "Ja — der Server wird offen sein, ohne Whitelist oder Premium-Konten. Unterstützer erhalten zusätzliche Boni (Rollen, Skins, Schilder).",
+    faq_q2: "Ist die Versorgung mit erneuerbarer Energie realistisch?",
+    faq_a2: "Ja — PV-Module, eine Windturbine und LiFePO₄-Akkus liefern 100 % Energie. Alles wird über Raspberry Pi und Home Assistant gesteuert.",
+    faq_q3: "Habe ich die Genehmigung, den Campus nachzubilden?",
+    faq_a3: "Ich habe einen Antrag gestellt — die Nachbildung beginnt nach Genehmigung. Ich habe vorläufige Unterstützung der Universität.",
+    faq_q4: "Kann ich beim Bau oder bei Inhalten helfen?",
+    faq_a4: "Ja — ich plane eine offene Rekrutierung von Lehrern und Bauherren. Unterstützer erhalten frühzeitigen Zugang über Discord.",
+    faq_q5: "Was passiert, wenn wir nicht den vollen Betrag sammeln?",
+    faq_a5: "Jede Phase hat ein Minimum. Ich werde so viel umsetzen wie möglich — beginnend mit Phase 1: Energieversorgung und Basiserver.",
+    faq_q6: "Wie kann ich den Fortschritt verfolgen?",
+    faq_a6: "Der Fortschritt wird auf der Crowdfunding-Seite, der Projektseite und Discord veröffentlicht. Es wird eine öffentliche Fortschrittsanzeige und Visualisierungen geben.",
+    faq_q7: "Ist das nur zum Spaß?",
+    faq_a7: "Nein! Dies ist ein Bildungsprojekt mit einer Mission. Minecraft ist eine großartige Plattform, um erneuerbare Energien, Automatisierung und Physik praxisnah zu lernen.",
+    faq_q8: "Wird das Projekt Open-Source sein?",
+    faq_a8: "Ja — technische Dokumentation, Automatisierungscode und einige Bildungsinhalte werden unter einer Open-Source-Lizenz verfügbar sein.",
+    contact_title: "Kontakt & Community",
+    contact_text: "Discord (bald) • GitHub: github.com/your-username/ecocraft-oze",
+    footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
+  }
 };
+
+// ------------------- Funkcja dynamicznego FAQ -------------------
+function applyLanguage(lang){
+  const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
+  document.documentElement.lang = lang;
+
+  // zwykłe teksty
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(dict[key]) el.textContent = dict[key];
+  });
+
+  // dynamiczne FAQ
+  const faq = document.getElementById('faq');
+  if(faq && dict){
+    faq.querySelectorAll('details').forEach(d=>d.remove());
+    for(let i=1;i<=8;i++){
+      const qKey = 'faq_q'+i;
+      const aKey = 'faq_a'+i;
+      if(dict[qKey] && dict[aKey]){
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        summary.textContent = dict[qKey];
+        const p = document.createElement('p');
+        p.textContent = dict[aKey];
+        details.appendChild(summary);
+        details.appendChild(p);
+        faq.appendChild(details);
+      }
+    }
+  }
+
+  try{ localStorage.setItem('ecocraft_lang', lang); } catch(e){}
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+}
+
+// inicjalizacja języka
+(function initLang(){
+  const urlParams = new URLSearchParams(window.location.search);
+  let lang = urlParams.get('lang') || localStorage.getItem('ecocraft_lang') || navigator.language.slice(0,2);
+  if(!['pl','en','de'].includes(lang)) lang='pl';
+  applyLanguage(lang);
+})();
+
+// przyciski zmiany języka
+document.querySelectorAll('.lang-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
+});
+</script>
+
 
 function applyLanguage(lang){
   const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
