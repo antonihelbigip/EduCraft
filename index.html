@@ -67,184 +67,20 @@
     </section>
 
     <!-- Gallery -->
-<section id="gallery" class="card gallery">
-  <h3 data-i18n="gallery_title">Galeria</h3>
+    <section id="gallery" class="card gallery">
+      <h3 data-i18n="gallery_title">Galeria</h3>
+      <div class="carousel">
+        <div class="carousel-track"></div>
+      </div>
+      <div class="carousel-controls" aria-hidden="false">
+        <input type="range" class="carousel-range" min="0" value="0" step="1" />
+      </div>
+    </section>
 
-  <div class="carousel">
-    <div class="carousel-track">
-      <!-- slajdy będą dodane tutaj dynamicznie -->
-    </div>
-  </div>
-
-  <div class="carousel-controls" aria-hidden="false">
-    <input type="range" class="carousel-range" min="0" value="0" step="1" />
-  </div>
-
-</section>
-
-<script>
-(async function(){
-  const owner = 'antonihelbigip';
-  const repo = 'EduCraft';
-  const path = 'images';
-  const branch = 'main';
-
-  const gallery = document.querySelector('.gallery');
-  if (!gallery) return;
-  const track = gallery.querySelector('.carousel-track');
-  const range = gallery.querySelector('.carousel-range');
-  if (!track || !range) return;
-
-  // komunikat ładowania
-  track.innerHTML = '<p class="small">Ładowanie galerii…</p>';
-
-  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
-
-  try {
-    const res = await fetch(apiUrl);
-    if (!res.ok) throw new Error('GitHub API error: ' + res.status);
-    const files = await res.json();
-    const imgs = (Array.isArray(files) ? files.filter(f => /\.(jpe?g|png|gif|webp|svg)$/i.test(f.name)) : []);
-
-    if (imgs.length === 0) {
-      track.innerHTML = '<p class="small">Brak obrazów w katalogu images/. Dodaj pliki i zrób push.</p>';
-      range.style.display = 'none';
-      return;
-    }
-
-    // sortuj po nazwie
-    imgs.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
-
-    // wyczyść track
-    track.innerHTML = '';
-
-    // helper: tworzy poprawny raw.githubusercontent URL (koduje tylko nazwę pliku)
-    const rawUrl = (p, filename) =>
-      `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p ? p + '/' : ''}${encodeURIComponent(filename)}`;
-
-    // utwórz tablicę slides i wypełnij track
-    const slides = [];
-    imgs.forEach(file => {
-      const slide = document.createElement('div');
-      slide.className = 'carousel-slide';
-
-      const img = document.createElement('img');
-      img.src = rawUrl(path, file.name);
-      img.alt = file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g,' ');
-      img.loading = 'lazy';
-
-      slide.appendChild(img);
-      track.appendChild(slide);
-       // ustawia wysokość slajdu proporcjonalnie do szerokości (1:0.6)
-      slide.style.height = `${slide.offsetWidth * 0.6}px`;
-      slides.push(slide);
-    });
-
-    // ---- KARUZELA: logika przewijania ----
-    let visible = window.innerWidth <= 760 ? 1 : 2; // ile slide'ów widocznych
-    let currentIndex = 0;
-    const total = slides.length;
-    let maxIndex = Math.max(0, total - visible);
-
-    // ustaw range max
-    function updateRangeMax() {
-      visible = window.innerWidth <= 760 ? 1 : 2;
-      maxIndex = Math.max(0, total - visible);
-      range.max = maxIndex;
-      if (+range.value > maxIndex) range.value = maxIndex;
-      updatePosition(+range.value);
-    }
-
-    // update transform
-    function updatePosition(index) {
-      currentIndex = index;
-      const shiftPercent = (index * (100 / visible));
-      track.style.transform = `translateX(-${shiftPercent}%)`;
-      range.value = index;
-    }
-
-    // ustaw szerokości slajdów w procentach (flex-basis)
-function setSlideBasis() {
-slides.forEach(slide => {
-  slide.style.flex = `0 0 ${basis}`;
-  slide.style.height = `${slide.offsetWidth * 0.6}px`; // zachowanie proporcji
-});
-  updatePosition(Math.min(currentIndex, Math.max(0, total - visible)));
-}
-
-
-    // inicjalizacja
-    updateRangeMax();
-    setSlideBasis();
-
-    // reaguj na resize (przelicz visible i szerokości)
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        visible = window.innerWidth <= 760 ? 1 : 2;
-        setSlideBasis();
-        updateRangeMax();
-      }, 120);
-    });
-
-    // obsługa suwaka ręcznego
-    range.addEventListener('input', (e) => {
-      updatePosition(+e.target.value);
-      restartAutoplay();
-    });
-
-    // AUTOPLAY
-    let autoplayInterval = 2500; // ms (2.5s)
-    let autoplayTimer = null;
-
-    function startAutoplay() {
-      stopAutoplay();
-      autoplayTimer = setInterval(() => {
-        let next = currentIndex + 1;
-        if (next > maxIndex) next = 0; // zapętlenie
-        updatePosition(next);
-      }, autoplayInterval);
-    }
-    function stopAutoplay(){
-      if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
-    }
-    function restartAutoplay(){
-      stopAutoplay();
-      startAutoplay();
-    }
-
-    // pauza na hover
-    gallery.addEventListener('mouseenter', stopAutoplay);
-    gallery.addEventListener('mouseleave', startAutoplay);
-
-    // jeśli mniej slajdów niż visible — wycentruj i ukryj suwak
-    if (total <= visible) {
-      range.style.display = 'none';
-      track.style.justifyContent = 'center';
-      slides.forEach(slide => slide.style.flex = `0 0 ${100 / total}%`);
-    } else {
-      range.style.display = 'block';
-    }
-
-    // Start autoplay
-    startAutoplay();
-
-  } catch (err) {
-    console.error(err);
-    track.innerHTML = '<p class="small">Nie udało się załadować galerii. Sprawdź konsolę (F12).</p>';
-    range.style.display = 'none';
-  }
-})();
-</script>
-
-
-    <!-- Support (Zrzutka widget) -->
+    <!-- Support -->
     <section id="support" class="card support">
       <h3 data-i18n="support_title">Wesprzyj projekt</h3>
       <p data-i18n="support_text">Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.</p>
-
-      <!-- widget Zrzutka -->
       <div class="widget-wrap">
         <div style="position: relative; width: 100%; height: 480px; overflow: hidden;">
           <iframe style="position: absolute; top:0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%;" 
@@ -254,57 +90,25 @@ slides.forEach(slide => {
     </section>
 
     <!-- FAQ -->
-   <!-- FAQ -->
-<section id="faq" class="card muted">
-  <h3 data-i18n="faq_title">❓ Najczęstsze pytania (FAQ)</h3>
+    <section id="faq" class="card muted">
+      <h3 data-i18n="faq_title">❓ Najczęstsze pytania (FAQ)</h3>
 
-  <details>
-    <summary>Czy serwer będzie darmowy?</summary>
-    <p>Tak — serwer będzie otwarty, bez whitelisty, bez kont premium. Wspierający dostaną dodatkowe bonusy (role, skiny, tabliczki).</p>
-  </details>
+      <details>
+        <summary data-i18n="faq_q1">Czy serwer będzie darmowy?</summary>
+        <p data-i18n="faq_a1">Tak — serwer będzie otwarty dla wszystkich. Wspierający dostaną dodatkowe bonusy.</p>
+      </details>
 
-  <details>
-    <summary>Czy zasilanie OZE będzie realne?</summary>
-    <p>Tak — panele PV, turbina wiatrowa i akumulatory LiFePO₄ zapewnią 100% energii. Całość zarządzana przez Raspberry Pi i Home Assistant.</p>
-  </details>
+      <details>
+        <summary data-i18n="faq_q2">Czy zasilanie OZE będzie realne?</summary>
+        <p data-i18n="faq_a2">Tak — planujemy PV + turbina + akumulatory LiFePO₄ oraz monitoring przez Home Assistant.</p>
+      </details>
+    </section>
 
-  <details>
-    <summary>Czy mam zgodę na odwzorowanie kampusu?</summary>
-    <p>Złożyłem wniosek — rozpocznę odwzorowywanie po jej uzyskaniu. Mam wstępne poparcie uczelni.</p>
-  </details>
-
-  <details>
-    <summary>Czy można pomóc w budowie lub treściach?</summary>
-    <p>Tak — planuję otwartą rekrutację edukatorów i budowniczych. Wspierający otrzymają wcześniejszy dostęp przez Discorda.</p>
-  </details>
-
-  <details>
-    <summary>Co, jeśli nie zbierzemy całej kwoty?</summary>
-    <p>Każdy etap ma określone minimum. Zrealizuję tyle, ile się uda — zaczynając od etapu 1: zasilania i podstawowego serwera.</p>
-  </details>
-
-  <details>
-    <summary>Jak śledzić postępy?</summary>
-    <p>Postępy będą publikowane na stronie zrzutki, stronie projektu oraz Discordzie. Będzie publiczny pasek postępu i wizualizacje.</p>
-  </details>
-
-  <details>
-    <summary>Czy to tylko zabawa?</summary>
-    <p>Nie! To edukacyjny projekt z misją. Minecraft to świetna platforma do nauki o OZE, automatyce i fizyce w przystępnej formie.</p>
-  </details>
-
-  <details>
-    <summary>Czy projekt będzie open-source?</summary>
-    <p>Tak — dokumentacja techniczna, kod automatyki i część materiałów edukacyjnych będzie dostępna na licencji open-source.</p>
-  </details>
-</section>
-
-    <!-- Contact / Links -->
+    <!-- Contact -->
     <section id="contact" class="card">
       <h3 data-i18n="contact_title">Kontakt & społeczność</h3>
       <p data-i18n="contact_text">Discord (wkrótce) • GitHub: <a href="https://github.com/your-username/ecocraft-oze" target="_blank">github.com/your-username/ecocraft-oze</a></p>
     </section>
-
   </main>
 
   <footer class="site-footer">
@@ -315,143 +119,35 @@ slides.forEach(slide => {
 
   <!-- TRANSLATIONS & SWITCHER SCRIPT -->
   <script>
-    // translation dictionary (pl / en / de) - edit text here to tweak translations
-    const TRANSLATIONS = {
-      pl: {
-        hero_title: "EcoCraft 🌍⚡",
-        hero_lead: "Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.",
-        cta_support: "Wesprzyj projekt",
-        cta_about: "Dowiedz się więcej",
-        about_title: "O projekcie",
-        about_text: "Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej. To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE.",
-        creator_title: "Kim jestem?",
-        creator_text: "Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.",
-        build_title: "Co buduję?",
-        build_li1: "Serwer 24/7 zasilany panelami PV i turbiną wiatrową",
-        build_li2: "Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC",
-        build_li3: "System monitoringu energii (Raspberry Pi + Home Assistant)",
-        updates_title: "Aktualizacje",
-        updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione",
-        updates_li2: "Tryby: Proxy, Lobby, PvP, EarthMC",
-        updates_li3: "Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-        updates_li4: "Monitoring energii (miernik Teccus) – plan integracji z Home Assistant",
-        gallery_title: "Galeria",
-        gallery_img1_alt: "Panel kontrolny projektu EcoCraft",
-        gallery_img2_alt: "Prototyp racka / serwera",
-        support_title: "Wesprzyj projekt",
-        support_text: "Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.",
-        faq_title: "FAQ",
-        faq_q1: "Czy serwer będzie darmowy?",
-        faq_a1: "Tak — serwer będzie otwarty dla wszystkich. Wspierający dostaną dodatkowe bonusy.",
-        faq_q2: "Czy zasilanie OZE będzie realne?",
-        faq_a2: "Tak — planujemy PV + turbina + akumulatory LiFePO₄ oraz monitoring przez Home Assistant.",
-        contact_title: "Kontakt & społeczność",
-        contact_text: "Discord (wkrótce) • GitHub: github.com/your-username/ecocraft-oze",
-        footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
-      },
-      en: {
-        hero_title: "EcoCraft 🌍⚡",
-        hero_lead: "The first Polish educational Minecraft server powered 100% by renewable energy.",
-        cta_support: "Support the project",
-        cta_about: "Learn more",
-        about_title: "About",
-        about_text: "I'm building an open educational Minecraft server that runs 24/7 thanks to solar panels and a wind turbine. It combines gaming, technology and ecology — players will see how renewable systems work in practice.",
-        creator_title: "About the creator",
-        creator_text: "My name is Antoni — mechatronics student, AI intern at Siemens, three-time winner of the “My business idea” contest.",
-        build_title: "What we build",
-        build_li1: "24/7 server powered by PV panels and a wind turbine",
-        build_li2: "Educational platform with quests, NPC/AI and EarthMC map",
-        build_li3: "Energy monitoring system (Raspberry Pi + Home Assistant)",
-        updates_title: "Updates",
-        updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — servers deployed",
-        updates_li2: "Modes: Proxy, Lobby, PvP, EarthMC",
-        updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-        updates_li4: "Energy metering (Teccus meter) — plan to integrate with Home Assistant",
-        gallery_title: "Gallery",
-        gallery_img1_alt: "EcoCraft control panel",
-        gallery_img2_alt: "Rack / server prototype",
-        support_title: "Support the project",
-        support_text: "Support us on Zrzutka.pl — every contribution helps powering tests and educational content.",
-        faq_title: "FAQ",
-        faq_q1: "Will the server be free?",
-        faq_a1: "Yes — the server will be open to everyone. Supporters will receive bonuses.",
-        faq_q2: "Is renewable powering realistic?",
-        faq_a2: "Yes — we plan PV + turbine + LiFePO₄ batteries and monitoring with Home Assistant.",
-        contact_title: "Contact & community",
-        contact_text: "Discord (coming soon) • GitHub: github.com/your-username/ecocraft-oze",
-        footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
-      },
-      de: {
-        hero_title: "EcoCraft 🌍⚡",
-        hero_lead: "Der erste polnische Bildungs-Minecraft-Server, der zu 100 % mit erneuerbarer Energie betrieben wird.",
-        cta_support: "Projekt unterstützen",
-        cta_about: "Mehr erfahren",
-        about_title: "Über das Projekt",
-        about_text: "Ich baue einen offenen Bildungs-Minecraft-Server, der rund um die Uhr dank Solarpaneelen und einer Windturbine läuft. Er verbindet Spiele, Technik und Ökologie – Spieler sehen, wie erneuerbare Systeme in der Praxis funktionieren.",
-        creator_title: "Über den Ersteller",
-        creator_text: "Ich heiße Antoni – Mechatronik-Student, AI-Praktikant bei Siemens, dreifacher Gewinner des Wettbewerbs „Meine Geschäftsidee“. ",
-        build_title: "Was wir bauen",
-        build_li1: "24/7 Server, betrieben durch PV-Module und Windturbine",
-        build_li2: "Bildungsplattform mit Aufgaben, NPC/AI und EarthMC-Karte",
-        build_li3: "Energiemonitoring-System (Raspberry Pi + Home Assistant)",
-        updates_title: "Aktualisierungen",
-        updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — Server aufgesetzt",
-        updates_li2: "Modi: Proxy, Lobby, PvP, EarthMC",
-        updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-        updates_li4: "Energie-Messung (Teccus) — Integration mit Home Assistant geplant",
-        gallery_title: "Galerie",
-        gallery_img1_alt: "EcoCraft Bedienfeld",
-        gallery_img2_alt: "Rack / Server-Prototyp",
-        support_title: "Unterstütze das Projekt",
-        support_text: "Unterstütze uns auf Zrzutka.pl — jeder Beitrag hilft beim Betriebstests und Bildungsinhalten.",
-        faq_title: "FAQ",
-        faq_q1: "Wird der Server kostenlos sein?",
-        faq_a1: "Ja — der Server wird für alle zugänglich sein. Unterstützer erhalten Boni.",
-        faq_q2: "Ist die OZE-Versorgung realistisch?",
-        faq_a2: "Ja — wir planen PV + Turbine + LiFePO₄-Batterien und Monitoring via Home Assistant.",
-        contact_title: "Kontakt & Community",
-        contact_text: "Discord (bald) • GitHub: github.com/your-username/ecocraft-oze",
-        footer_text: "© 2025 EcoCraft • MIT License • Made by Antoni"
-      }
-    };
+    const TRANSLATIONS = {/* Twój obszerny obiekt z tłumaczeniami pl/en/de */};
 
-    // apply chosen language to all elements with data-i18n attr
-    function applyLanguage(lang) {
+    function applyLanguage(lang){
       const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
       document.documentElement.lang = lang;
-      // text nodes
-      document.querySelectorAll('[data-i18n]').forEach(el => {
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
         const key = el.getAttribute('data-i18n');
-        if (dict[key]) el.textContent = dict[key];
+        if(dict[key]) el.textContent = dict[key];
       });
-      // alt attributes for images etc.
-      document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      document.querySelectorAll('[data-i18n-alt]').forEach(el=>{
         const key = el.getAttribute('data-i18n-alt');
-        if (dict[key]) el.setAttribute('alt', dict[key]);
+        if(dict[key]) el.setAttribute('alt', dict[key]);
       });
-      // special: update CTA link text (if any)
       const cta = document.getElementById('cta-support');
-      if (cta && dict['cta_support']) cta.textContent = dict['cta_support'];
-
-      // save preference
+      if(cta && dict['cta_support']) cta.textContent = dict['cta_support'];
       try { localStorage.setItem('ecocraft_lang', lang); } catch(e){}
-      // update URL query param without reload
       const url = new URL(window.location);
       url.searchParams.set('lang', lang);
       window.history.replaceState({}, '', url);
-      // set active button class
-      document.querySelectorAll('.lang-btn').forEach(b=> b.classList.toggle('active', b.dataset.lang === lang));
+      document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
     }
 
-    // find initial language from query param / localStorage / browser
     (function initLang(){
       const urlParams = new URLSearchParams(window.location.search);
       let lang = urlParams.get('lang') || localStorage.getItem('ecocraft_lang') || navigator.language.slice(0,2);
-      if (!['pl','en','de'].includes(lang)) lang = 'pl';
+      if(!['pl','en','de'].includes(lang)) lang='pl';
       applyLanguage(lang);
     })();
 
-    // event listeners for switcher
     document.querySelectorAll('.lang-btn').forEach(btn=>{
       btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
     });
