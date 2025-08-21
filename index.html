@@ -135,6 +135,8 @@
 
       slide.appendChild(img);
       track.appendChild(slide);
+       // ustawia wysokość slajdu proporcjonalnie do szerokości (1:0.6)
+      slide.style.height = `${slide.offsetWidth * 0.6}px`;
       slides.push(slide);
     });
 
