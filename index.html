@@ -67,15 +67,167 @@
     </section>
 
     <!-- Gallery -->
-    <section id="gallery" class="card gallery">
-      <h3 data-i18n="gallery_title">Galeria</h3>
-      <div class="carousel">
-        <div class="carousel-track"></div>
-      </div>
-      <div class="carousel-controls" aria-hidden="false">
-        <input type="range" class="carousel-range" min="0" value="0" step="1" />
-      </div>
-    </section>
+ <!-- Gallery -->
+<section id="gallery" class="card gallery">
+  <h3 data-i18n="gallery_title">Galeria</h3>
+  <div class="carousel">
+    <div class="carousel-track"></div>
+  </div>
+  <div class="carousel-controls" aria-hidden="false">
+    <input type="range" class="carousel-range" min="0" value="0" step="1" />
+  </div>
+</section>
+
+<script>
+(async function(){
+  const owner = 'antonihelbigip';
+  const repo = 'EduCraft';
+  const path = 'images';
+  const branch = 'main';
+
+  const gallery = document.querySelector('.gallery');
+  if (!gallery) return;
+  const track = gallery.querySelector('.carousel-track');
+  const range = gallery.querySelector('.carousel-range');
+  if (!track || !range) return;
+
+  track.innerHTML = '<p class="small">Ładowanie galerii…</p>';
+
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error('GitHub API error: ' + res.status);
+    const files = await res.json();
+    const imgs = Array.isArray(files) ? files.filter(f => /\.(jpe?g|png|gif|webp|svg)$/i.test(f.name)) : [];
+
+    if (imgs.length === 0) {
+      track.innerHTML = '<p class="small">Brak obrazów w katalogu images/. Dodaj pliki i zrób push.</p>';
+      range.style.display = 'none';
+      return;
+    }
+
+    imgs.sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
+    track.innerHTML = '';
+
+    const rawUrl = (p, filename) =>
+      `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p ? p + '/' : ''}${encodeURIComponent(filename)}`;
+
+    const slides = [];
+    imgs.forEach(file => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+
+      const img = document.createElement('img');
+      img.src = rawUrl(path, file.name);
+      img.setAttribute('data-i18n-alt', file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g,'_'));
+      img.loading = 'lazy';
+
+      slide.appendChild(img);
+      track.appendChild(slide);
+      slides.push(slide);
+    });
+
+    let visible = window.innerWidth <= 760 ? 1 : 2;
+    let currentIndex = 0;
+    const total = slides.length;
+    let maxIndex = Math.max(0, total - visible);
+
+    function updateRangeMax() {
+      visible = window.innerWidth <= 760 ? 1 : 2;
+      maxIndex = Math.max(0, total - visible);
+      range.max = maxIndex;
+      if (+range.value > maxIndex) range.value = maxIndex;
+      updatePosition(+range.value);
+    }
+
+    function updatePosition(index) {
+      currentIndex = index;
+      const shiftPercent = (index * (100 / visible));
+      track.style.transform = `translateX(-${shiftPercent}%)`;
+      range.value = index;
+    }
+
+    function setSlideBasis() {
+      const basis = 100 / visible;
+      slides.forEach(slide => {
+        slide.style.flex = `0 0 ${basis}%`;
+        slide.style.height = `${slide.offsetWidth * 0.6}px`;
+      });
+      updatePosition(Math.min(currentIndex, Math.max(0, total - visible)));
+    }
+
+    updateRangeMax();
+    setSlideBasis();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        updateRangeMax();
+        setSlideBasis();
+      }, 120);
+    });
+
+    range.addEventListener('input', (e) => updatePosition(+e.target.value));
+
+    let autoplayInterval = 2500;
+    let autoplayTimer = null;
+
+    function startAutoplay() {
+      stopAutoplay();
+      if (total <= visible) return;
+      autoplayTimer = setInterval(() => {
+        let next = currentIndex + 1;
+        if (next > maxIndex) next = 0;
+        updatePosition(next);
+      }, autoplayInterval);
+    }
+
+    function stopAutoplay() {
+      if(autoplayTimer){ clearInterval(autoplayTimer); autoplayTimer=null; }
+    }
+
+    gallery.addEventListener('mouseenter', stopAutoplay);
+    gallery.addEventListener('mouseleave', startAutoplay);
+
+    if (total <= visible) {
+      range.style.display = 'none';
+      track.style.justifyContent = 'center';
+      slides.forEach(slide => slide.style.flex = `0 0 ${100 / total}%`);
+    } else range.style.display = 'block';
+
+    startAutoplay();
+
+    // --- Dynamic ALT translations ---
+    const TRANSLATIONS = { pl: {}, en: {}, de: {} };
+    function applyAltLanguage(lang) {
+      slides.forEach(slide => {
+        const img = slide.querySelector('img[data-i18n-alt]');
+        const key = img.getAttribute('data-i18n-alt');
+        if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+          img.alt = TRANSLATIONS[lang][key];
+        } else {
+          img.alt = key;
+        }
+      });
+    }
+
+    const initLang = localStorage.getItem('ecocraft_lang') || 'pl';
+    applyAltLanguage(initLang);
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', ()=> applyAltLanguage(btn.dataset.lang));
+    });
+
+  } catch (err) {
+    console.error(err);
+    track.innerHTML = '<p class="small">Nie udało się załadować galerii. Sprawdź konsolę (F12).</p>';
+    range.style.display = 'none';
+  }
+})();
+</script>
+
 
     <!-- Support -->
     <section id="support" class="card support">
