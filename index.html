@@ -11,7 +11,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="favicon.png">
 
-  <!-- Open Graph (zastąp URL/obrazki własnymi kiedy będziesz miał domenę) -->
+  <!-- Open Graph (zastąp, kiedy będziesz miał domenę) -->
   <meta property="og:title" content="EduCraft – Minecraft OZE" />
   <meta property="og:description" content="Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną." />
   <meta property="og:image" content="https://twoja-domena.pl/tlo.jpg" />
@@ -24,17 +24,17 @@
   <meta name="twitter:description" content="Minecraft + OZE + edukacja. Dołącz!" />
   <meta name="twitter:image" content="https://twoja-domena.pl/tlo.jpg" />
 
-  <!-- marked.js (render markdown w przeglądarce) -->
+  <!-- marked.js do renderowania Markdown -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-  <!-- TOPBAR — full-width wrapper + centered container -->
+  <!-- TOPBAR — pełna szerokość, wewnętrzny container centrowany -->
   <div class="topbar" role="navigation" aria-label="Główna nawigacja">
     <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0.5rem 0;">
       <div style="display:flex;align-items:center;gap:12px;">
         <a class="brand" href="#home" aria-label="EduCraft">EduCraft</a>
 
-        <!-- mobile toggle (widoczny na małych ekranach) -->
+        <!-- mobile toggle -->
         <button class="nav-toggle" aria-expanded="false" aria-label="Otwórz menu">
           <span></span><span></span><span></span>
         </button>
@@ -63,15 +63,15 @@
     </div>
   </div>
 
- <!-- HERO (tylko tło) -->
-<header class="hero" id="home" role="banner" aria-label="Hero">
-  <div class="hero-inner container">
-    <!-- puste (chciałeś bez tekstów/przycisków) -->
-  </div>
-</header>
+  <!-- HERO (tylko tło, bez tekstów/przycisków) -->
+  <header class="hero" id="home" role="banner" aria-label="Hero">
+    <div class="hero-inner container">
+      <!-- intentionally empty: no hero text/buttons as requested -->
+    </div>
+  </header>
 
   <main class="container" role="main" style="padding-top:18px;">
-    <!-- About -->
+    <!-- ABOUT -->
     <section id="about" class="card" aria-labelledby="about-heading">
       <h2 id="about-heading" data-i18n="about_title">O projekcie</h2>
       <p data-i18n="about_text">
@@ -80,7 +80,7 @@
       </p>
     </section>
 
-    <!-- Education -->
+    <!-- EDUCATION -->
     <section id="education" class="card muted" aria-labelledby="education-heading">
       <h3 id="education-heading" data-i18n="education_title">Edukacja</h3>
       <p data-i18n="education_text">Materiały edukacyjne i scenariusze lekcji: energia słoneczna, wiatr, magazynowanie, monitoring i automatyka (Home Assistant).</p>
@@ -91,7 +91,7 @@
       </ul>
     </section>
 
-    <!-- Publications (tabela) -->
+    <!-- PUBLICATIONS (możesz później przerobić na "Aktualizacje", jeśli wolisz) -->
     <section id="publications" class="card" aria-labelledby="publications-heading">
       <h3 id="publications-heading" data-i18n="publications_title">Publikacje</h3>
       <p data-i18n="publications_intro">Lista raportów, artykułów i materiałów edukacyjnych związanych z projektem.</p>
@@ -110,26 +110,26 @@
               <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">2025</td>
               <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">EduCraft — raport wdrożenia OZE</td>
               <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">Raport</td>
-              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1"><a href="https://github.com/antonihelbigip/EduCraft" target="_blank" rel="noopener">GitHub</a></td>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">GitHub</td>
             </tr>
             <tr>
               <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">2024</td>
               <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">Scenariusze lekcji: Energia w praktyce</td>
               <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">Materiały</td>
-              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1"><a href="#" onclick="alert('Podmień link do PDF');return false;">PDF</a></td>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">PDF</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Creator -->
+    <!-- CREATOR -->
     <section id="creator" class="card muted" aria-labelledby="creator-heading">
       <h3 id="creator-heading" data-i18n="creator_title">Kim jestem?</h3>
       <p data-i18n="creator_text">Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.</p>
     </section>
 
-    <!-- What we build -->
+    <!-- BUILD -->
     <section id="build" class="card" aria-labelledby="build-heading">
       <h3 id="build-heading" data-i18n="build_title">Co buduję?</h3>
       <ul>
@@ -139,7 +139,7 @@
       </ul>
     </section>
 
-    <!-- Projects -->
+    <!-- PROJECTS -->
     <section id="projects" class="card muted" aria-labelledby="projects-heading">
       <h3 id="projects-heading" data-i18n="projects_title">Projekty</h3>
       <ul>
@@ -149,35 +149,44 @@
       </ul>
     </section>
 
-    <!-- Progress / dynamic updates (Pobierane z _posts w repo) -->
+    <!-- ===== AKTUALIZACJE: ładowane dynamicznie z katalogu _posts na GitHubie ===== -->
     <section id="updates-frame" class="card muted" aria-labelledby="updates-heading">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-        <h3 id="updates-heading" data-i18n="updates_title">🔔 Aktualizacje projektu</h3>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <button id="refresh-posts" class="btn btn-outline" title="Odśwież aktualizacje">Odśwież</button>
-          <a id="open-zrzutka" class="btn btn-outline" href="https://zrzutka.pl/zbudujmy-1-w-polsce-edukacyjny-eco-serwer-minecraft-z-oze-b5j6vm#updates" target="_blank" rel="noopener">Zrzutka — pełne</a>
-        </div>
+      <h3 id="updates-heading" data-i18n="updates_title">🔔 Aktualizacje projektu</h3>
+
+      <div id="updates-controls" style="display:flex;gap:8px;align-items:center;margin-bottom:10px;justify-content:flex-end;">
+        <button id="refresh-posts" class="btn btn-outline" title="Odśwież listę">Odśwież</button>
+        <button id="open-zrzutka" class="btn btn-outline" title="Otwórz zrzutkę">Zrzutka (aktualizacje)</button>
       </div>
 
-      <div id="updates-controls" style="margin-top:10px;display:flex;align-items:center;gap:12px;">
-        <div class="small">Filtr języka aktualizacji:</div>
-        <div style="display:flex;gap:8px;">
-          <button class="filter-btn btn btn-outline" data-filter="pl">PL</button>
-          <button class="filter-btn btn btn-outline" data-filter="en">EN</button>
-          <button class="filter-btn btn btn-outline" data-filter="de">DE</button>
-        </div>
-      </div>
-
-      <div id="updates-list" style="margin-top:12px;max-height:520px;overflow:auto;padding:6px;border-radius:8px;background:var(--muted);">
+      <div id="updates-list" style="display:block; gap:12px; overflow:auto; max-height:520px; padding-right:6px;">
         <p class="small">Ładowanie aktualizacji…</p>
       </div>
 
-      <div style="margin-top:10px;display:flex;justify-content:center;">
-        <button id="load-more" class="btn btn-outline" style="display:none;">Pokaż więcej</button>
-      </div>
+      <template id="post-card-tpl">
+        <article class="post-card card" style="display:block; margin-bottom:12px;">
+          <div style="display:flex;gap:12px;">
+            <div class="post-thumb" style="flex:0 0 160px;">
+              <img src="" alt="" style="width:160px;height:100px;object-fit:cover;border-radius:6px;">
+            </div>
+            <div style="flex:1;">
+              <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;">
+                <div>
+                  <h4 class="post-title" style="margin:0 0 6px;font-size:1.05rem"></h4>
+                  <div class="small post-meta"></div>
+                </div>
+                <div>
+                  <button class="btn btn-outline btn-open" style="white-space:nowrap">Czytaj</button>
+                </div>
+              </div>
+              <div class="post-excerpt small" style="margin-top:8px;color:var(--dark);"></div>
+              <div class="post-full" style="display:none;margin-top:12px;"></div>
+            </div>
+          </div>
+        </article>
+      </template>
     </section>
 
-    <!-- Multimedia -->
+    <!-- MULTIMEDIA (galeria) -->
     <section id="multimedia" class="card gallery" aria-labelledby="gallery-heading">
       <h3 id="gallery-heading" data-i18n="gallery_title">Galeria / Multimedia</h3>
       <div class="carousel">
@@ -191,10 +200,10 @@
     <!-- FAQ -->
     <section id="faq" class="card muted" aria-labelledby="faq-heading">
       <h3 id="faq-heading" data-i18n="faq_title">Najczęstsze pytania (FAQ)</h3>
-      <!-- dynamic FAQ (skrypt dopisze treści) -->
+      <!-- zostanie wygenerowane przez skrypt -->
     </section>
 
-    <!-- Support -->
+    <!-- SUPPORT -->
     <section id="support" class="card support" aria-labelledby="support-heading">
       <h3 id="support-heading" data-i18n="support_title">Wesprzyj projekt</h3>
       <p data-i18n="support_text">Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.</p>
@@ -206,7 +215,7 @@
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- CONTACT -->
     <section id="contact" class="card" aria-labelledby="contact-heading">
       <h3 id="contact-heading" data-i18n="contact_title">Kontakt & społeczność</h3>
       <p data-i18n="contact_text">Discord (wkrótce) • GitHub: <a href="https://github.com/antonihelbigip/EduCraft" target="_blank" rel="noopener">github.com/antonihelbigip/EduCraft</a></p>
@@ -229,21 +238,24 @@
         const open = nav.classList.toggle('open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
-      // close mobile nav on resize > 760
       window.addEventListener('resize', ()=> {
         if(window.innerWidth > 760 && nav.classList.contains('open')) {
           nav.classList.remove('open');
           btn.setAttribute('aria-expanded','false');
         }
       });
-      // close on link click (mobile)
       nav.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', ()=> { if(nav.classList.contains('open')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
+        a.addEventListener('click', ()=> {
+          if(nav.classList.contains('open')) {
+            nav.classList.remove('open');
+            btn.setAttribute('aria-expanded','false');
+          }
+        });
       });
     })();
   </script>
 
-  <!-- Gallery + Language Script (gallery uses GitHub raw content) -->
+  <!-- GALLERY: ładowanie obrazów z katalogu images na GitHubie -->
   <script>
   (async function(){
     const owner = 'antonihelbigip';
@@ -266,12 +278,12 @@
       imgs.sort((a,b)=>a.name.localeCompare(b.name, undefined, {numeric:true}));
       track.innerHTML='';
       const slides = [];
-      const rawUrl = (p, filename)=>`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p? p+'/' : ''}${encodeURIComponent(filename)}`;
+      const rawUrl = (filename)=>`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}/${encodeURIComponent(filename)}`;
       imgs.forEach(file=>{
         const slide=document.createElement('div');
         slide.className='carousel-slide';
         const img=document.createElement('img');
-        img.src=rawUrl(path,file.name);
+        img.src=rawUrl(file.name);
         img.setAttribute('data-i18n-alt',file.name.replace(/\.[^/.]+$/,'').replace(/[-_]/g,'_'));
         img.loading='lazy';
         slide.appendChild(img);
@@ -299,7 +311,7 @@
       if(total<=visible){range.style.display='none'; track.style.justifyContent='center'; slides.forEach(slide=>slide.style.flex=`0 0 ${100/total}%`);}else range.style.display='block';
       startAutoplay();
 
-      // ALT translations (empty; left for future i18n)
+      // ALT translations (puste teraz, można rozszerzyć)
       const TRANSLATIONS_ALT={pl:{},en:{},de:{}};
       const applyAltLanguage=lang=>{slides.forEach(s=>{const img=s.querySelector('img[data-i18n-alt]'); const key=img.getAttribute('data-i18n-alt'); img.alt=(TRANSLATIONS_ALT[lang]&&TRANSLATIONS_ALT[lang][key])?TRANSLATIONS_ALT[lang][key]:key;});}
       const initLang=localStorage.getItem('educraft_lang')||'pl';
@@ -309,8 +321,11 @@
   })();
   </script>
 
-  <!-- TRANSLATIONS & SWITCHER SCRIPT + dynamic updates loader -->
+  <!-- TRANSLATIONS & DYNAMIC POSTS LOADER -->
   <script>
+  /* =====================
+     Słownik tłumaczeń (klucze użyte w data-i18n)
+     ===================== */
   const TRANSLATIONS = {
     pl: {
       nav_about: "O projekcie",
@@ -338,31 +353,13 @@
       build_li3: "System monitoringu energii (Raspberry Pi + Home Assistant)",
       projects_title: "Projekty",
       updates_title: "Aktualizacje",
-      updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione",
-      updates_li2: "Tryby: Proxy, Lobby, PvP, EarthMC",
-      updates_li3: "Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-      updates_li4: "Monitoring energii (miernik Teccus) – plan integracji z Home Assistant",
+      updates_open: "Otwórz",
+      updates_refresh: "Odśwież",
       gallery_title: "Galeria / Multimedia",
       blog_title: "Blog",
       support_title: "Wesprzyj projekt",
       support_text: "Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.",
       faq_title: "Najczęstsze pytania (FAQ)",
-      faq_q1: "Czy serwer będzie darmowy?",
-      faq_a1: "Tak — serwer będzie otwarty, bez whitelisty, bez kont premium. Wspierający dostaną dodatkowe bonusy (role, skiny, tabliczki).",
-      faq_q2: "Czy zasilanie OZE będzie realne?",
-      faq_a2: "Tak — panele PV, turbina wiatrowa i akumulatory LiFePO₄ zapewnią 100% energii. Całość zarządzana przez Raspberry Pi i Home Assistant.",
-      faq_q3: "Czy mam zgodę na odwzorowanie kampusu?",
-      faq_a3: "Złożyłem wniosek — rozpocznę odwzorowywanie po jej uzyskaniu. Mam wstępne poparcie uczelni.",
-      faq_q4: "Czy można pomóc w budowie lub treściach?",
-      faq_a4: "Tak — planuję otwartą rekrutację edukatorów i budowniczych. Wspierający otrzymają wcześniejszy dostęp przez Discorda.",
-      faq_q5: "Co, jeśli nie zbierzemy całej kwoty?",
-      faq_a5: "Każdy etap ma określone minimum. Zrealizuję tyle, ile się uda — zaczynając od etapu 1: zasilania i podstawowego serwera.",
-      faq_q6: "Jak śledzić postępy?",
-      faq_a6: "Postępy będą publikowane na stronie zrzutki, stronie projektu oraz Discordzie. Będzie publiczny pasek postępu i wizualizacje.",
-      faq_q7: "Czy to tylko zabawa?",
-      faq_a7: "Nie! To edukacyjny projekt z misją. Minecraft to świetna platforma do nauki o OZE, automatyce i fizyce w przystępnej formie.",
-      faq_q8: "Czy projekt będzie open-source?",
-      faq_a8: "Tak — dokumentacja techniczna, kod automatyki i część materiałów edukacyjnych będzie dostępna na licencji open-source.",
       contact_title: "Kontakt & społeczność",
       contact_text: "Discord (wkrótce) • GitHub: github.com/antonihelbigip/EduCraft",
       footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
@@ -380,44 +377,26 @@
       cta_support: "Support",
       cta_about: "Learn more",
       about_title: "About",
-      about_text: "I'm building an open educational Minecraft server that runs 24/7 thanks to solar panels and a wind turbine. It combines gaming, technology and ecology — players will see how renewable systems work in practice.",
+      about_text: "I'm building an open educational Minecraft server that runs 24/7 thanks to solar panels and a wind turbine.",
       education_title: "Education",
       education_text: "Curriculum: Solar energy, Wind energy, Storage, Monitoring and Automation (Home Assistant).",
       publications_title: "Publications",
       publications_intro: "Reports, papers and educational materials related to the project.",
       creator_title: "About the creator",
-      creator_text: "My name is Antoni — mechatronics student, AI intern at Siemens, three-time winner of the 'My business idea' contest.",
+      creator_text: "My name is Antoni — mechatronics student, AI intern at Siemens.",
       build_title: "What we build",
       build_li1: "24/7 server powered by PV panels and a wind turbine",
       build_li2: "Educational platform with quests, NPC/AI and EarthMC map",
       build_li3: "Energy monitoring system (Raspberry Pi + Home Assistant)",
       projects_title: "Projects",
       updates_title: "Updates",
-      updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — servers deployed",
-      updates_li2: "Modes: Proxy, Lobby, PvP, EarthMC",
-      updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-      updates_li4: "Energy metering (Teccus meter) — plan to integrate with Home Assistant",
+      updates_open: "Open",
+      updates_refresh: "Refresh",
       gallery_title: "Gallery / Multimedia",
       blog_title: "Blog",
       support_title: "Support the project",
       support_text: "Support us on Zrzutka.pl — every contribution helps powering tests and educational content.",
       faq_title: "FAQ",
-      faq_q1: "Will the server be free?",
-      faq_a1: "Yes — the server will be open, without whitelist or premium accounts. Supporters will receive extra bonuses (roles, skins, signs).",
-      faq_q2: "Is renewable energy supply feasible?",
-      faq_a2: "Yes — PV panels, a wind turbine, and LiFePO₄ batteries will provide 100% energy. Everything is managed by Raspberry Pi and Home Assistant.",
-      faq_q3: "Do I have permission to replicate the campus?",
-      faq_a3: "I’ve submitted a request — I will start replication after approval. I have preliminary support from the university.",
-      faq_q4: "Can I help with building or content?",
-      faq_a4: "Yes — I plan open recruitment for educators and builders. Supporters will get early access via Discord.",
-      faq_q5: "What if we don’t raise the full amount?",
-      faq_a5: "Each stage has a minimum. I will implement as much as possible — starting from Stage 1: energy supply and basic server.",
-      faq_q6: "How can I track progress?",
-      faq_a6: "Progress will be published on the crowdfunding page, project website, and Discord. There will be a public progress bar and visualizations.",
-      faq_q7: "Is this just for fun?",
-      faq_a7: "No! This is an educational project with a mission. Minecraft is a great platform to learn about renewable energy, automation, and physics in a practical way.",
-      faq_q8: "Will the project be open-source?",
-      faq_a8: "Yes — technical documentation, automation code, and some educational materials will be available under an open-source license.",
       contact_title: "Contact & community",
       contact_text: "Discord (coming soon) • GitHub: github.com/antonihelbigip/EduCraft",
       footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
@@ -437,9 +416,9 @@
       about_title: "Über das Projekt",
       about_text: "Ich baue einen offenen Bildungs-Minecraft-Server, der rund um die Uhr dank Solarpaneelen und einer Windturbine läuft.",
       education_title: "Bildung",
-      education_text: "Curriculum und Lehrmaterialien (Solar, Wind, Monitoring).",
+      education_text: "Lehrplan: Solar, Wind, Speicher, Monitoring und Automatisierung.",
       publications_title: "Publikationen",
-      publications_intro: "Berichte, Artikel und Bildungsressourcen zum Projekt.",
+      publications_intro: "Berichte, Artikel und Materialien zum Projekt.",
       creator_title: "Über den Ersteller",
       creator_text: "Ich heiße Antoni – Mechatronik-Student, AI-Praktikant bei Siemens.",
       build_title: "Was wir bauen",
@@ -448,40 +427,24 @@
       build_li3: "Energiemonitoring-System (Raspberry Pi + Home Assistant)",
       projects_title: "Projekte",
       updates_title: "Aktualisierungen",
-      updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — Server aufgesetzt",
-      updates_li2: "Modi: Proxy, Lobby, PvP, EarthMC",
-      updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-      updates_li4: "Energie-Messung (Teccus) — Integration mit Home Assistant geplant",
+      updates_open: "Öffnen",
+      updates_refresh: "Aktualisieren",
       gallery_title: "Galerie / Multimedia",
       blog_title: "Blog",
       support_title: "Unterstütze das Projekt",
-      support_text: "Unterstütze nas na Zrzutka.pl — każdy wkład pomaga.",
+      support_text: "Unterstütze uns auf Zrzutka.pl — jeder Beitrag hilft.",
       faq_title: "FAQ",
-      faq_q1: "Wird der Server kostenlos sein?",
-      faq_a1: "Ja — der Server wird offen sein, ohne Whitelist oder Premium-Konten. Unterstützer erhalten zusätzliche Boni.",
-      faq_q2: "Ist die Versorgung mit erneuerbarer Energie realistisch?",
-      faq_a2: "Ja — PV-Module, Windturbine und LiFePO₄-Akkus liefern Energie. Steuerung über Raspberry Pi und Home Assistant.",
-      faq_q3: "Habe ich die Genehmigung, den Campus nachzubilden?",
-      faq_a3: "Antrag gestellt — Nachbildung startet nach Genehmigung.",
-      faq_q4: "Kann ich beim Bau helfen?",
-      faq_a4: "Ja — offene Rekrutierung geplant.",
-      faq_q5: "Was passiert, wenn Ziel nicht erreicht wird?",
-      faq_a5: "Realisierung etapami według dostępnych środków.",
-      faq_q6: "Wie kann ich den Fortschritt verfolgen?",
-      faq_a6: "Der Fortschritt wird auf der Crowdfunding-Seite, der Projektseite und Discord veröffentlicht.",
-      faq_q7: "Ist das nur zum Spaß?",
-      faq_a7: "Nein — dies ist ein Bildungsprojekt mit einer Mission.",
-      faq_q8: "Wird das Projekt Open-Source sein?",
-      faq_a8: "Ja — ein Teil der Materialien wird Open-Source sein.",
       contact_title: "Kontakt & Community",
       contact_text: "Discord (bald) • GitHub: github.com/antonihelbigip/EduCraft",
       footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
     }
   };
 
-  // ---------------------------
-  // Language switcher + i18n
-  // ---------------------------
+  /* -------------------------
+     Funkcje i18n (zmiana języka)
+     - applyLanguage(lang) — ustawia teksty i zapisuje ustawienie w localStorage
+     - initLang() — inicjalizacja przy starcie
+     ------------------------- */
   function applyLanguage(lang){
     const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
     document.documentElement.lang = lang;
@@ -491,10 +454,10 @@
     });
     try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
     document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
-    // also set filter-controls (buttons) active state
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active', b.dataset.filter===lang));
-    // load posts for this language
+    // po zmianie języka przeładuj wpisy aktualizacji
     loadPosts(lang);
+    // przebuduj FAQ
+    buildFAQFor(lang);
   }
 
   (function initLang(){
@@ -508,204 +471,250 @@
     btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
   });
 
-  // ---------------------------
-  // Dynamic posts loader (from GitHub _posts)
-  // ---------------------------
+  /* =========================
+     Dynamiczne ładowanie wpisów z GitHub _posts
+     - Obsługuje pliki z frontmatter (images, date, title, lang)
+     - Jeśli brak lang we frontmatter, wykrywa końcówkę pliku:
+         * yyyy-mm-dd-title.pl.md  OR  title.pl.md  OR  title-pl.md  OR title-en.md etc.
+     - Obrazki: obsługuje ścieżki typu "images/foo.jpg", "/images/foo.jpg", "foo.jpg"
+     ========================= */
+
   const GH_OWNER = 'antonihelbigip';
   const GH_REPO  = 'EduCraft';
   const GH_REF   = 'main';
   const POSTS_PATH = '_posts';
   const POSTS_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${POSTS_PATH}?ref=${GH_REF}`;
   const RAW_BASE = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_REF}/${POSTS_PATH}/`;
+  const RAW_BASE_ROOT = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_REF}/`;
 
   let _postsCache = null;
-  let _visibleCount = 5;
 
-  async function fetchPostsList(){
-    if(_postsCache) return _postsCache;
-    try {
+  // Pomocnik: wykrywa język z nazwy pliku (np. title.pl.md, title-en.md)
+  function detectLangFromFilename(filename){
+    // match .pl.md or -pl.md or .en.md etc.
+    const m1 = filename.match(/\.([a-z]{2})\.md$/i);
+    if(m1) return m1[1].toLowerCase();
+    const m2 = filename.match(/[-._]([a-z]{2})\.md$/i);
+    if(m2) return m2[1].toLowerCase();
+    return null;
+  }
+
+  // Parsowanie frontmatter (prosty parser: title, date, lang, images[])
+  function parseFrontMatter(mdText){
+    const m = mdText.match(/^---\s*([\s\S]*?)\s*---/);
+    if(!m) return {title:null,date:null,lang:null,images:[]};
+    const fm = m[1];
+    const result = {images:[]};
+    // title
+    const t = fm.match(/^\s*title:\s*(?:"([^"]+)"|'([^']+)'|(.+))$/m);
+    if(t) result.title = (t[1]||t[2]||t[3]||'').trim();
+    // date
+    const d = fm.match(/^\s*date:\s*(.+)$/m);
+    if(d) result.date = d[1].trim();
+    // lang
+    const l = fm.match(/^\s*lang:\s*([a-zA-Z_-]+)/m);
+    if(l) result.lang = l[1].trim().toLowerCase();
+    // images block (simple)
+    const imgsBlock = fm.match(/^\s*images:\s*\n((?:\s*-\s*.+\n?)+)/m);
+    if(imgsBlock){
+      const lines = imgsBlock[1].match(/-\s*(.+)/g) || [];
+      result.images = lines.map(s => s.replace(/^\-\s*/,'').trim().replace(/^['"]|['"]$/g,''));
+    }
+    return result;
+  }
+
+  // Pomocnik: konwertuje podaną ścieżkę obrazu do raw.githubusercontent URL
+  function resolveImageRawUrl(imgPath){
+    if(!imgPath) return '';
+    // usuń spacje i cudzysłowy
+    imgPath = imgPath.trim().replace(/^['"]|['"]$/g,'');
+    // jeśli pełna ścieżka zaczyna się od '/', usuń pierwszy slash i traktuj jako repo root
+    if(imgPath.startsWith('/')) imgPath = imgPath.replace(/^\/+/, '');
+    // jeśli zawiera 'images/' - traktuj jako względną od repo root
+    if(/(^|\/)images\//i.test(imgPath)){
+      return RAW_BASE_ROOT + encodeURI(imgPath);
+    }
+    // jeśli wygląda jak URL (http) — zwróć jak jest
+    if(/^https?:\/\//i.test(imgPath)) return imgPath;
+    // w przeciwnym razie zakładamy że to nazwa pliku w folderze images
+    return RAW_BASE_ROOT + 'images/' + encodeURIComponent(imgPath);
+  }
+
+  // Render minimalny Markdown -> HTML fallback (używamy marked.js dla pełnej konwersji)
+  function safeRenderMarkdown(md){
+    try{
+      return marked.parse(md || '');
+    } catch(e){
+      // bardzo prosty fallback
+      return (md||'').replace(/\n/g,'<br>');
+    }
+  }
+
+  // Główna funkcja: ładuje listę plików z _posts, pobiera treść i renderuje karty
+  async function loadPosts(lang){
+    lang = (lang || localStorage.getItem('educraft_lang') || (navigator.language||'pl').slice(0,2)).slice(0,2);
+    const updatesList = document.getElementById('updates-list');
+    const tpl = document.getElementById('post-card-tpl');
+    if(!updatesList || !tpl) return;
+    updatesList.innerHTML = '<p class="small">Ładowanie aktualizacji…</p>';
+
+    try{
+      // pobieramy listę plików w katalogu _posts
       const res = await fetch(POSTS_API);
       if(!res.ok) throw new Error('GitHub API: ' + res.status);
       const files = await res.json();
-      const mdFiles = files.filter(f=>/\.md$/i.test(f.name));
-      // load content of each file (in parallel, but limit friendly)
-      const promises = mdFiles.map(f => fetch(RAW_BASE + encodeURIComponent(f.name)).then(r=>{
-        if(!r.ok) throw new Error('Raw fetch error ' + r.status);
-        return r.text().then(txt=>({name:f.name, text:txt}));
-      }).catch(e=>{
-        console.warn('Failed to fetch', f.name, e);
-        return null;
-      }));
-      const results = (await Promise.all(promises)).filter(Boolean);
-      const posts = results.map(r=>parseMarkdownPost(r.name, r.text)).filter(Boolean);
-      // sort by date desc (if present)
-      posts.sort((a,b)=> (new Date(b.date || 0)) - (new Date(a.date || 0)));
-      _postsCache = posts;
-      return posts;
-    } catch(err){
-      console.error('fetchPostsList', err);
-      throw err;
-    }
-  }
-
-  function parseMarkdownPost(filename, text){
-    // extract YAML frontmatter
-    const fmMatch = text.match(/^---\s*([\s\S]*?)\s*---\s*/);
-    const fm = {};
-    let body = text;
-    if(fmMatch){
-      const rawfm = fmMatch[1];
-      body = text.slice(fmMatch[0].length);
-      // very small YAML extractor (works for our simple frontmatter)
-      rawfm.split('\n').forEach(line=>{
-        const m = line.match(/^\s*([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
-        if(m){
-          const key = m[1].trim();
-          let val = m[2].trim();
-          // strip quotes
-          if(/^".*"$/.test(val) || /^'.*'$/.test(val)) val = val.slice(1,-1);
-          // arrays like images: - /path...
-          if(val === '') {
-            // multi-line possibly; handle images block
-            if(/^\s*images\s*:\s*$/.test(line)){
-              // collect following lines starting with -
-              const imgs = [];
-              const rest = rawfm.split('\n');
-              const startIndex = rest.findIndex(l=>/^\s*images\s*:\s*$/.test(l));
-              if(startIndex>=0){
-                for(let i=startIndex+1;i<rest.length;i++){
-                  const li = rest[i].match(/^\s*-\s*(.+)$/);
-                  if(li) imgs.push(li[1].trim().replace(/^["']|["']$/g,'')); else break;
-                }
-              }
-              fm['images'] = imgs;
-            }
-          } else {
-            fm[key] = val;
-          }
-        }
-      });
-    }
-    // basic required fields
-    const titleMatch = (fm.title) ? fm.title : (body.match(/^#\s+(.+)$/m) ? body.match(/^#\s+(.+)$/m)[1].trim() : filename.replace(/^\d{4}-\d{2}-\d{2}-/,'').replace(/\.md$/,''));
-    const date = fm.date || filename.slice(0,10);
-    const lang = (fm.lang || 'pl').trim();
-    const images = fm.images || [];
-    // return object
-    return {
-      filename,
-      title: titleMatch,
-      date,
-      lang,
-      images,
-      body
-    };
-  }
-
-  function renderPostHTML(post){
-    // create card html: title, date, excerpt (first paragraph) + read more toggle
-    const html = [];
-    html.push(`<article class="post-card" style="background:var(--card);padding:12px;border-radius:10px;margin-bottom:10px;box-shadow:0 6px 18px rgba(2,6,23,0.04);">`);
-    html.push(`<header style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px;">`);
-    html.push(`<div><strong style="font-size:1.05rem;">${escapeHtml(post.title)}</strong><div class="small" style="margin-top:6px;color:#6b7280;">${new Date(post.date).toLocaleString(document.documentElement.lang || 'pl-PL', {year:'numeric',month:'short',day:'numeric'})}</div></div>`);
-    html.push(`<div style="display:flex;gap:8px;align-items:center;"><a class="btn btn-outline" href="https://github.com/${GH_OWNER}/${GH_REPO}/blob/${GH_REF}/${POSTS_PATH}/${encodeURI(post.filename)}" target="_blank" rel="noopener">Surowy</a></div>`);
-    html.push(`</header>`);
-    if(post.images && post.images.length){
-      const img = post.images[0].replace(/^\/+/,''); // remove leading slash
-      const rawImg = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_REF}/${img}`;
-      html.push(`<div style="margin-bottom:8px;"><img src="${rawImg}" alt="${escapeHtml(post.title)}" style="width:100%;height:auto;border-radius:8px;object-fit:cover;" loading="lazy"></div>`);
-    }
-    // excerpt: first 220 chars of rendered markdown (strip tags)
-    const rendered = marked.parse(post.body || '');
-    const tmp = document.createElement('div');
-    tmp.innerHTML = rendered;
-    const excerpt = tmp.textContent.trim().slice(0,360);
-    html.push(`<div class="post-excerpt" style="color:var(--text);line-height:1.45;">${escapeHtml(excerpt)}${tmp.textContent.trim().length > excerpt.length ? '…' : ''}</div>`);
-    html.push(`<div style="text-align:right;margin-top:8px;"><button class="btn btn-primary read-toggle">Czytaj więcej</button></div>`);
-    html.push(`<div class="post-full" style="display:none;margin-top:12px;border-top:1px dashed rgba(0,0,0,0.04);padding-top:12px;">${rendered}</div>`);
-    html.push(`</article>`);
-    return html.join('');
-  }
-
-  function escapeHtml(s){
-    return (''+s).replace(/[&<>'"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
-  }
-
-  async function loadPosts(lang){
-    const container = document.getElementById('updates-list');
-    const loadMoreBtn = document.getElementById('load-more');
-    container.innerHTML = `<p class="small">Ładowanie aktualizacji (${lang})…</p>`;
-    _visibleCount = 5;
-    try {
-      const posts = await fetchPostsList();
-      const filtered = posts.filter(p=> (p.lang||'pl') === (lang||'pl'));
-      if(filtered.length === 0){
-        container.innerHTML = `<p class="small">Brak aktualizacji w języku ${lang.toUpperCase()}.</p>`;
-        loadMoreBtn.style.display = 'none';
+      const mdFiles = Array.isArray(files) ? files.filter(f=>/\.md$/i.test(f.name)) : [];
+      if(mdFiles.length===0){
+        updatesList.innerHTML = '<p class="small">Brak wpisów w katalogu _posts.</p>';
         return;
       }
-      // show first _visibleCount
-      function renderSlice(count){
-        const slice = filtered.slice(0, count);
-        container.innerHTML = slice.map(p=>renderPostHTML(p)).join('');
-        // attach read toggles
-        container.querySelectorAll('.read-toggle').forEach((btn,i)=>{
-          btn.onclick = ()=>{
-            const full = container.querySelectorAll('.post-full')[i];
-            if(!full) return;
-            const open = full.style.display !== 'none';
-            full.style.display = open ? 'none' : 'block';
-            btn.textContent = open ? (dictForLang(lang).read_less || 'Czytaj więcej') : (dictForLang(lang).read_less || 'Zwiń');
-            // improve button label minimal: but translations for read_more/read_less not in i18n; keep simple
-            btn.textContent = open ? 'Czytaj więcej' : 'Zwiń';
-          };
-        });
-        // show load more?
-        if(filtered.length > count){
-          loadMoreBtn.style.display = 'inline-block';
-        } else {
-          loadMoreBtn.style.display = 'none';
-        }
-      }
-      renderSlice(_visibleCount);
 
-      loadMoreBtn.onclick = ()=>{
-        _visibleCount += 5;
-        renderSlice(_visibleCount);
-      };
+      // pobieramy zawartość plików równolegle (download_url)
+      const fetches = mdFiles.map(f => fetch(f.download_url).then(r=>{
+        if(!r.ok) throw new Error('raw fetch ' + r.status);
+        return r.text().then(txt => ({name: f.name, text: txt}));
+      }).catch(e=>{
+        console.warn('fetch error', f.name, e);
+        return null;
+      }));
+
+      const all = (await Promise.all(fetches)).filter(Boolean);
+      // parsujemy frontmatter i wybieramy wpisy pasujące do języka
+      const posts = all.map(o=>{
+        const fm = parseFrontMatter(o.text);
+        const body = o.text.replace(/^---[\s\S]*?---\s*/,'').trim();
+        // jeśli brak lang we frontmatter, spróbuj wykryć z nazwy pliku
+        const langFromFile = detectLangFromFilename(o.name);
+        const finalLang = fm.lang ? fm.lang.toLowerCase() : (langFromFile || 'pl');
+        return { filename: o.name, title: fm.title || null, date: fm.date || null, lang: finalLang, images: fm.images || [], body };
+      }).filter(p=> p && p.lang && p.lang.slice(0,2) === (lang || 'pl'));
+
+      if(posts.length === 0){
+        updatesList.innerHTML = `<p class="small">Brak wpisów dla języka ${lang.toUpperCase()}.</p>`;
+        return;
+      }
+
+      // sortujemy malejąco po dacie (jeśli brak daty, korzystamy z nazwy pliku)
+      posts.sort((a,b)=>{
+        const da = new Date(a.date || a.filename.slice(0,10));
+        const db = new Date(b.date || b.filename.slice(0,10));
+        return db - da;
+      });
+
+      // render każdej karty
+      updatesList.innerHTML = '';
+      posts.forEach(p=>{
+        const node = tpl.content.cloneNode(true);
+        const imgEl = node.querySelector('img');
+        const titleEl = node.querySelector('.post-title');
+        const metaEl = node.querySelector('.post-meta');
+        const excerptEl = node.querySelector('.post-excerpt');
+        const fullEl = node.querySelector('.post-full');
+        const btnOpen = node.querySelector('.btn-open');
+
+        titleEl.textContent = p.title || p.filename;
+        metaEl.textContent = (p.date ? new Date(p.date).toLocaleString() : '') + (p.lang ? ' • ' + p.lang.toUpperCase() : '');
+
+        // thumb: pierwsze image z frontmatter lub placeholder
+        const thumb = (p.images && p.images.length>0) ? resolveImageRawUrl(p.images[0]) : '';
+        if(thumb){
+          imgEl.src = thumb;
+          imgEl.alt = p.title || '';
+        } else {
+          imgEl.src = 'https://via.placeholder.com/320x180?text=EduCraft';
+          imgEl.alt = 'EduCraft';
+          imgEl.style.objectFit = 'cover';
+        }
+
+        // excerpt — pierwsze znaki bez markdown
+        const plain = (p.body || '').replace(/!\[.*?\]\(.*?\)/g,'').replace(/\[([^\]]+)\]\([^\)]+\)/g,'$1').replace(/[#>*`]/g,'').trim();
+        excerptEl.textContent = plain.length>240 ? plain.slice(0,240).trim()+'…' : plain;
+
+        // pełna treść — zanim wyrenderujemy, zamieniamy względne obrazki na raw URL
+        let body = p.body || '';
+        body = body.replace(/!\[([^\]]*)\]\((\/?images\/)?([^)\/\s]+)\)/g, (m,alt,maybe,filename)=>{
+          const resolved = resolveImageRawUrl(filename);
+          return `![${alt}](${resolved})`;
+        });
+        // render Markdown do HTML
+        fullEl.innerHTML = safeRenderMarkdown(body);
+
+        // przycisk Czytaj / Zwiń
+        btnOpen.addEventListener('click', ()=>{
+          const visible = fullEl.style.display === 'block';
+          if(visible){
+            fullEl.style.display = 'none';
+            btnOpen.textContent = 'Czytaj';
+          } else {
+            fullEl.style.display = 'block';
+            btnOpen.textContent = 'Zwiń';
+            fullEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+          }
+        });
+
+        updatesList.appendChild(node);
+      });
 
     } catch(err){
-      console.error(err);
-      container.innerHTML = `<p class="small">Nie udało się pobrać aktualizacji z GitHub. Możliwe limity API lub brak publicznego repo. (<span style="color:#b91c1c">sprawdź w konsoli</span>)</p>`;
-      document.getElementById('load-more').style.display='none';
+      console.error('loadPosts error', err);
+      updatesList.innerHTML = '<p class="small">Nie udało się załadować wpisów. Sprawdź konsolę (F12) lub upewnij się, że katalog _posts jest publiczny i poprawnie nazwany.</p>';
     }
   }
 
-  function dictForLang(l){
-    // minimal dictionary for read/less if needed later
-    return {read_more: (l==='en'?'Read more':'Czytaj więcej'), read_less: (l==='en'?'Show less':'Zwiń')};
-  }
-
-  // fetch posts on page load already called inside applyLanguage
-  // refresh-posts button
+  // Podłącz kontrolki: Odśwież i Otwórz Zrzutkę
+  document.getElementById('open-zrzutka').addEventListener('click', ()=> {
+    window.open('https://zrzutka.pl/zbudujmy-1-w-polsce-edukacyjny-eco-serwer-minecraft-z-oze-b5j6vm#updates','_blank','noopener');
+  });
   document.getElementById('refresh-posts').addEventListener('click', ()=>{
+    // czyść cache i przeładuj
     _postsCache = null;
     const lang = localStorage.getItem('educraft_lang') || document.documentElement.lang || 'pl';
-    loadPosts(lang);
+    loadPosts(lang.slice(0,2));
   });
 
-  // language filter buttons inside updates section
-  document.querySelectorAll('.filter-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const lang = btn.dataset.filter;
-      applyLanguage(lang);
-      // also scroll to updates
-      const el = document.getElementById('updates-frame');
-      if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
-    });
-  });
+  // automatyczne przeładowanie po zmianie języka (przycisk w topbar)
+  document.querySelectorAll('.lang-btn').forEach(b=> b.addEventListener('click', ()=> {
+    setTimeout(()=> {
+      const lang = localStorage.getItem('educraft_lang') || document.documentElement.lang || 'pl';
+      loadPosts(lang.slice(0,2));
+    }, 80);
+  }));
 
-  // minimal smooth scroll for topbar links (preserve offset for fixed topbar)
+  // Inicjalne załadowanie wpisów (applyLanguage wywołało loadPosts już wcześniej,
+  // ale na wszelki wypadek wywołamy jeszcze raz jeśli nic nie załadowano)
+  (function tryInitPosts(){
+    const list = document.getElementById('updates-list');
+    if(list && list.innerHTML.trim().includes('Ładowanie aktualizacji')) {
+      const lang = localStorage.getItem('educraft_lang') || document.documentElement.lang || 'pl';
+      loadPosts(lang.slice(0,2));
+    }
+  })();
+
+  // =========================
+  // FAQ dynamic build (na podstawie TRANSLATIONS)
+  // =========================
+  function buildFAQFor(lang){
+    const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
+    const faq = document.getElementById('faq');
+    if(!faq) return;
+    faq.querySelectorAll('details').forEach(d=>d.remove());
+    for(let i=1;i<=8;i++){
+      const qKey = 'faq_q'+i;
+      const aKey = 'faq_a'+i;
+      if(dict[qKey] && dict[aKey]){
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        summary.textContent = dict[qKey];
+        const p = document.createElement('p');
+        p.textContent = dict[aKey];
+        details.appendChild(summary);
+        details.appendChild(p);
+        faq.appendChild(details);
+      }
+    }
+  }
+
+  // podmiana smooth scroll dla anchorów (uwzględnia sticky topbar)
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
     a.addEventListener('click', function(e){
       const href = this.getAttribute('href');
@@ -720,40 +729,6 @@
     });
   });
 
-  // dynamic FAQ build (same as before)
-  function buildFAQFor(lang){
-    const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
-    const faq = document.getElementById('faq');
-    if(faq && dict){
-      faq.querySelectorAll('details').forEach(d=>d.remove());
-      for(let i=1;i<=8;i++){
-        const qKey = 'faq_q'+i;
-        const aKey = 'faq_a'+i;
-        if(dict[qKey] && dict[aKey]){
-          const details = document.createElement('details');
-          const summary = document.createElement('summary');
-          summary.textContent = dict[qKey];
-          const p = document.createElement('p');
-          p.textContent = dict[aKey];
-          details.appendChild(summary);
-          details.appendChild(p);
-          faq.appendChild(details);
-        }
-      }
-    }
-  }
-
-  // Hook into applyLanguage to rebuild FAQ too:
-  const _oldApply = applyLanguage;
-  applyLanguage = function(lang){
-    // call original behavior (we captured earlier)
-    (function(prev){
-      prev(lang);
-    })(_oldApply);
-    buildFAQFor(lang);
-  };
-
-  // initial build called earlier by initLang -> applyLanguage -> loadPosts
   </script>
 </body>
 </html>
