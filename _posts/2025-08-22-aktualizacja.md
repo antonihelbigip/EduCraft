@@ -1,4 +1,5 @@
 ---
+
 layout: post
 title: "Aktualizacja projektu – sierpień 2025"
 date: 2025-08-22 12:00:00 +02:00
@@ -11,7 +12,7 @@ Hej! 👋
 
 Chcę podzielić się z Wami najnowszymi postępami w moim projekcie **Minecraft OZE – EcoCraft** 🌍⚡
 
-## ✅ Co już zrobiłem?
+## ✅ Co już zrobiłem? ##
 - Postawiłem 2 serwery HP EliteDesk (Ryzen 5, 32 GB RAM, SSD) z Linuxem (Xubuntu).  
 - Uruchomiłem główne tryby gry: Proxy, Lobby, PvP oraz mapę EarthMC (1:1000).  
 - Zainstalowałem najważniejsze pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap.  
