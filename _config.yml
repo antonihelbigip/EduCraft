@@ -1,0 +1,9 @@
+title: EduCraft
+url: "https://antonihelbigip.github.io"   # Twoje konto GitHub Pages (user site root)
+baseurl: "/EduCraft"                       # ważne dla project pages (repozytorium EduCraft)
+theme: minima
+plugins: []
+markdown: kramdown
+
+# opcjonalne ustawienia pomocnicze
+permalink: /:categories/:year/:month/:day/:title/
