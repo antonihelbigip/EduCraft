@@ -6,8 +6,8 @@ categories: [aktualizacje]
 lang: pl
 images:
 images:
-  - images/eLK49S3ES8vxFGuL.jpg
-  - /images/L1EvnWqKu3qNUTtY.jpg
+  - eLK49S3ES8vxFGuL.jpg
+  - L1EvnWqKu3qNUTtY.jpg
 ---
 
 Hej! 👋
