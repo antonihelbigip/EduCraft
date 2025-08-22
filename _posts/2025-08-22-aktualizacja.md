@@ -23,8 +23,14 @@ Chcę podzielić się z Wami najnowszymi postępami w moim projekcie **Minecraft
 - Monitoruję pobór prądu za pomocą miernika Teccus – planuję integrację z Home Assistant, aby pokazać zużycie energii w czasie rzeczywistym.
 
 <!-- obrazy (jeśli chcesz, zostaw) -->
-<img src="{{ site.baseurl }}/images/eLK49S3ES8vxFGuL.jpg" alt="Serwery HP EliteDesk" style="max-width:100%;border-radius:8px;margin:10px 0;" loading="lazy" />
-<img src="{{ site.baseurl }}/images/L1EvnWqKu3qNUTtY.jpg" alt="Konfiguracja serwerów" style="max-width:100%;border-radius:8px;margin:10px 0;" loading="lazy" />
+<!-- obrazy -->
+<img src="https://raw.githubusercontent.com/antonihelbigip/EduCraft/main/images/eLK49S3ES8vxFGuL.jpg" 
+     alt="Serwery HP EliteDesk" 
+     style="max-width:100%;border-radius:8px;margin:10px 0;" loading="lazy" />
+
+<img src="https://raw.githubusercontent.com/antonihelbigip/EduCraft/main/images/L1EvnWqKu3qNUTtY.jpg" 
+     alt="Konfiguracja serwerów" 
+     style="max-width:100%;border-radius:8px;margin:10px 0;" loading="lazy" />
 
 ## ⚙️ Nad czym teraz pracuję?
 - Integruję system z LuckPerms, żeby sklepy i przywileje były powiązane z rangami.  
