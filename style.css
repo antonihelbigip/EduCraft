@@ -229,3 +229,56 @@ body {
 
 /* accessibility */
 a:focus, button:focus { outline: 3px solid rgba(14,165,233,0.14); outline-offset:2px; }
+
+/* ===== Dodatki stylów dla sekcji Aktualizacje / postów (wklej na końcu style.css) ===== */
+
+/* Updates container */
+#updates-list { 
+  transition: background .18s ease;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Karta wpisu */
+.post-card {
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.post-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(2,6,23,0.08); }
+
+/* excerpt & full content */
+.post-excerpt { color: #0f1724; opacity: 0.95; }
+.post-full { color: #0f1724; background: transparent; }
+
+/* Markdown inside .post-full */
+.post-full h1, .post-full h2, .post-full h3 { margin: 0.6rem 0; color: var(--dark); }
+.post-full p { margin: 0.45rem 0; line-height:1.55; }
+.post-full ul, .post-full ol { margin-left:1.1rem; }
+.post-full pre { background: #0b1220; color: #e6eef6; padding:10px; border-radius:8px; overflow:auto; }
+.post-full code { background: rgba(0,0,0,0.04); padding: 2px 6px; border-radius:6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace; }
+
+/* responsive images in posts */
+.post-full img { max-width:100%; height:auto; border-radius:8px; display:block; margin: 8px 0; }
+
+/* small hint line */
+.post-card .small { color: #6b7280; font-size: 13px; }
+
+/* scrollbar inside updates-list */
+#updates-list::-webkit-scrollbar { width:10px; height:10px; }
+#updates-list::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary), var(--accent)); border-radius:999px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06); }
+#updates-list::-webkit-scrollbar-track { background: rgba(0,0,0,0.02); border-radius:999px; }
+
+/* filter button active */
+.filter-btn.active, .lang-btn.active { background: var(--accent); color: #fff; border-color: transparent; box-shadow: 0 6px 18px rgba(22,163,74,0.08); }
+
+/* make sure hero doesn't hide under fixed topbar on short viewports */
+@media (max-width:760px) {
+  .hero-inner { padding: 16px; }
+  #updates-list { max-height: 50vh; }
+}
+
+/* small: reduce margin for very small screens */
+@media (max-width:420px) {
+  .post-card { padding:10px; }
+  .post-excerpt { font-size: 14px; }
+}
+
