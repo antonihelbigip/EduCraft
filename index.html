@@ -154,8 +154,8 @@
       <h3 id="updates-heading" data-i18n="updates_title">🔔 Aktualizacje projektu</h3>
 
       <div id="updates-controls" style="display:flex;gap:8px;align-items:center;margin-bottom:10px;justify-content:flex-end;">
-        <button id="refresh-posts" class="btn btn-outline" title="Odśwież listę">Odśwież</button>
-        <button id="open-zrzutka" class="btn btn-outline" title="Otwórz zrzutkę">Zrzutka (aktualizacje)</button>
+        <button id="refresh-posts" class="btn btn-outline" data-i18n="btn_refresh" title="Odśwież listę">Odśwież</button>
+        <button id="open-zrzutka" class="btn btn-outline" data-i18n="btn_open_zrzutka" title="Otwórz zrzutkę">Zrzutka (aktualizacje)</button>
       </div>
 
       <div id="updates-list" style="display:block; gap:12px; overflow:auto; max-height:520px; padding-right:6px;">
@@ -175,7 +175,7 @@
                   <div class="small post-meta"></div>
                 </div>
                 <div>
-                  <button class="btn btn-outline btn-open" style="white-space:nowrap">Czytaj</button>
+                  <button class="btn btn-outline btn-open" data-i18n="read_more" style="white-space:nowrap">Czytaj</button>
                 </div>
               </div>
               <div class="post-excerpt small" style="margin-top:8px;color:var(--dark);"></div>
@@ -313,7 +313,7 @@
 
       // ALT translations (puste teraz, można rozszerzyć)
       const TRANSLATIONS_ALT={pl:{},en:{},de:{}};
-      const applyAltLanguage=lang=>{slides.forEach(s=>{const img=s.querySelector('img[data-i18n-alt]'); const key=img.getAttribute('data-i18n-alt'); img.alt=(TRANSLATIONS_ALT[lang]&&TRANSLATIONS_ALT[lang][key])?TRANSLATIONS_ALT[lang][key]:key;});}
+      const applyAltLanguage=lang=>{slides.forEach(s=>{const img=s.querySelector('img[data-i18n-alt]'); if(!img) return; const key=img.getAttribute('data-i18n-alt'); img.alt=(TRANSLATIONS_ALT[lang]&&TRANSLATIONS_ALT[lang][key])?TRANSLATIONS_ALT[lang][key]:key;});}
       const initLang=localStorage.getItem('educraft_lang')||'pl';
       applyAltLanguage(initLang);
       document.querySelectorAll('.lang-btn').forEach(btn=>{btn.addEventListener('click',()=>applyAltLanguage(btn.dataset.lang));});
@@ -508,7 +508,7 @@ const TRANSLATIONS = {
     faq_q3: "Kann ich helfen?",
     faq_a3: "Ja — Beiträge der Community sind willkommen.",
     faq_q4: "Was, wenn Finanzierung nicht reicht?",
-    faq_a4: "Wir priorisieren Funktionen und werten sie etappenweise aus.",
+    faq_a4: "Wir priorisieren Funktionen und realisieren etappenweise.",
     faq_q5: "Wie kann ich den Fortschritt verfolgen?",
     faq_a5: "Der Fortschritt wird auf der Crowdfunding-Seite, der Projektseite und Discord veröffentlicht.",
     faq_q6: "Werden Materialien open-source sein?",
@@ -528,15 +528,43 @@ const TRANSLATIONS = {
   function applyLanguage(lang){
     const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
     document.documentElement.lang = lang;
+
+    // zwykłe elementy z data-i18n w DOM
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       const key = el.getAttribute('data-i18n');
-      if(dict[key]) el.textContent = dict[key];
+      if(key && dict[key]) el.textContent = dict[key];
     });
-    try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
+
+    // template: trzeba podmienić zawartość w samym template (nie jest w DOM)
+    const tpl = document.getElementById('post-card-tpl');
+    if(tpl && tpl.content) {
+      try {
+        tpl.content.querySelectorAll('[data-i18n]').forEach(el=>{
+          const key = el.getAttribute('data-i18n');
+          if(key && dict[key]) el.textContent = dict[key];
+        });
+      } catch(e) {
+        // nic strasznego jeśli nie można podmienić
+        console.warn('applyLanguage: template update failed', e);
+      }
+    }
+
+    // ręczne dopasowanie kilku kontrolnych elementów (na wszelki wypadek)
+    try {
+      const refreshBtn = document.getElementById('refresh-posts');
+      if(refreshBtn && dict.btn_refresh) refreshBtn.textContent = dict.btn_refresh;
+
+      const openZrz = document.getElementById('open-zrzutka');
+      if(openZrz && dict.btn_open_zrzutka) openZrz.textContent = dict.btn_open_zrzutka;
+    } catch(e) {}
+
+    // aktywne przyciski języka
     document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
-    // po zmianie języka przeładuj wpisy aktualizacji
+
+    try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
+
+    //ładuj wpisy i FAQ dla nowego języka
     loadPosts(lang);
-    // przebuduj FAQ
     buildFAQFor(lang);
   }
 
@@ -553,10 +581,6 @@ const TRANSLATIONS = {
 
   /* =========================
      Dynamiczne ładowanie wpisów z GitHub _posts
-     - Obsługuje pliki z frontmatter (images, date, title, lang)
-     - Jeśli brak lang we frontmatter, wykrywa końcówkę pliku:
-         * yyyy-mm-dd-title.pl.md  OR  title.pl.md  OR  title-pl.md  OR title-en.md etc.
-     - Obrazki: obsługuje ścieżki typu "images/foo.jpg", "/images/foo.jpg", "foo.jpg"
      ========================= */
 
   const GH_OWNER = 'antonihelbigip';
@@ -564,14 +588,11 @@ const TRANSLATIONS = {
   const GH_REF   = 'main';
   const POSTS_PATH = '_posts';
   const POSTS_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${POSTS_PATH}?ref=${GH_REF}`;
-  const RAW_BASE = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_REF}/${POSTS_PATH}/`;
   const RAW_BASE_ROOT = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_REF}/`;
 
   let _postsCache = null;
 
-  // Pomocnik: wykrywa język z nazwy pliku (np. title.pl.md, title-en.md)
   function detectLangFromFilename(filename){
-    // match .pl.md or -pl.md or .en.md etc.
     const m1 = filename.match(/\.([a-z]{2})\.md$/i);
     if(m1) return m1[1].toLowerCase();
     const m2 = filename.match(/[-._]([a-z]{2})\.md$/i);
@@ -579,22 +600,17 @@ const TRANSLATIONS = {
     return null;
   }
 
-  // Parsowanie frontmatter (prosty parser: title, date, lang, images[])
   function parseFrontMatter(mdText){
     const m = mdText.match(/^---\s*([\s\S]*?)\s*---/);
     if(!m) return {title:null,date:null,lang:null,images:[]};
     const fm = m[1];
     const result = {images:[]};
-    // title
     const t = fm.match(/^\s*title:\s*(?:"([^"]+)"|'([^']+)'|(.+))$/m);
     if(t) result.title = (t[1]||t[2]||t[3]||'').trim();
-    // date
     const d = fm.match(/^\s*date:\s*(.+)$/m);
     if(d) result.date = d[1].trim();
-    // lang
     const l = fm.match(/^\s*lang:\s*([a-zA-Z_-]+)/m);
     if(l) result.lang = l[1].trim().toLowerCase();
-    // images block (simple)
     const imgsBlock = fm.match(/^\s*images:\s*\n((?:\s*-\s*.+\n?)+)/m);
     if(imgsBlock){
       const lines = imgsBlock[1].match(/-\s*(.+)/g) || [];
@@ -603,53 +619,43 @@ const TRANSLATIONS = {
     return result;
   }
 
-  // Pomocnik: konwertuje podaną ścieżkę obrazu do raw.githubusercontent URL
   function resolveImageRawUrl(imgPath){
     if(!imgPath) return '';
-    // usuń spacje i cudzysłowy
     imgPath = imgPath.trim().replace(/^['"]|['"]$/g,'');
-    // jeśli pełna ścieżka zaczyna się od '/', usuń pierwszy slash i traktuj jako repo root
     if(imgPath.startsWith('/')) imgPath = imgPath.replace(/^\/+/, '');
-    // jeśli zawiera 'images/' - traktuj jako względną od repo root
     if(/(^|\/)images\//i.test(imgPath)){
       return RAW_BASE_ROOT + encodeURI(imgPath);
     }
-    // jeśli wygląda jak URL (http) — zwróć jak jest
     if(/^https?:\/\//i.test(imgPath)) return imgPath;
-    // w przeciwnym razie zakładamy że to nazwa pliku w folderze images
     return RAW_BASE_ROOT + 'images/' + encodeURIComponent(imgPath);
   }
 
-  // Render minimalny Markdown -> HTML fallback (używamy marked.js dla pełnej konwersji)
   function safeRenderMarkdown(md){
     try{
       return marked.parse(md || '');
     } catch(e){
-      // bardzo prosty fallback
       return (md||'').replace(/\n/g,'<br>');
     }
   }
 
-  // Główna funkcja: ładuje listę plików z _posts, pobiera treść i renderuje karty
   async function loadPosts(lang){
     lang = (lang || localStorage.getItem('educraft_lang') || (navigator.language||'pl').slice(0,2)).slice(0,2);
+    const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
     const updatesList = document.getElementById('updates-list');
     const tpl = document.getElementById('post-card-tpl');
     if(!updatesList || !tpl) return;
-    updatesList.innerHTML = '<p class="small">Ładowanie aktualizacji…</p>';
+    updatesList.innerHTML = `<p class="small">${dict.loading_posts || 'Ładowanie aktualizacji…'}</p>`;
 
     try{
-      // pobieramy listę plików w katalogu _posts
       const res = await fetch(POSTS_API);
       if(!res.ok) throw new Error('GitHub API: ' + res.status);
       const files = await res.json();
       const mdFiles = Array.isArray(files) ? files.filter(f=>/\.md$/i.test(f.name)) : [];
       if(mdFiles.length===0){
-        updatesList.innerHTML = '<p class="small">Brak wpisów w katalogu _posts.</p>';
+        updatesList.innerHTML = `<p class="small">${dict.no_posts_dir || 'Brak wpisów w katalogu _posts.'}</p>`;
         return;
       }
 
-      // pobieramy zawartość plików równolegle (download_url)
       const fetches = mdFiles.map(f => fetch(f.download_url).then(r=>{
         if(!r.ok) throw new Error('raw fetch ' + r.status);
         return r.text().then(txt => ({name: f.name, text: txt}));
@@ -659,29 +665,27 @@ const TRANSLATIONS = {
       }));
 
       const all = (await Promise.all(fetches)).filter(Boolean);
-      // parsujemy frontmatter i wybieramy wpisy pasujące do języka
+
       const posts = all.map(o=>{
         const fm = parseFrontMatter(o.text);
         const body = o.text.replace(/^---[\s\S]*?---\s*/,'').trim();
-        // jeśli brak lang we frontmatter, spróbuj wykryć z nazwy pliku
         const langFromFile = detectLangFromFilename(o.name);
         const finalLang = fm.lang ? fm.lang.toLowerCase() : (langFromFile || 'pl');
         return { filename: o.name, title: fm.title || null, date: fm.date || null, lang: finalLang, images: fm.images || [], body };
       }).filter(p=> p && p.lang && p.lang.slice(0,2) === (lang || 'pl'));
 
       if(posts.length === 0){
-        updatesList.innerHTML = `<p class="small">Brak wpisów dla języka ${lang.toUpperCase()}.</p>`;
+        const msg = (dict.no_posts_for_lang || 'Brak wpisów dla języka {LANG}.').replace('{LANG}', lang.toUpperCase());
+        updatesList.innerHTML = `<p class="small">${msg}</p>`;
         return;
       }
 
-      // sortujemy malejąco po dacie (jeśli brak daty, korzystamy z nazwy pliku)
       posts.sort((a,b)=>{
         const da = new Date(a.date || a.filename.slice(0,10));
         const db = new Date(b.date || b.filename.slice(0,10));
         return db - da;
       });
 
-      // render każdej karty
       updatesList.innerHTML = '';
       posts.forEach(p=>{
         const node = tpl.content.cloneNode(true);
@@ -695,7 +699,6 @@ const TRANSLATIONS = {
         titleEl.textContent = p.title || p.filename;
         metaEl.textContent = (p.date ? new Date(p.date).toLocaleString() : '') + (p.lang ? ' • ' + p.lang.toUpperCase() : '');
 
-        // thumb: pierwsze image z frontmatter lub placeholder
         const thumb = (p.images && p.images.length>0) ? resolveImageRawUrl(p.images[0]) : '';
         if(thumb){
           imgEl.src = thumb;
@@ -706,29 +709,30 @@ const TRANSLATIONS = {
           imgEl.style.objectFit = 'cover';
         }
 
-        // excerpt — pierwsze znaki bez markdown
         const plain = (p.body || '').replace(/!\[.*?\]\(.*?\)/g,'').replace(/\[([^\]]+)\]\([^\)]+\)/g,'$1').replace(/[#>*`]/g,'').trim();
         excerptEl.textContent = plain.length>240 ? plain.slice(0,240).trim()+'…' : plain;
 
-        // pełna treść — zanim wyrenderujemy, zamieniamy względne obrazki na raw URL
         let body = p.body || '';
         body = body.replace(/!\[([^\]]*)\]\((\/?images\/)?([^)\/\s]+)\)/g, (m,alt,maybe,filename)=>{
           const resolved = resolveImageRawUrl(filename);
           return `![${alt}](${resolved})`;
         });
-        // render Markdown do HTML
         fullEl.innerHTML = safeRenderMarkdown(body);
 
-        // przycisk Czytaj / Zwiń
+        // ustawienie tekstu przycisku z tłumaczenia
+        btnOpen.textContent = (TRANSLATIONS[lang] && TRANSLATIONS[lang].read_more) ? TRANSLATIONS[lang].read_more : 'Czytaj więcej';
+
+        // obsługa Czytaj/Zwiń (toggle)
         btnOpen.addEventListener('click', ()=>{
-          const visible = fullEl.style.display === 'block';
-          if(visible){
-            fullEl.style.display = 'none';
-            btnOpen.textContent = 'Czytaj';
-          } else {
+          const dictLocal = TRANSLATIONS[document.documentElement.lang] || TRANSLATIONS.pl;
+          const isOpen = fullEl.classList.toggle('open');
+          if(isOpen){
             fullEl.style.display = 'block';
-            btnOpen.textContent = 'Zwiń';
+            btnOpen.textContent = dictLocal.show_less || 'Zwiń';
             fullEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+          } else {
+            fullEl.style.display = 'none';
+            btnOpen.textContent = dictLocal.read_more || 'Czytaj więcej';
           }
         });
 
@@ -737,36 +741,39 @@ const TRANSLATIONS = {
 
     } catch(err){
       console.error('loadPosts error', err);
-      updatesList.innerHTML = '<p class="small">Nie udało się załadować wpisów. Sprawdź konsolę (F12) lub upewnij się, że katalog _posts jest publiczny i poprawnie nazwany.</p>';
+      updatesList.innerHTML = `<p class="small">${(TRANSLATIONS.pl && TRANSLATIONS.pl.loading_posts) ? TRANSLATIONS.pl.loading_posts : 'Nie udało się załadować wpisów.'}</p>`;
     }
   }
 
   // Podłącz kontrolki: Odśwież i Otwórz Zrzutkę
-  document.getElementById('open-zrzutka').addEventListener('click', ()=> {
-    window.open('https://zrzutka.pl/zbudujmy-1-w-polsce-edukacyjny-eco-serwer-minecraft-z-oze-b5j6vm#updates','_blank','noopener');
-  });
-  document.getElementById('refresh-posts').addEventListener('click', ()=>{
-    // czyść cache i przeładuj
-    _postsCache = null;
-    const lang = localStorage.getItem('educraft_lang') || document.documentElement.lang || 'pl';
-    loadPosts(lang.slice(0,2));
-  });
+  try {
+    document.getElementById('open-zrzutka').addEventListener('click', ()=> {
+      window.open('https://zrzutka.pl/zbudujmy-1-w-polsce-edukacyjny-eco-serwer-minecraft-z-oze-b5j6vm#updates','_blank','noopener');
+    });
+  } catch(e){}
+
+  try {
+    document.getElementById('refresh-posts').addEventListener('click', ()=>{
+      _postsCache = null;
+      const lang = localStorage.getItem('educraft_lang') || document.documentElement.lang || 'pl';
+      loadPosts((lang||'pl').slice(0,2));
+    });
+  } catch(e){}
 
   // automatyczne przeładowanie po zmianie języka (przycisk w topbar)
   document.querySelectorAll('.lang-btn').forEach(b=> b.addEventListener('click', ()=> {
     setTimeout(()=> {
       const lang = localStorage.getItem('educraft_lang') || document.documentElement.lang || 'pl';
-      loadPosts(lang.slice(0,2));
+      loadPosts((lang||'pl').slice(0,2));
     }, 80);
   }));
 
-  // Inicjalne załadowanie wpisów (applyLanguage wywołało loadPosts już wcześniej,
-  // ale na wszelki wypadek wywołamy jeszcze raz jeśli nic nie załadowano)
+  // Inicjalne załadowanie wpisów (jeśli jeszcze nie załadowano)
   (function tryInitPosts(){
     const list = document.getElementById('updates-list');
     if(list && list.innerHTML.trim().includes('Ładowanie aktualizacji')) {
       const lang = localStorage.getItem('educraft_lang') || document.documentElement.lang || 'pl';
-      loadPosts(lang.slice(0,2));
+      loadPosts((lang||'pl').slice(0,2));
     }
   })();
 
