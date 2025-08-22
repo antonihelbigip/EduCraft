@@ -11,7 +11,7 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="favicon.png">
 
-  <!-- Open Graph -->
+  <!-- Open Graph (zastąp URL/obrazki własnymi kiedy będziesz miał domenę) -->
   <meta property="og:title" content="EduCraft – Minecraft OZE" />
   <meta property="og:description" content="Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną." />
   <meta property="og:image" content="https://twoja-domena.pl/tlo.jpg" />
@@ -23,6 +23,9 @@
   <meta name="twitter:title" content="EduCraft – Minecraft OZE" />
   <meta name="twitter:description" content="Minecraft + OZE + edukacja. Dołącz!" />
   <meta name="twitter:image" content="https://twoja-domena.pl/tlo.jpg" />
+
+  <!-- marked.js (render markdown w przeglądarce) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <!-- TOPBAR — full-width wrapper + centered container -->
@@ -60,16 +63,14 @@
     </div>
   </div>
 
- <!-- HERO tylko z tłem -->
+ <!-- HERO (tylko tło) -->
 <header class="hero" id="home" role="banner" aria-label="Hero">
   <div class="hero-inner container">
-    <!-- usunięte h1, p i przyciski -->
+    <!-- puste (chciałeś bez tekstów/przycisków) -->
   </div>
 </header>
 
-  </header>
-
-  <main class="container" role="main">
+  <main class="container" role="main" style="padding-top:18px;">
     <!-- About -->
     <section id="about" class="card" aria-labelledby="about-heading">
       <h2 id="about-heading" data-i18n="about_title">O projekcie</h2>
@@ -148,34 +149,33 @@
       </ul>
     </section>
 
-    <!-- Progress / updates -->
+    <!-- Progress / dynamic updates (Pobierane z _posts w repo) -->
     <section id="updates-frame" class="card muted" aria-labelledby="updates-heading">
-  <h3 id="updates-heading" data-i18n="updates_title">🔔 Aktualizacje projektu</h3>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <h3 id="updates-heading" data-i18n="updates_title">🔔 Aktualizacje projektu</h3>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button id="refresh-posts" class="btn btn-outline" title="Odśwież aktualizacje">Odśwież</button>
+          <a id="open-zrzutka" class="btn btn-outline" href="https://zrzutka.pl/zbudujmy-1-w-polsce-edukacyjny-eco-serwer-minecraft-z-oze-b5j6vm#updates" target="_blank" rel="noopener">Zrzutka — pełne</a>
+        </div>
+      </div>
 
-  <div class="iframe-wrap" style="position:relative;">
-    <iframe id="zrzutka-iframe"
-      src="https://zrzutka.pl/zbudujmy-1-w-polsce-edukacyjny-eco-serwer-minecraft-z-oze-b5j6vm#updates"
-      style="width:100%;height:520px;border:0;"
-      loading="lazy"
-      title="Aktualizacje z Zrzutka">
-    </iframe>
-    <div class="iframe-controls" style="position:absolute;right:10px;top:8px;display:flex;gap:8px;">
-      <button id="open-full" class="btn btn-outline" title="Otwórz w nowej karcie">Otwórz</button>
-      <button id="refresh-iframe" class="btn btn-outline" title="Odśwież zawartość">Odśwież</button>
-    </div>
-  </div>
-</section>
+      <div id="updates-controls" style="margin-top:10px;display:flex;align-items:center;gap:12px;">
+        <div class="small">Filtr języka aktualizacji:</div>
+        <div style="display:flex;gap:8px;">
+          <button class="filter-btn btn btn-outline" data-filter="pl">PL</button>
+          <button class="filter-btn btn btn-outline" data-filter="en">EN</button>
+          <button class="filter-btn btn btn-outline" data-filter="de">DE</button>
+        </div>
+      </div>
 
-<script>
-  document.getElementById('open-full').addEventListener('click', ()=>{
-    window.open(document.getElementById('zrzutka-iframe').src, '_blank', 'noopener');
-  });
-  document.getElementById('refresh-iframe').addEventListener('click', ()=>{
-    const f = document.getElementById('zrzutka-iframe');
-    f.src = f.src.split('#')[0] + '#updates'; // reset
-  });
-</script>
+      <div id="updates-list" style="margin-top:12px;max-height:520px;overflow:auto;padding:6px;border-radius:8px;background:var(--muted);">
+        <p class="small">Ładowanie aktualizacji…</p>
+      </div>
 
+      <div style="margin-top:10px;display:flex;justify-content:center;">
+        <button id="load-more" class="btn btn-outline" style="display:none;">Pokaż więcej</button>
+      </div>
+    </section>
 
     <!-- Multimedia -->
     <section id="multimedia" class="card gallery" aria-labelledby="gallery-heading">
@@ -309,7 +309,7 @@
   })();
   </script>
 
-  <!-- TRANSLATIONS & SWITCHER SCRIPT -->
+  <!-- TRANSLATIONS & SWITCHER SCRIPT + dynamic updates loader -->
   <script>
   const TRANSLATIONS = {
     pl: {
@@ -455,7 +455,7 @@
       gallery_title: "Galerie / Multimedia",
       blog_title: "Blog",
       support_title: "Unterstütze das Projekt",
-      support_text: "Unterstütze uns auf Zrzutka.pl — jeder Beitrag hilft beim Betriebstests und Bildungsinhalten.",
+      support_text: "Unterstütze nas na Zrzutka.pl — każdy wkład pomaga.",
       faq_title: "FAQ",
       faq_q1: "Wird der Server kostenlos sein?",
       faq_a1: "Ja — der Server wird offen sein, ohne Whitelist oder Premium-Konten. Unterstützer erhalten zusätzliche Boni.",
@@ -465,7 +465,7 @@
       faq_a3: "Antrag gestellt — Nachbildung startet nach Genehmigung.",
       faq_q4: "Kann ich beim Bau helfen?",
       faq_a4: "Ja — offene Rekrutierung geplant.",
-      faq_q5: "Was passiert, wenn das Ziel nicht erreicht wird?",
+      faq_q5: "Was passiert, wenn Ziel nicht erreicht wird?",
       faq_a5: "Realisierung etapami według dostępnych środków.",
       faq_q6: "Wie kann ich den Fortschritt verfolgen?",
       faq_a6: "Der Fortschritt wird auf der Crowdfunding-Seite, der Projektseite und Discord veröffentlicht.",
@@ -479,18 +479,250 @@
     }
   };
 
-  // dynamic FAQ generator + language switcher
+  // ---------------------------
+  // Language switcher + i18n
+  // ---------------------------
   function applyLanguage(lang){
     const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
     document.documentElement.lang = lang;
-
-    // zwykłe teksty
     document.querySelectorAll('[data-i18n]').forEach(el=>{
       const key = el.getAttribute('data-i18n');
       if(dict[key]) el.textContent = dict[key];
     });
+    try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
+    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
+    // also set filter-controls (buttons) active state
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active', b.dataset.filter===lang));
+    // load posts for this language
+    loadPosts(lang);
+  }
 
-    // dynamiczne FAQ
+  (function initLang(){
+    const urlParams = new URLSearchParams(window.location.search);
+    let lang = urlParams.get('lang') || localStorage.getItem('educraft_lang') || (navigator.language||'pl').slice(0,2);
+    if(!['pl','en','de'].includes(lang)) lang='pl';
+    applyLanguage(lang);
+  })();
+
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
+  });
+
+  // ---------------------------
+  // Dynamic posts loader (from GitHub _posts)
+  // ---------------------------
+  const GH_OWNER = 'antonihelbigip';
+  const GH_REPO  = 'EduCraft';
+  const GH_REF   = 'main';
+  const POSTS_PATH = '_posts';
+  const POSTS_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${POSTS_PATH}?ref=${GH_REF}`;
+  const RAW_BASE = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_REF}/${POSTS_PATH}/`;
+
+  let _postsCache = null;
+  let _visibleCount = 5;
+
+  async function fetchPostsList(){
+    if(_postsCache) return _postsCache;
+    try {
+      const res = await fetch(POSTS_API);
+      if(!res.ok) throw new Error('GitHub API: ' + res.status);
+      const files = await res.json();
+      const mdFiles = files.filter(f=>/\.md$/i.test(f.name));
+      // load content of each file (in parallel, but limit friendly)
+      const promises = mdFiles.map(f => fetch(RAW_BASE + encodeURIComponent(f.name)).then(r=>{
+        if(!r.ok) throw new Error('Raw fetch error ' + r.status);
+        return r.text().then(txt=>({name:f.name, text:txt}));
+      }).catch(e=>{
+        console.warn('Failed to fetch', f.name, e);
+        return null;
+      }));
+      const results = (await Promise.all(promises)).filter(Boolean);
+      const posts = results.map(r=>parseMarkdownPost(r.name, r.text)).filter(Boolean);
+      // sort by date desc (if present)
+      posts.sort((a,b)=> (new Date(b.date || 0)) - (new Date(a.date || 0)));
+      _postsCache = posts;
+      return posts;
+    } catch(err){
+      console.error('fetchPostsList', err);
+      throw err;
+    }
+  }
+
+  function parseMarkdownPost(filename, text){
+    // extract YAML frontmatter
+    const fmMatch = text.match(/^---\s*([\s\S]*?)\s*---\s*/);
+    const fm = {};
+    let body = text;
+    if(fmMatch){
+      const rawfm = fmMatch[1];
+      body = text.slice(fmMatch[0].length);
+      // very small YAML extractor (works for our simple frontmatter)
+      rawfm.split('\n').forEach(line=>{
+        const m = line.match(/^\s*([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
+        if(m){
+          const key = m[1].trim();
+          let val = m[2].trim();
+          // strip quotes
+          if(/^".*"$/.test(val) || /^'.*'$/.test(val)) val = val.slice(1,-1);
+          // arrays like images: - /path...
+          if(val === '') {
+            // multi-line possibly; handle images block
+            if(/^\s*images\s*:\s*$/.test(line)){
+              // collect following lines starting with -
+              const imgs = [];
+              const rest = rawfm.split('\n');
+              const startIndex = rest.findIndex(l=>/^\s*images\s*:\s*$/.test(l));
+              if(startIndex>=0){
+                for(let i=startIndex+1;i<rest.length;i++){
+                  const li = rest[i].match(/^\s*-\s*(.+)$/);
+                  if(li) imgs.push(li[1].trim().replace(/^["']|["']$/g,'')); else break;
+                }
+              }
+              fm['images'] = imgs;
+            }
+          } else {
+            fm[key] = val;
+          }
+        }
+      });
+    }
+    // basic required fields
+    const titleMatch = (fm.title) ? fm.title : (body.match(/^#\s+(.+)$/m) ? body.match(/^#\s+(.+)$/m)[1].trim() : filename.replace(/^\d{4}-\d{2}-\d{2}-/,'').replace(/\.md$/,''));
+    const date = fm.date || filename.slice(0,10);
+    const lang = (fm.lang || 'pl').trim();
+    const images = fm.images || [];
+    // return object
+    return {
+      filename,
+      title: titleMatch,
+      date,
+      lang,
+      images,
+      body
+    };
+  }
+
+  function renderPostHTML(post){
+    // create card html: title, date, excerpt (first paragraph) + read more toggle
+    const html = [];
+    html.push(`<article class="post-card" style="background:var(--card);padding:12px;border-radius:10px;margin-bottom:10px;box-shadow:0 6px 18px rgba(2,6,23,0.04);">`);
+    html.push(`<header style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px;">`);
+    html.push(`<div><strong style="font-size:1.05rem;">${escapeHtml(post.title)}</strong><div class="small" style="margin-top:6px;color:#6b7280;">${new Date(post.date).toLocaleString(document.documentElement.lang || 'pl-PL', {year:'numeric',month:'short',day:'numeric'})}</div></div>`);
+    html.push(`<div style="display:flex;gap:8px;align-items:center;"><a class="btn btn-outline" href="https://github.com/${GH_OWNER}/${GH_REPO}/blob/${GH_REF}/${POSTS_PATH}/${encodeURI(post.filename)}" target="_blank" rel="noopener">Surowy</a></div>`);
+    html.push(`</header>`);
+    if(post.images && post.images.length){
+      const img = post.images[0].replace(/^\/+/,''); // remove leading slash
+      const rawImg = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_REF}/${img}`;
+      html.push(`<div style="margin-bottom:8px;"><img src="${rawImg}" alt="${escapeHtml(post.title)}" style="width:100%;height:auto;border-radius:8px;object-fit:cover;" loading="lazy"></div>`);
+    }
+    // excerpt: first 220 chars of rendered markdown (strip tags)
+    const rendered = marked.parse(post.body || '');
+    const tmp = document.createElement('div');
+    tmp.innerHTML = rendered;
+    const excerpt = tmp.textContent.trim().slice(0,360);
+    html.push(`<div class="post-excerpt" style="color:var(--text);line-height:1.45;">${escapeHtml(excerpt)}${tmp.textContent.trim().length > excerpt.length ? '…' : ''}</div>`);
+    html.push(`<div style="text-align:right;margin-top:8px;"><button class="btn btn-primary read-toggle">Czytaj więcej</button></div>`);
+    html.push(`<div class="post-full" style="display:none;margin-top:12px;border-top:1px dashed rgba(0,0,0,0.04);padding-top:12px;">${rendered}</div>`);
+    html.push(`</article>`);
+    return html.join('');
+  }
+
+  function escapeHtml(s){
+    return (''+s).replace(/[&<>'"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
+  }
+
+  async function loadPosts(lang){
+    const container = document.getElementById('updates-list');
+    const loadMoreBtn = document.getElementById('load-more');
+    container.innerHTML = `<p class="small">Ładowanie aktualizacji (${lang})…</p>`;
+    _visibleCount = 5;
+    try {
+      const posts = await fetchPostsList();
+      const filtered = posts.filter(p=> (p.lang||'pl') === (lang||'pl'));
+      if(filtered.length === 0){
+        container.innerHTML = `<p class="small">Brak aktualizacji w języku ${lang.toUpperCase()}.</p>`;
+        loadMoreBtn.style.display = 'none';
+        return;
+      }
+      // show first _visibleCount
+      function renderSlice(count){
+        const slice = filtered.slice(0, count);
+        container.innerHTML = slice.map(p=>renderPostHTML(p)).join('');
+        // attach read toggles
+        container.querySelectorAll('.read-toggle').forEach((btn,i)=>{
+          btn.onclick = ()=>{
+            const full = container.querySelectorAll('.post-full')[i];
+            if(!full) return;
+            const open = full.style.display !== 'none';
+            full.style.display = open ? 'none' : 'block';
+            btn.textContent = open ? (dictForLang(lang).read_less || 'Czytaj więcej') : (dictForLang(lang).read_less || 'Zwiń');
+            // improve button label minimal: but translations for read_more/read_less not in i18n; keep simple
+            btn.textContent = open ? 'Czytaj więcej' : 'Zwiń';
+          };
+        });
+        // show load more?
+        if(filtered.length > count){
+          loadMoreBtn.style.display = 'inline-block';
+        } else {
+          loadMoreBtn.style.display = 'none';
+        }
+      }
+      renderSlice(_visibleCount);
+
+      loadMoreBtn.onclick = ()=>{
+        _visibleCount += 5;
+        renderSlice(_visibleCount);
+      };
+
+    } catch(err){
+      console.error(err);
+      container.innerHTML = `<p class="small">Nie udało się pobrać aktualizacji z GitHub. Możliwe limity API lub brak publicznego repo. (<span style="color:#b91c1c">sprawdź w konsoli</span>)</p>`;
+      document.getElementById('load-more').style.display='none';
+    }
+  }
+
+  function dictForLang(l){
+    // minimal dictionary for read/less if needed later
+    return {read_more: (l==='en'?'Read more':'Czytaj więcej'), read_less: (l==='en'?'Show less':'Zwiń')};
+  }
+
+  // fetch posts on page load already called inside applyLanguage
+  // refresh-posts button
+  document.getElementById('refresh-posts').addEventListener('click', ()=>{
+    _postsCache = null;
+    const lang = localStorage.getItem('educraft_lang') || document.documentElement.lang || 'pl';
+    loadPosts(lang);
+  });
+
+  // language filter buttons inside updates section
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const lang = btn.dataset.filter;
+      applyLanguage(lang);
+      // also scroll to updates
+      const el = document.getElementById('updates-frame');
+      if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+
+  // minimal smooth scroll for topbar links (preserve offset for fixed topbar)
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const href = this.getAttribute('href');
+      if(!href || href === "#") return;
+      const target = document.querySelector(href);
+      if(!target) return;
+      e.preventDefault();
+      const headerOffset = document.querySelector('.topbar') ? document.querySelector('.topbar').offsetHeight : 72;
+      const rect = target.getBoundingClientRect();
+      const offsetTop = window.pageYOffset + rect.top - headerOffset - 12;
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    });
+  });
+
+  // dynamic FAQ build (same as before)
+  function buildFAQFor(lang){
+    const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
     const faq = document.getElementById('faq');
     if(faq && dict){
       faq.querySelectorAll('details').forEach(d=>d.remove());
@@ -509,38 +741,19 @@
         }
       }
     }
-
-    try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
-    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
   }
 
-  // inicjalizacja języka
-  (function initLang(){
-    const urlParams = new URLSearchParams(window.location.search);
-    let lang = urlParams.get('lang') || localStorage.getItem('educraft_lang') || (navigator.language||'pl').slice(0,2);
-    if(!['pl','en','de'].includes(lang)) lang='pl';
-    applyLanguage(lang);
-  })();
+  // Hook into applyLanguage to rebuild FAQ too:
+  const _oldApply = applyLanguage;
+  applyLanguage = function(lang){
+    // call original behavior (we captured earlier)
+    (function(prev){
+      prev(lang);
+    })(_oldApply);
+    buildFAQFor(lang);
+  };
 
-  document.querySelectorAll('.lang-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
-  });
-
-  // minimal smooth scroll for topbar links (preserve offset for fixed topbar)
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', function(e){
-      const href = this.getAttribute('href');
-      // allow external anchors like "#" to pass
-      if(!href || href === "#") return;
-      const target = document.querySelector(href);
-      if(!target) return;
-      e.preventDefault();
-      const headerOffset = document.querySelector('.topbar') ? document.querySelector('.topbar').offsetHeight : 72;
-      const rect = target.getBoundingClientRect();
-      const offsetTop = window.pageYOffset + rect.top - headerOffset - 12;
-      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-    });
-  });
+  // initial build called earlier by initLang -> applyLanguage -> loadPosts
   </script>
 </body>
 </html>
