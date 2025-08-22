@@ -5,9 +5,8 @@ date: 2025-08-22 12:00:00 +02:00
 categories: [aktualizacje]
 lang: pl
 images:
-- [eLK49S3ES8vxFGuL](https://github.com/user-attachments/assets/59112b4e-c4c2-444c-90c4-949c4c9f0fad)
-
-- [L1EvnWqKu3qNUTtY](https://github.com/user-attachments/assets/b7f01f9b-185d-434f-af04-59645c57b3df)
+[eLK49S3ES8vxFGuL](https://github.com/user-attachments/assets/59112b4e-c4c2-444c-90c4-949c4c9f0fad)
+[L1EvnWqKu3qNUTtY](https://github.com/user-attachments/assets/b7f01f9b-185d-434f-af04-59645c57b3df)
 
 ---
 
