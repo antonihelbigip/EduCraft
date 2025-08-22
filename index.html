@@ -522,8 +522,6 @@ const TRANSLATIONS = {
 
   /* -------------------------
      Funkcje i18n (zmiana języka)
-     - applyLanguage(lang) — ustawia teksty i zapisuje ustawienie w localStorage
-     - initLang() — inicjalizacja przy starcie
      ------------------------- */
   function applyLanguage(lang){
     const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
@@ -544,12 +542,11 @@ const TRANSLATIONS = {
           if(key && dict[key]) el.textContent = dict[key];
         });
       } catch(e) {
-        // nic strasznego jeśli nie można podmienić
         console.warn('applyLanguage: template update failed', e);
       }
     }
 
-    // ręczne dopasowanie kilku kontrolnych elementów (na wszelki wypadek)
+    // ręczne dopasowanie kilku kontrolnych elementów
     try {
       const refreshBtn = document.getElementById('refresh-posts');
       if(refreshBtn && dict.btn_refresh) refreshBtn.textContent = dict.btn_refresh;
@@ -558,12 +555,8 @@ const TRANSLATIONS = {
       if(openZrz && dict.btn_open_zrzutka) openZrz.textContent = dict.btn_open_zrzutka;
     } catch(e) {}
 
-    // aktywne przyciski języka
     document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
-
     try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
-
-    //ładuj wpisy i FAQ dla nowego języka
     loadPosts(lang);
     buildFAQFor(lang);
   }
@@ -600,6 +593,7 @@ const TRANSLATIONS = {
     return null;
   }
 
+  // rozszerzony parser: obsługuje image: oraz images:
   function parseFrontMatter(mdText){
     const m = mdText.match(/^---\s*([\s\S]*?)\s*---/);
     if(!m) return {title:null,date:null,lang:null,images:[]};
@@ -611,11 +605,21 @@ const TRANSLATIONS = {
     if(d) result.date = d[1].trim();
     const l = fm.match(/^\s*lang:\s*([a-zA-Z_-]+)/m);
     if(l) result.lang = l[1].trim().toLowerCase();
+
+    // images: - "a", - "b"
     const imgsBlock = fm.match(/^\s*images:\s*\n((?:\s*-\s*.+\n?)+)/m);
     if(imgsBlock){
       const lines = imgsBlock[1].match(/-\s*(.+)/g) || [];
       result.images = lines.map(s => s.replace(/^\-\s*/,'').trim().replace(/^['"]|['"]$/g,''));
     }
+
+    // single image: "..." or image: /images/...
+    const singleImg = fm.match(/^\s*image:\s*(?:"([^"]+)"|'([^']+)'|(.+))$/m);
+    if(singleImg){
+      const val = (singleImg[1]||singleImg[2]||singleImg[3]||'').trim().replace(/^['"]|['"]$/g,'');
+      if(val) result.images.unshift(val);
+    }
+
     return result;
   }
 
@@ -690,6 +694,7 @@ const TRANSLATIONS = {
       posts.forEach(p=>{
         const node = tpl.content.cloneNode(true);
         const imgEl = node.querySelector('img');
+        const thumbWrap = node.querySelector('.post-thumb');
         const titleEl = node.querySelector('.post-title');
         const metaEl = node.querySelector('.post-meta');
         const excerptEl = node.querySelector('.post-excerpt');
@@ -699,14 +704,19 @@ const TRANSLATIONS = {
         titleEl.textContent = p.title || p.filename;
         metaEl.textContent = (p.date ? new Date(p.date).toLocaleString() : '') + (p.lang ? ' • ' + p.lang.toUpperCase() : '');
 
+        // thumb: jeśli brak -> ukryj cały kontener .post-thumb (nie pokazujemy placeholdera)
         const thumb = (p.images && p.images.length>0) ? resolveImageRawUrl(p.images[0]) : '';
         if(thumb){
-          imgEl.src = thumb;
-          imgEl.alt = p.title || '';
+          if(imgEl){
+            imgEl.src = thumb;
+            imgEl.alt = p.title || '';
+            imgEl.style.display = '';
+            if(thumbWrap) thumbWrap.style.display = '';
+          }
         } else {
-          imgEl.src = 'https://via.placeholder.com/320x180?text=EduCraft';
-          imgEl.alt = 'EduCraft';
-          imgEl.style.objectFit = 'cover';
+          // ukryj cały kontener miniaturki tak, żeby nie było tekstu "EduCraft"
+          if(thumbWrap) thumbWrap.style.display = 'none';
+          if(imgEl) { imgEl.removeAttribute('src'); imgEl.alt = ''; imgEl.style.display = 'none'; }
         }
 
         const plain = (p.body || '').replace(/!\[.*?\]\(.*?\)/g,'').replace(/\[([^\]]+)\]\([^\)]+\)/g,'$1').replace(/[#>*`]/g,'').trim();
@@ -719,8 +729,8 @@ const TRANSLATIONS = {
         });
         fullEl.innerHTML = safeRenderMarkdown(body);
 
-        // ustawienie tekstu przycisku z tłumaczenia
-        btnOpen.textContent = (TRANSLATIONS[lang] && TRANSLATIONS[lang].read_more) ? TRANSLATIONS[lang].read_more : 'Czytaj więcej';
+        // ustawienie tekstu przycisku z tłumaczenia (używamy dict aby trzymać lokalizację)
+        btnOpen.textContent = (dict && dict.read_more) ? dict.read_more : 'Czytaj więcej';
 
         // obsługa Czytaj/Zwiń (toggle)
         btnOpen.addEventListener('click', ()=>{
