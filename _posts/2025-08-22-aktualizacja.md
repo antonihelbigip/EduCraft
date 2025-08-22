@@ -5,6 +5,7 @@ title: "Aktualizacja projektu – sierpień 2025"
 date: 2025-08-22 12:00:00 +02:00
 categories: [aktualizacje]
 lang: pl
+image: "https://raw.githubusercontent.com/antonihelbigip/EduCraft/main/images/L1EvnWqKu3qNUTtY.jpg"
 
 ---
 
