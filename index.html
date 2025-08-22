@@ -6,48 +6,131 @@
   <title>EduCraft – Minecraft OZE</title>
   <link rel="stylesheet" href="style.css">
   <meta name="description" content="EduCraft – educational Minecraft server powered by renewable energy.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="EduCraft – Minecraft OZE" />
+  <meta property="og:description" content="Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną." />
+  <meta property="og:image" content="https://twoja-domena.pl/tlo.jpg" />
+  <meta property="og:url" content="https://twoja-domena.pl/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EduCraft – Minecraft OZE" />
+  <meta name="twitter:description" content="Minecraft + OZE + edukacja. Dołącz!" />
+  <meta name="twitter:image" content="https://twoja-domena.pl/tlo.jpg" />
 </head>
 <body>
-  <header class="hero">
-    <div class="topbar">
-      <div class="lang-switch">
-        <button class="lang-btn" data-lang="pl" title="Polski">PL</button>
-        <button class="lang-btn" data-lang="en" title="English">EN</button>
-        <button class="lang-btn" data-lang="de" title="Deutsch">DE</button>
-      </div>
-    </div>
+  <!-- TOPBAR — full-width wrapper + centered container -->
+  <div class="topbar" role="navigation" aria-label="Główna nawigacja">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0.5rem 0;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a class="brand" href="#home" aria-label="EduCraft">EduCraft</a>
 
-    <div class="hero-inner container">
-      <h1 data-i18n="hero_title">EduCraft 🌍⚡</h1>
-      <p class="lead" data-i18n="hero_lead">Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.</p>
-      <div class="hero-ctas">
-        <a id="cta-support" class="btn btn-primary" href="https://zrzutka.pl/b5j6vm" target="_blank" rel="noopener" data-i18n="cta_support">Wesprzyj projekt</a>
-        <a class="btn btn-outline" href="#about" data-i18n="cta_about">Dowiedz się więcej</a>
+        <!-- mobile toggle (widoczny na małych ekranach) -->
+        <button class="nav-toggle" aria-expanded="false" aria-label="Otwórz menu">
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav class="main-nav" role="navigation" aria-label="Główna nawigacja">
+          <ul>
+            <li><a href="#about" data-i18n="nav_about">O projekcie</a></li>
+            <li><a href="#education" data-i18n="nav_education">Edukacja</a></li>
+            <li><a href="#publications" data-i18n="nav_publications">Publikacje</a></li>
+            <li><a href="#projects" data-i18n="nav_projects">Projekty</a></li>
+            <li><a href="#multimedia" data-i18n="nav_multimedia">Multimedia</a></li>
+            <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
+            <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="right-group" style="display:flex;align-items:center;gap:.6rem;">
+        <div class="lang-switch" aria-hidden="false">
+          <button class="lang-btn" data-lang="pl" title="Polski">PL</button>
+          <button class="lang-btn" data-lang="en" title="English">EN</button>
+          <button class="lang-btn" data-lang="de" title="Deutsch">DE</button>
+        </div>
+        <a id="cta-support" class="btn btn-primary" href="https://zrzutka.pl/b5j6vm" target="_blank" rel="noopener" data-i18n="cta_support">Wesprzyj</a>
       </div>
     </div>
+  </div>
+
+ <!-- HERO tylko z tłem -->
+<header class="hero" id="home" role="banner" aria-label="Hero">
+  <div class="hero-inner container">
+    <!-- usunięte h1, p i przyciski -->
+  </div>
+</header>
+
   </header>
 
-  <main class="container">
+  <main class="container" role="main">
     <!-- About -->
-    <section id="about" class="card">
-      <h2 data-i18n="about_title">O projekcie</h2>
+    <section id="about" class="card" aria-labelledby="about-heading">
+      <h2 id="about-heading" data-i18n="about_title">O projekcie</h2>
       <p data-i18n="about_text">
         Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej.
         To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE.
       </p>
     </section>
 
+    <!-- Education -->
+    <section id="education" class="card muted" aria-labelledby="education-heading">
+      <h3 id="education-heading" data-i18n="education_title">Edukacja</h3>
+      <p data-i18n="education_text">Materiały edukacyjne i scenariusze lekcji: energia słoneczna, wiatr, magazynowanie, monitoring i automatyka (Home Assistant).</p>
+      <ul>
+        <li>Lesson: Solar Basics</li>
+        <li>Lesson: Wind Energy</li>
+        <li>Lesson: Monitoring & Home Assistant</li>
+      </ul>
+    </section>
+
+    <!-- Publications (tabela) -->
+    <section id="publications" class="card" aria-labelledby="publications-heading">
+      <h3 id="publications-heading" data-i18n="publications_title">Publikacje</h3>
+      <p data-i18n="publications_intro">Lista raportów, artykułów i materiałów edukacyjnych związanych z projektem.</p>
+      <div class="table-wrap" style="overflow:auto;margin-top:1rem;">
+        <table class="pub-table" style="width:100%;border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:.6rem;border-bottom:1px solid #eee">Rok</th>
+              <th style="text-align:left;padding:.6rem;border-bottom:1px solid #eee">Tytuł</th>
+              <th style="text-align:left;padding:.6rem;border-bottom:1px solid #eee">Typ</th>
+              <th style="text-align:left;padding:.6rem;border-bottom:1px solid #eee">Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">2025</td>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">EduCraft — raport wdrożenia OZE</td>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">Raport</td>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1"><a href="https://github.com/antonihelbigip/EduCraft" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">2024</td>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">Scenariusze lekcji: Energia w praktyce</td>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1">Materiały</td>
+              <td style="padding:.6rem;border-bottom:1px solid #f1f1f1"><a href="#" onclick="alert('Podmień link do PDF');return false;">PDF</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- Creator -->
-    <section id="creator" class="card muted">
-      <h3 data-i18n="creator_title">Kim jestem?</h3>
-      <p data-i18n="creator_text">
-        Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.
-      </p>
+    <section id="creator" class="card muted" aria-labelledby="creator-heading">
+      <h3 id="creator-heading" data-i18n="creator_title">Kim jestem?</h3>
+      <p data-i18n="creator_text">Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.</p>
     </section>
 
     <!-- What we build -->
-    <section id="build" class="card">
-      <h3 data-i18n="build_title">Co buduję?</h3>
+    <section id="build" class="card" aria-labelledby="build-heading">
+      <h3 id="build-heading" data-i18n="build_title">Co buduję?</h3>
       <ul>
         <li data-i18n="build_li1">Serwer 24/7 zasilany panelami PV i turbiną wiatrową</li>
         <li data-i18n="build_li2">Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC</li>
@@ -55,9 +138,19 @@
       </ul>
     </section>
 
+    <!-- Projects -->
+    <section id="projects" class="card muted" aria-labelledby="projects-heading">
+      <h3 id="projects-heading" data-i18n="projects_title">Projekty</h3>
+      <ul>
+        <li>SunBlock One — solar powered modded server (inspiracja)</li>
+        <li>Gaia’s Riddle — edukacyjne scenariusze</li>
+        <li>Fun Palace SMP — wydarzenia i warsztaty</li>
+      </ul>
+    </section>
+
     <!-- Progress / updates -->
-    <section id="updates" class="card muted">
-      <h3 data-i18n="updates_title">Aktualizacje</h3>
+    <section id="updates" class="card muted" aria-labelledby="updates-heading">
+      <h3 id="updates-heading" data-i18n="updates_title">Aktualizacje</h3>
       <ul>
         <li data-i18n="updates_li1">2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione</li>
         <li data-i18n="updates_li2">Tryby: Proxy, Lobby, PvP, EarthMC</li>
@@ -66,9 +159,9 @@
       </ul>
     </section>
 
-    <!-- Gallery -->
-    <section id="gallery" class="card gallery">
-      <h3 data-i18n="gallery_title">Galeria</h3>
+    <!-- Multimedia -->
+    <section id="multimedia" class="card gallery" aria-labelledby="gallery-heading">
+      <h3 id="gallery-heading" data-i18n="gallery_title">Galeria / Multimedia</h3>
       <div class="carousel">
         <div class="carousel-track"></div>
       </div>
@@ -77,321 +170,365 @@
       </div>
     </section>
 
+    <!-- Blog -->
+    <section id="blog" class="card muted" aria-labelledby="blog-heading">
+      <h3 id="blog-heading" data-i18n="blog_title">Blog</h3>
+      <p>Ostatnie wpisy i krótkie aktualizacje — w przyszłości wylistujemy tu ostatnie posty i linki.</p>
+    </section>
+
     <!-- FAQ -->
-    <section id="faq" class="card muted">
-      <h3 data-i18n="faq_title">❓ Najczęstsze pytania (FAQ)</h3>
-
-      <details>
-        <summary>Czy serwer będzie darmowy?</summary>
-        <p>Tak — serwer będzie otwarty, bez whitelisty, bez kont premium. Wspierający dostaną dodatkowe bonusy (role, skiny, tabliczki).</p>
-      </details>
-
-      <details>
-        <summary>Czy zasilanie OZE będzie realne?</summary>
-        <p>Tak — panele PV, turbina wiatrowa i akumulatory LiFePO₄ zapewnią 100% energii. Całość zarządzana przez Raspberry Pi i Home Assistant.</p>
-      </details>
-
-      <details>
-        <summary>Czy mam zgodę na odwzorowanie kampusu?</summary>
-        <p>Złożyłem wniosek — rozpocznę odwzorowywanie po jej uzyskaniu. Mam wstępne poparcie uczelni.</p>
-      </details>
-
-      <details>
-        <summary>Czy można pomóc w budowie lub treściach?</summary>
-        <p>Tak — planuję otwartą rekrutację edukatorów i budowniczych. Wspierający otrzymają wcześniejszy dostęp przez Discorda.</p>
-      </details>
-
-      <details>
-        <summary>Co, jeśli nie zbierzemy całej kwoty?</summary>
-        <p>Każdy etap ma określone minimum. Zrealizuję tyle, ile się uda — zaczynając od etapu 1: zasilania i podstawowego serwera.</p>
-      </details>
-
-      <details>
-        <summary>Jak śledzić postępy?</summary>
-        <p>Postępy będą publikowane na stronie zrzutki, stronie projektu oraz Discordzie. Będzie publiczny pasek postępu i wizualizacje.</p>
-      </details>
-
-      <details>
-        <summary>Czy to tylko zabawa?</summary>
-        <p>Nie! To edukacyjny projekt z misją. Minecraft to świetna platforma do nauki o OZE, automatyce i fizyce w przystępnej formie.</p>
-      </details>
-
-      <details>
-        <summary>Czy projekt będzie open-source?</summary>
-        <p>Tak — dokumentacja techniczna, kod automatyki i część materiałów edukacyjnych będzie dostępna na licencji open-source.</p>
-      </details>
+    <section id="faq" class="card muted" aria-labelledby="faq-heading">
+      <h3 id="faq-heading" data-i18n="faq_title">Najczęstsze pytania (FAQ)</h3>
+      <!-- dynamic FAQ (skrypt dopisze treści) -->
     </section>
 
     <!-- Support -->
-    <section id="support" class="card support">
-      <h3 data-i18n="support_title">Wesprzyj projekt</h3>
+    <section id="support" class="card support" aria-labelledby="support-heading">
+      <h3 id="support-heading" data-i18n="support_title">Wesprzyj projekt</h3>
       <p data-i18n="support_text">Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.</p>
       <div class="widget-wrap">
         <div style="position: relative; width: 100%; height: 480px; overflow: hidden;">
-          <iframe style="position: absolute; top:0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%;" 
+          <iframe style="position: absolute; top:0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%;"
             src="https://zrzutka.pl/b5j6vm/widget/13" frameborder="0" scrolling="no" title="Zrzutka widget"></iframe>
         </div>
       </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="card">
-      <h3 data-i18n="contact_title">Kontakt & społeczność</h3>
-      <p data-i18n="contact_text">Discord (wkrótce) • GitHub: <a href="https://github.com/your-username/educraft-oze" target="_blank">github.com/your-username/educraft-oze</a></p>
+    <section id="contact" class="card" aria-labelledby="contact-heading">
+      <h3 id="contact-heading" data-i18n="contact_title">Kontakt & społeczność</h3>
+      <p data-i18n="contact_text">Discord (wkrótce) • GitHub: <a href="https://github.com/antonihelbigip/EduCraft" target="_blank" rel="noopener">github.com/antonihelbigip/EduCraft</a></p>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <div class="container">
       <small data-i18n="footer_text">© 2025 EduCraft • MIT License • Made by Antoni</small>
     </div>
   </footer>
 
-  <!-- Gallery + Language Script -->
+  <!-- NAV TOGGLE + accessibility helpers -->
   <script>
-(async function(){
-  const owner = 'antonihelbigip';
-  const repo = 'EduCraft';
-  const path = 'images';
-  const branch = 'main';
-  const gallery = document.querySelector('.gallery');
-  if (!gallery) return;
-  const track = gallery.querySelector('.carousel-track');
-  const range = gallery.querySelector('.carousel-range');
-  if (!track || !range) return;
-  track.innerHTML = '<p class="small">Ładowanie galerii…</p>';
-  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
-  try {
-    const res = await fetch(apiUrl);
-    if (!res.ok) throw new Error('GitHub API error: ' + res.status);
-    const files = await res.json();
-    const imgs = Array.isArray(files) ? files.filter(f => /\.(jpe?g|png|gif|webp|svg)$/i.test(f.name)) : [];
-    if (imgs.length === 0) { track.innerHTML = '<p class="small">Brak obrazów w katalogu images/. Dodaj pliki i zrób push.</p>'; range.style.display='none'; return; }
-    imgs.sort((a,b)=>a.name.localeCompare(b.name, undefined, {numeric:true}));
-    track.innerHTML='';
-    const slides = [];
-    const rawUrl = (p, filename)=>`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p? p+'/' : ''}${encodeURIComponent(filename)}`;
-    imgs.forEach(file=>{
-      const slide=document.createElement('div');
-      slide.className='carousel-slide';
-      const img=document.createElement('img');
-      img.src=rawUrl(path,file.name);
-      img.setAttribute('data-i18n-alt',file.name.replace(/\.[^/.]+$/,'').replace(/[-_]/g,'_'));
-      img.loading='lazy';
-      slide.appendChild(img);
-      track.appendChild(slide);
-      slides.push(slide);
-    });
+    (function(){
+      const btn = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.main-nav');
+      if(!btn || !nav) return;
+      btn.addEventListener('click', ()=> {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // close mobile nav on resize > 760
+      window.addEventListener('resize', ()=> {
+        if(window.innerWidth > 760 && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        }
+      });
+      // close on link click (mobile)
+      nav.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', ()=> { if(nav.classList.contains('open')) { nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }});
+      });
+    })();
+  </script>
 
-    let visible = window.innerWidth <= 760 ? 1 : 2;
-    let currentIndex = 0;
-    const total = slides.length;
-    let maxIndex = Math.max(0,total-visible);
-    const rangeUpdate = ()=>{ visible = window.innerWidth<=760?1:2; maxIndex=Math.max(0,total-visible); range.max=maxIndex; if(+range.value>maxIndex) range.value=maxIndex; updatePosition(+range.value);}
-    const updatePosition = index=>{currentIndex=index; track.style.transform=`translateX(-${index*(100/visible)}%)`; range.value=index;}
-    const setSlideBasis=()=>{const basis=100/visible; slides.forEach(s=>{s.style.flex=`0 0 ${basis}%`; s.style.height=`${s.offsetWidth*0.6}px`}); updatePosition(Math.min(currentIndex,Math.max(0,total-visible)));}
-    rangeUpdate(); setSlideBasis();
-    let resizeTimer;
-    window.addEventListener('resize',()=>{clearTimeout(resizeTimer); resizeTimer=setTimeout(()=>{rangeUpdate(); setSlideBasis();},120);});
-    range.addEventListener('input', e=>updatePosition(+e.target.value));
+  <!-- Gallery + Language Script (gallery uses GitHub raw content) -->
+  <script>
+  (async function(){
+    const owner = 'antonihelbigip';
+    const repo = 'EduCraft';
+    const path = 'images';
+    const branch = 'main';
+    const gallery = document.querySelector('.gallery');
+    if (!gallery) return;
+    const track = gallery.querySelector('.carousel-track');
+    const range = gallery.querySelector('.carousel-range');
+    if (!track || !range) return;
+    track.innerHTML = '<p class="small">Ładowanie galerii…</p>';
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`;
+    try {
+      const res = await fetch(apiUrl);
+      if (!res.ok) throw new Error('GitHub API error: ' + res.status);
+      const files = await res.json();
+      const imgs = Array.isArray(files) ? files.filter(f => /\.(jpe?g|png|gif|webp|svg)$/i.test(f.name)) : [];
+      if (imgs.length === 0) { track.innerHTML = '<p class="small">Brak obrazów w katalogu images/. Dodaj pliki i zrób push.</p>'; range.style.display='none'; return; }
+      imgs.sort((a,b)=>a.name.localeCompare(b.name, undefined, {numeric:true}));
+      track.innerHTML='';
+      const slides = [];
+      const rawUrl = (p, filename)=>`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${p? p+'/' : ''}${encodeURIComponent(filename)}`;
+      imgs.forEach(file=>{
+        const slide=document.createElement('div');
+        slide.className='carousel-slide';
+        const img=document.createElement('img');
+        img.src=rawUrl(path,file.name);
+        img.setAttribute('data-i18n-alt',file.name.replace(/\.[^/.]+$/,'').replace(/[-_]/g,'_'));
+        img.loading='lazy';
+        slide.appendChild(img);
+        track.appendChild(slide);
+        slides.push(slide);
+      });
 
-    let autoplayInterval=2500, autoplayTimer=null;
-    const startAutoplay=()=>{stopAutoplay(); if(total<=visible)return; autoplayTimer=setInterval(()=>{let next=currentIndex+1;if(next>maxIndex)next=0;updatePosition(next);},autoplayInterval);}
-    const stopAutoplay=()=>{if(autoplayTimer){clearInterval(autoplayTimer); autoplayTimer=null;}}
-    gallery.addEventListener('mouseenter',stopAutoplay);
-    gallery.addEventListener('mouseleave',startAutoplay);
-    if(total<=visible){range.style.display='none'; track.style.justifyContent='center'; slides.forEach(slide=>slide.style.flex=`0 0 ${100/total}%`);}else range.style.display='block';
-    startAutoplay();
+      let visible = window.innerWidth <= 760 ? 1 : 2;
+      let currentIndex = 0;
+      const total = slides.length;
+      let maxIndex = Math.max(0,total-visible);
+      const rangeUpdate = ()=>{ visible = window.innerWidth<=760?1:2; maxIndex=Math.max(0,total-visible); range.max=maxIndex; if(+range.value>maxIndex) range.value=maxIndex; updatePosition(+range.value);}
+      const updatePosition = index=>{currentIndex=index; track.style.transform=`translateX(-${index*(100/visible)}%)`; range.value=index;}
+      const setSlideBasis=()=>{const basis=100/visible; slides.forEach(s=>{s.style.flex=`0 0 ${basis}%`; s.style.height=`${s.offsetWidth*0.6}px`}); updatePosition(Math.min(currentIndex,Math.max(0,total-visible)));}
+      rangeUpdate(); setSlideBasis();
+      let resizeTimer;
+      window.addEventListener('resize',()=>{clearTimeout(resizeTimer); resizeTimer=setTimeout(()=>{rangeUpdate(); setSlideBasis();},120);});
+      range.addEventListener('input', e=>updatePosition(+e.target.value));
 
-    // ALT translations
-    const TRANSLATIONS_ALT={pl:{},en:{},de:{}};
-    const applyAltLanguage=lang=>{slides.forEach(s=>{const img=s.querySelector('img[data-i18n-alt]'); const key=img.getAttribute('data-i18n-alt'); img.alt=(TRANSLATIONS_ALT[lang]&&TRANSLATIONS_ALT[lang][key])?TRANSLATIONS_ALT[lang][key]:key;});}
-    const initLang=localStorage.getItem('educraft_lang')||'pl';
-    applyAltLanguage(initLang);
-    document.querySelectorAll('.lang-btn').forEach(btn=>{btn.addEventListener('click',()=>applyAltLanguage(btn.dataset.lang));});
+      let autoplayInterval=2500, autoplayTimer=null;
+      const startAutoplay=()=>{stopAutoplay(); if(total<=visible)return; autoplayTimer=setInterval(()=>{let next=currentIndex+1;if(next>maxIndex)next=0;updatePosition(next);},autoplayInterval);}
+      const stopAutoplay=()=>{if(autoplayTimer){clearInterval(autoplayTimer); autoplayTimer=null;}}
+      gallery.addEventListener('mouseenter',stopAutoplay);
+      gallery.addEventListener('mouseleave',startAutoplay);
+      if(total<=visible){range.style.display='none'; track.style.justifyContent='center'; slides.forEach(slide=>slide.style.flex=`0 0 ${100/total}%`);}else range.style.display='block';
+      startAutoplay();
 
-  } catch(err){console.error(err); track.innerHTML='<p class="small">Nie udało się załadować galerii. Sprawdź konsolę (F12).</p>'; range.style.display='none';}
-})();
+      // ALT translations (empty; left for future i18n)
+      const TRANSLATIONS_ALT={pl:{},en:{},de:{}};
+      const applyAltLanguage=lang=>{slides.forEach(s=>{const img=s.querySelector('img[data-i18n-alt]'); const key=img.getAttribute('data-i18n-alt'); img.alt=(TRANSLATIONS_ALT[lang]&&TRANSLATIONS_ALT[lang][key])?TRANSLATIONS_ALT[lang][key]:key;});}
+      const initLang=localStorage.getItem('educraft_lang')||'pl';
+      applyAltLanguage(initLang);
+      document.querySelectorAll('.lang-btn').forEach(btn=>{btn.addEventListener('click',()=>applyAltLanguage(btn.dataset.lang));});
+    } catch(err){console.error(err); track.innerHTML='<p class="small">Nie udało się załadować galerii. Sprawdź konsolę (F12).</p>'; range.style.display='none';}
+  })();
   </script>
 
   <!-- TRANSLATIONS & SWITCHER SCRIPT -->
-<script>
-const TRANSLATIONS = {
-  pl: {
-    hero_title: "EduCraft 🌍⚡",
-    hero_lead: "Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.",
-    cta_support: "Wesprzyj projekt",
-    cta_about: "Dowiedz się więcej",
-    about_title: "O projekcie",
-    about_text: "Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej. To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE.",
-    creator_title: "Kim jestem?",
-    creator_text: "Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.",
-    build_title: "Co buduję?",
-    build_li1: "Serwer 24/7 zasilany panelami PV i turbiną wiatrową",
-    build_li2: "Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC",
-    build_li3: "System monitoringu energii (Raspberry Pi + Home Assistant)",
-    updates_title: "Aktualizacje",
-    updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione",
-    updates_li2: "Tryby: Proxy, Lobby, PvP, EarthMC",
-    updates_li3: "Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-    updates_li4: "Monitoring energii (miernik Teccus) – plan integracji z Home Assistant",
-    gallery_title: "Galeria",
-    support_title: "Wesprzyj projekt",
-    support_text: "Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.",
-    faq_title: "Najczęstsze pytania (FAQ)",
-    faq_q1: "Czy serwer będzie darmowy?",
-    faq_a1: "Tak — serwer będzie otwarty, bez whitelisty, bez kont premium. Wspierający dostaną dodatkowe bonusy (role, skiny, tabliczki).",
-    faq_q2: "Czy zasilanie OZE będzie realne?",
-    faq_a2: "Tak — panele PV, turbina wiatrowa i akumulatory LiFePO₄ zapewnią 100% energii. Całość zarządzana przez Raspberry Pi i Home Assistant.",
-    faq_q3: "Czy mam zgodę na odwzorowanie kampusu?",
-    faq_a3: "Złożyłem wniosek — rozpocznę odwzorowywanie po jej uzyskaniu. Mam wstępne poparcie uczelni.",
-    faq_q4: "Czy można pomóc w budowie lub treściach?",
-    faq_a4: "Tak — planuję otwartą rekrutację edukatorów i budowniczych. Wspierający otrzymają wcześniejszy dostęp przez Discorda.",
-    faq_q5: "Co, jeśli nie zbierzemy całej kwoty?",
-    faq_a5: "Każdy etap ma określone minimum. Zrealizuję tyle, ile się uda — zaczynając od etapu 1: zasilania i podstawowego serwera.",
-    faq_q6: "Jak śledzić postępy?",
-    faq_a6: "Postępy będą publikowane na stronie zrzutki, stronie projektu oraz Discordzie. Będzie publiczny pasek postępu i wizualizacje.",
-    faq_q7: "Czy to tylko zabawa?",
-    faq_a7: "Nie! To edukacyjny projekt z misją. Minecraft to świetna platforma do nauki o OZE, automatyce i fizyce w przystępnej formie.",
-    faq_q8: "Czy projekt będzie open-source?",
-    faq_a8: "Tak — dokumentacja techniczna, kod automatyki i część materiałów edukacyjnych będzie dostępna na licencji open-source.",
-    contact_title: "Kontakt & społeczność",
-    contact_text: "Discord (wkrótce) • GitHub: github.com/your-username/educraft-oze",
-    footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
-  },
-  en: {
-    hero_title: "EduCraft 🌍⚡",
-    hero_lead: "The first Polish educational Minecraft server powered 100% by renewable energy.",
-    cta_support: "Support the project",
-    cta_about: "Learn more",
-    about_title: "About",
-    about_text: "I'm building an open educational Minecraft server that runs 24/7 thanks to solar panels and a wind turbine. It combines gaming, technology and ecology — players will see how renewable systems work in practice.",
-    creator_title: "About the creator",
-    creator_text: "My name is Antoni — mechatronics student, AI intern at Siemens, three-time winner of the “My business idea” contest.",
-    build_title: "What we build",
-    build_li1: "24/7 server powered by PV panels and a wind turbine",
-    build_li2: "Educational platform with quests, NPC/AI and EarthMC map",
-    build_li3: "Energy monitoring system (Raspberry Pi + Home Assistant)",
-    updates_title: "Updates",
-    updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — servers deployed",
-    updates_li2: "Modes: Proxy, Lobby, PvP, EarthMC",
-    updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-    updates_li4: "Energy metering (Teccus meter) — plan to integrate with Home Assistant",
-    gallery_title: "Gallery",
-    support_title: "Support the project",
-    support_text: "Support us on Zrzutka.pl — every contribution helps powering tests and educational content.",
-    faq_title: "FAQ",
-    faq_q1: "Will the server be free?",
-    faq_a1: "Yes — the server will be open, without whitelist or premium accounts. Supporters will receive extra bonuses (roles, skins, signs).",
-    faq_q2: "Is renewable energy supply feasible?",
-    faq_a2: "Yes — PV panels, a wind turbine, and LiFePO₄ batteries will provide 100% energy. Everything is managed by Raspberry Pi and Home Assistant.",
-    faq_q3: "Do I have permission to replicate the campus?",
-    faq_a3: "I’ve submitted a request — I will start replication after approval. I have preliminary support from the university.",
-    faq_q4: "Can I help with building or content?",
-    faq_a4: "Yes — I plan open recruitment for educators and builders. Supporters will get early access via Discord.",
-    faq_q5: "What if we don’t raise the full amount?",
-    faq_a5: "Each stage has a minimum. I will implement as much as possible — starting from Stage 1: energy supply and basic server.",
-    faq_q6: "How can I track progress?",
-    faq_a6: "Progress will be published on the crowdfunding page, project website, and Discord. There will be a public progress bar and visualizations.",
-    faq_q7: "Is this just for fun?",
-    faq_a7: "No! This is an educational project with a mission. Minecraft is a great platform to learn about renewable energy, automation, and physics in a practical way.",
-    faq_q8: "Will the project be open-source?",
-    faq_a8: "Yes — technical documentation, automation code, and some educational materials will be available under an open-source license.",
-    contact_title: "Contact & community",
-    contact_text: "Discord (coming soon) • GitHub: github.com/your-username/educraft-oze",
-    footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
-  },
-  de: {
-    hero_title: "EduCraft 🌍⚡",
-    hero_lead: "Der erste polnische Bildungs-Minecraft-Server, der zu 100 % mit erneuerbarer Energie betrieben wird.",
-    cta_support: "Projekt unterstützen",
-    cta_about: "Mehr erfahren",
-    about_title: "Über das Projekt",
-    about_text: "Ich baue einen offenen Bildungs-Minecraft-Server, der rund um die Uhr dank Solarpaneelen und einer Windturbine läuft. Er verbindet Spiele, Technik und Ökologie – Spieler sehen, wie erneuerbare Systeme in der Praxis funktionieren.",
-    creator_title: "Über den Ersteller",
-    creator_text: "Ich heiße Antoni – Mechatronik-Student, AI-Praktikant bei Siemens, dreifacher Gewinner des Wettbewerbs „Meine Geschäftsidee“.",
-    build_title: "Was wir bauen",
-    build_li1: "24/7 Server, betrieben durch PV-Module und Windturbine",
-    build_li2: "Bildungsplattform mit Aufgaben, NPC/AI und EarthMC-Karte",
-    build_li3: "Energiemonitoring-System (Raspberry Pi + Home Assistant)",
-    updates_title: "Aktualisierungen",
-    updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — Server aufgesetzt",
-    updates_li2: "Modi: Proxy, Lobby, PvP, EarthMC",
-    updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
-    updates_li4: "Energie-Messung (Teccus) — Integration mit Home Assistant geplant",
-    gallery_title: "Galerie",
-    support_title: "Unterstütze das Projekt",
-    support_text: "Unterstütze uns auf Zrzutka.pl — jeder Beitrag hilft beim Betriebstests und Bildungsinhalten.",
-    faq_title: "FAQ",
-    faq_q1: "Wird der Server kostenlos sein?",
-    faq_a1: "Ja — der Server wird offen sein, ohne Whitelist oder Premium-Konten. Unterstützer erhalten zusätzliche Boni (Rollen, Skins, Schilder).",
-    faq_q2: "Ist die Versorgung mit erneuerbarer Energie realistisch?",
-    faq_a2: "Ja — PV-Module, eine Windturbine und LiFePO₄-Akkus liefern 100 % Energie. Alles wird über Raspberry Pi und Home Assistant gesteuert.",
-    faq_q3: "Habe ich die Genehmigung, den Campus nachzubilden?",
-    faq_a3: "Ich habe einen Antrag gestellt — die Nachbildung beginnt nach Genehmigung. Ich habe vorläufige Unterstützung der Universität.",
-    faq_q4: "Kann ich beim Bau oder bei Inhalten helfen?",
-    faq_a4: "Ja — ich plane eine offene Rekrutierung von Lehrern und Bauherren. Unterstützer erhalten frühzeitigen Zugang über Discord.",
-    faq_q5: "Was passiert, wenn wir nicht den vollen Betrag sammeln?",
-    faq_a5: "Jede Phase hat ein Minimum. Ich werde so viel umsetzen wie möglich — beginnend mit Phase 1: Energieversorgung und Basiserver.",
-    faq_q6: "Wie kann ich den Fortschritt verfolgen?",
-    faq_a6: "Der Fortschritt wird auf der Crowdfunding-Seite, der Projektseite und Discord veröffentlicht. Es wird eine öffentliche Fortschrittsanzeige und Visualisierungen geben.",
-    faq_q7: "Ist das nur zum Spaß?",
-    faq_a7: "Nein! Dies ist ein Bildungsprojekt mit einer Mission. Minecraft ist eine großartige Plattform, um erneuerbare Energien, Automatisierung und Physik praxisnah zu lernen.",
-    faq_q8: "Wird das Projekt Open-Source sein?",
-    faq_a8: "Ja — technische Dokumentation, Automatisierungscode und einige Bildungsinhalte werden unter einer Open-Source-Lizenz verfügbar sein.",
-    contact_title: "Kontakt & Community",
-    contact_text: "Discord (bald) • GitHub: github.com/your-username/educraft-oze",
-    footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
-  }
-};
+  <script>
+  const TRANSLATIONS = {
+    pl: {
+      nav_about: "O projekcie",
+      nav_education: "Edukacja",
+      nav_publications: "Publikacje",
+      nav_projects: "Projekty",
+      nav_multimedia: "Multimedia",
+      nav_blog: "Blog",
+      nav_contact: "Kontakt",
+      hero_title: "EduCraft",
+      hero_lead: "Pierwszy w Polsce edukacyjny serwer Minecraft zasilany w 100% energią odnawialną.",
+      cta_support: "Wesprzyj",
+      cta_about: "Dowiedz się więcej",
+      about_title: "O projekcie",
+      about_text: "Buduję otwarto-edukacyjny serwer Minecraft, który działa 24/7 dzięki energii z paneli słonecznych i turbiny wiatrowej. To połączenie gier, technologii i ekologii — gracz zobaczy w praktyce, jak działa system OZE.",
+      education_title: "Edukacja",
+      education_text: "Program edukacyjny zawiera moduły: Energia słoneczna, Energia wiatrowa, Magazynowanie energii, Automatyka i Home Assistant.",
+      publications_title: "Publikacje",
+      publications_intro: "Lista raportów, artykułów i materiałów edukacyjnych związanych z projektem.",
+      creator_title: "Kim jestem?",
+      creator_text: "Nazywam się Antoni — student mechatroniki, stażysta AI w Siemens, trzykrotny laureat konkursu „Mój pomysł na biznes”.",
+      build_title: "Co buduję?",
+      build_li1: "Serwer 24/7 zasilany panelami PV i turbiną wiatrową",
+      build_li2: "Platforma edukacyjna z zadaniami, NPC/AI i mapą EarthMC",
+      build_li3: "System monitoringu energii (Raspberry Pi + Home Assistant)",
+      projects_title: "Projekty",
+      updates_title: "Aktualizacje",
+      updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione",
+      updates_li2: "Tryby: Proxy, Lobby, PvP, EarthMC",
+      updates_li3: "Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+      updates_li4: "Monitoring energii (miernik Teccus) – plan integracji z Home Assistant",
+      gallery_title: "Galeria / Multimedia",
+      blog_title: "Blog",
+      support_title: "Wesprzyj projekt",
+      support_text: "Wesprzyj nas na Zrzutka.pl — każda złotówka przybliża testy zasilania z OZE i rozwój treści edukacyjnych.",
+      faq_title: "Najczęstsze pytania (FAQ)",
+      faq_q1: "Czy serwer będzie darmowy?",
+      faq_a1: "Tak — serwer będzie otwarty, bez whitelisty, bez kont premium. Wspierający dostaną dodatkowe bonusy (role, skiny, tabliczki).",
+      faq_q2: "Czy zasilanie OZE będzie realne?",
+      faq_a2: "Tak — panele PV, turbina wiatrowa i akumulatory LiFePO₄ zapewnią 100% energii. Całość zarządzana przez Raspberry Pi i Home Assistant.",
+      faq_q3: "Czy mam zgodę na odwzorowanie kampusu?",
+      faq_a3: "Złożyłem wniosek — rozpocznę odwzorowywanie po jej uzyskaniu. Mam wstępne poparcie uczelni.",
+      faq_q4: "Czy można pomóc w budowie lub treściach?",
+      faq_a4: "Tak — planuję otwartą rekrutację edukatorów i budowniczych. Wspierający otrzymają wcześniejszy dostęp przez Discorda.",
+      faq_q5: "Co, jeśli nie zbierzemy całej kwoty?",
+      faq_a5: "Każdy etap ma określone minimum. Zrealizuję tyle, ile się uda — zaczynając od etapu 1: zasilania i podstawowego serwera.",
+      faq_q6: "Jak śledzić postępy?",
+      faq_a6: "Postępy będą publikowane na stronie zrzutki, stronie projektu oraz Discordzie. Będzie publiczny pasek postępu i wizualizacje.",
+      faq_q7: "Czy to tylko zabawa?",
+      faq_a7: "Nie! To edukacyjny projekt z misją. Minecraft to świetna platforma do nauki o OZE, automatyce i fizyce w przystępnej formie.",
+      faq_q8: "Czy projekt będzie open-source?",
+      faq_a8: "Tak — dokumentacja techniczna, kod automatyki i część materiałów edukacyjnych będzie dostępna na licencji open-source.",
+      contact_title: "Kontakt & społeczność",
+      contact_text: "Discord (wkrótce) • GitHub: github.com/antonihelbigip/EduCraft",
+      footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
+    },
+    en: {
+      nav_about: "About",
+      nav_education: "Education",
+      nav_publications: "Publications",
+      nav_projects: "Projects",
+      nav_multimedia: "Multimedia",
+      nav_blog: "Blog",
+      nav_contact: "Contact",
+      hero_title: "EduCraft",
+      hero_lead: "The first Polish educational Minecraft server powered 100% by renewable energy.",
+      cta_support: "Support",
+      cta_about: "Learn more",
+      about_title: "About",
+      about_text: "I'm building an open educational Minecraft server that runs 24/7 thanks to solar panels and a wind turbine. It combines gaming, technology and ecology — players will see how renewable systems work in practice.",
+      education_title: "Education",
+      education_text: "Curriculum: Solar energy, Wind energy, Storage, Monitoring and Automation (Home Assistant).",
+      publications_title: "Publications",
+      publications_intro: "Reports, papers and educational materials related to the project.",
+      creator_title: "About the creator",
+      creator_text: "My name is Antoni — mechatronics student, AI intern at Siemens, three-time winner of the 'My business idea' contest.",
+      build_title: "What we build",
+      build_li1: "24/7 server powered by PV panels and a wind turbine",
+      build_li2: "Educational platform with quests, NPC/AI and EarthMC map",
+      build_li3: "Energy monitoring system (Raspberry Pi + Home Assistant)",
+      projects_title: "Projects",
+      updates_title: "Updates",
+      updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — servers deployed",
+      updates_li2: "Modes: Proxy, Lobby, PvP, EarthMC",
+      updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+      updates_li4: "Energy metering (Teccus meter) — plan to integrate with Home Assistant",
+      gallery_title: "Gallery / Multimedia",
+      blog_title: "Blog",
+      support_title: "Support the project",
+      support_text: "Support us on Zrzutka.pl — every contribution helps powering tests and educational content.",
+      faq_title: "FAQ",
+      faq_q1: "Will the server be free?",
+      faq_a1: "Yes — the server will be open, without whitelist or premium accounts. Supporters will receive extra bonuses (roles, skins, signs).",
+      faq_q2: "Is renewable energy supply feasible?",
+      faq_a2: "Yes — PV panels, a wind turbine, and LiFePO₄ batteries will provide 100% energy. Everything is managed by Raspberry Pi and Home Assistant.",
+      faq_q3: "Do I have permission to replicate the campus?",
+      faq_a3: "I’ve submitted a request — I will start replication after approval. I have preliminary support from the university.",
+      faq_q4: "Can I help with building or content?",
+      faq_a4: "Yes — I plan open recruitment for educators and builders. Supporters will get early access via Discord.",
+      faq_q5: "What if we don’t raise the full amount?",
+      faq_a5: "Each stage has a minimum. I will implement as much as possible — starting from Stage 1: energy supply and basic server.",
+      faq_q6: "How can I track progress?",
+      faq_a6: "Progress will be published on the crowdfunding page, project website, and Discord. There will be a public progress bar and visualizations.",
+      faq_q7: "Is this just for fun?",
+      faq_a7: "No! This is an educational project with a mission. Minecraft is a great platform to learn about renewable energy, automation, and physics in a practical way.",
+      faq_q8: "Will the project be open-source?",
+      faq_a8: "Yes — technical documentation, automation code, and some educational materials will be available under an open-source license.",
+      contact_title: "Contact & community",
+      contact_text: "Discord (coming soon) • GitHub: github.com/antonihelbigip/EduCraft",
+      footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
+    },
+    de: {
+      nav_about: "Über das Projekt",
+      nav_education: "Bildung",
+      nav_publications: "Publikationen",
+      nav_projects: "Projekte",
+      nav_multimedia: "Multimedia",
+      nav_blog: "Blog",
+      nav_contact: "Kontakt",
+      hero_title: "EduCraft",
+      hero_lead: "Der erste polnische Bildungs-Minecraft-Server, der zu 100 % mit erneuerbarer Energie betrieben wird.",
+      cta_support: "Unterstütze",
+      cta_about: "Mehr erfahren",
+      about_title: "Über das Projekt",
+      about_text: "Ich baue einen offenen Bildungs-Minecraft-Server, der rund um die Uhr dank Solarpaneelen und einer Windturbine läuft.",
+      education_title: "Bildung",
+      education_text: "Curriculum und Lehrmaterialien (Solar, Wind, Monitoring).",
+      publications_title: "Publikationen",
+      publications_intro: "Berichte, Artikel und Bildungsressourcen zum Projekt.",
+      creator_title: "Über den Ersteller",
+      creator_text: "Ich heiße Antoni – Mechatronik-Student, AI-Praktikant bei Siemens.",
+      build_title: "Was wir bauen",
+      build_li1: "24/7 Server, betrieben durch PV-Module und Windturbine",
+      build_li2: "Bildungsplattform mit Aufgaben, NPC/AI und EarthMC-Karte",
+      build_li3: "Energiemonitoring-System (Raspberry Pi + Home Assistant)",
+      projects_title: "Projekte",
+      updates_title: "Aktualisierungen",
+      updates_li1: "2× HP EliteDesk (Ryzen 5, 32GB, SSD) — Server aufgesetzt",
+      updates_li2: "Modi: Proxy, Lobby, PvP, EarthMC",
+      updates_li3: "Plugins: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap",
+      updates_li4: "Energie-Messung (Teccus) — Integration mit Home Assistant geplant",
+      gallery_title: "Galerie / Multimedia",
+      blog_title: "Blog",
+      support_title: "Unterstütze das Projekt",
+      support_text: "Unterstütze uns auf Zrzutka.pl — jeder Beitrag hilft beim Betriebstests und Bildungsinhalten.",
+      faq_title: "FAQ",
+      faq_q1: "Wird der Server kostenlos sein?",
+      faq_a1: "Ja — der Server wird offen sein, ohne Whitelist oder Premium-Konten. Unterstützer erhalten zusätzliche Boni.",
+      faq_q2: "Ist die Versorgung mit erneuerbarer Energie realistisch?",
+      faq_a2: "Ja — PV-Module, Windturbine und LiFePO₄-Akkus liefern Energie. Steuerung über Raspberry Pi und Home Assistant.",
+      faq_q3: "Habe ich die Genehmigung, den Campus nachzubilden?",
+      faq_a3: "Antrag gestellt — Nachbildung startet nach Genehmigung.",
+      faq_q4: "Kann ich beim Bau helfen?",
+      faq_a4: "Ja — offene Rekrutierung geplant.",
+      faq_q5: "Was passiert, wenn das Ziel nicht erreicht wird?",
+      faq_a5: "Realisierung etapami według dostępnych środków.",
+      faq_q6: "Wie kann ich den Fortschritt verfolgen?",
+      faq_a6: "Der Fortschritt wird auf der Crowdfunding-Seite, der Projektseite und Discord veröffentlicht.",
+      faq_q7: "Ist das nur zum Spaß?",
+      faq_a7: "Nein — dies ist ein Bildungsprojekt mit einer Mission.",
+      faq_q8: "Wird das Projekt Open-Source sein?",
+      faq_a8: "Ja — ein Teil der Materialien wird Open-Source sein.",
+      contact_title: "Kontakt & Community",
+      contact_text: "Discord (bald) • GitHub: github.com/antonihelbigip/EduCraft",
+      footer_text: "© 2025 EduCraft • MIT License • Made by Antoni"
+    }
+  };
 
-// ------------------- Funkcja dynamicznego FAQ -------------------
-function applyLanguage(lang){
-  const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
-  document.documentElement.lang = lang;
+  // dynamic FAQ generator + language switcher
+  function applyLanguage(lang){
+    const dict = TRANSLATIONS[lang] || TRANSLATIONS['pl'];
+    document.documentElement.lang = lang;
 
-  // zwykłe teksty
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    if(dict[key]) el.textContent = dict[key];
-  });
+    // zwykłe teksty
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(dict[key]) el.textContent = dict[key];
+    });
 
-  // dynamiczne FAQ
-  const faq = document.getElementById('faq');
-  if(faq && dict){
-    faq.querySelectorAll('details').forEach(d=>d.remove());
-    for(let i=1;i<=8;i++){
-      const qKey = 'faq_q'+i;
-      const aKey = 'faq_a'+i;
-      if(dict[qKey] && dict[aKey]){
-        const details = document.createElement('details');
-        const summary = document.createElement('summary');
-        summary.textContent = dict[qKey];
-        const p = document.createElement('p');
-        p.textContent = dict[aKey];
-        details.appendChild(summary);
-        details.appendChild(p);
-        faq.appendChild(details);
+    // dynamiczne FAQ
+    const faq = document.getElementById('faq');
+    if(faq && dict){
+      faq.querySelectorAll('details').forEach(d=>d.remove());
+      for(let i=1;i<=8;i++){
+        const qKey = 'faq_q'+i;
+        const aKey = 'faq_a'+i;
+        if(dict[qKey] && dict[aKey]){
+          const details = document.createElement('details');
+          const summary = document.createElement('summary');
+          summary.textContent = dict[qKey];
+          const p = document.createElement('p');
+          p.textContent = dict[aKey];
+          details.appendChild(summary);
+          details.appendChild(p);
+          faq.appendChild(details);
+        }
       }
     }
+
+    try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
+    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
   }
 
-  try{ localStorage.setItem('educraft_lang', lang); } catch(e){}
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===lang));
-}
+  // inicjalizacja języka
+  (function initLang(){
+    const urlParams = new URLSearchParams(window.location.search);
+    let lang = urlParams.get('lang') || localStorage.getItem('educraft_lang') || (navigator.language||'pl').slice(0,2);
+    if(!['pl','en','de'].includes(lang)) lang='pl';
+    applyLanguage(lang);
+  })();
 
-// inicjalizacja języka
-(function initLang(){
-  const urlParams = new URLSearchParams(window.location.search);
-  let lang = urlParams.get('lang') || localStorage.getItem('educraft_lang') || navigator.language.slice(0,2);
-  if(!['pl','en','de'].includes(lang)) lang='pl';
-  applyLanguage(lang);
-})();
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
+  });
 
-// przyciski zmiany języka
-document.querySelectorAll('.lang-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
-});
-</script>
+  // minimal smooth scroll for topbar links (preserve offset for fixed topbar)
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', function(e){
+      const href = this.getAttribute('href');
+      // allow external anchors like "#" to pass
+      if(!href || href === "#") return;
+      const target = document.querySelector(href);
+      if(!target) return;
+      e.preventDefault();
+      const headerOffset = document.querySelector('.topbar') ? document.querySelector('.topbar').offsetHeight : 72;
+      const rect = target.getBoundingClientRect();
+      const offsetTop = window.pageYOffset + rect.top - headerOffset - 12;
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+    });
+  });
+  </script>
 </body>
 </html>
