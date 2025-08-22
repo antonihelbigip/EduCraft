@@ -149,15 +149,33 @@
     </section>
 
     <!-- Progress / updates -->
-    <section id="updates" class="card muted" aria-labelledby="updates-heading">
-      <h3 id="updates-heading" data-i18n="updates_title">Aktualizacje</h3>
-      <ul>
-        <li data-i18n="updates_li1">2× HP EliteDesk (Ryzen 5, 32GB, SSD) – serwery postawione</li>
-        <li data-i18n="updates_li2">Tryby: Proxy, Lobby, PvP, EarthMC</li>
-        <li data-i18n="updates_li3">Pluginy: EssentialsX, LuckPerms, Citizens, WorldEdit, WorldGuard, TAB, Dynmap</li>
-        <li data-i18n="updates_li4">Monitoring energii (miernik Teccus) – plan integracji z Home Assistant</li>
-      </ul>
-    </section>
+    <section id="updates-frame" class="card muted" aria-labelledby="updates-heading">
+  <h3 id="updates-heading" data-i18n="updates_title">🔔 Aktualizacje projektu</h3>
+
+  <div class="iframe-wrap" style="position:relative;">
+    <iframe id="zrzutka-iframe"
+      src="https://zrzutka.pl/zbudujmy-1-w-polsce-edukacyjny-eco-serwer-minecraft-z-oze-b5j6vm#updates"
+      style="width:100%;height:520px;border:0;"
+      loading="lazy"
+      title="Aktualizacje z Zrzutka">
+    </iframe>
+    <div class="iframe-controls" style="position:absolute;right:10px;top:8px;display:flex;gap:8px;">
+      <button id="open-full" class="btn btn-outline" title="Otwórz w nowej karcie">Otwórz</button>
+      <button id="refresh-iframe" class="btn btn-outline" title="Odśwież zawartość">Odśwież</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('open-full').addEventListener('click', ()=>{
+    window.open(document.getElementById('zrzutka-iframe').src, '_blank', 'noopener');
+  });
+  document.getElementById('refresh-iframe').addEventListener('click', ()=>{
+    const f = document.getElementById('zrzutka-iframe');
+    f.src = f.src.split('#')[0] + '#updates'; // reset
+  });
+</script>
+
 
     <!-- Multimedia -->
     <section id="multimedia" class="card gallery" aria-labelledby="gallery-heading">
