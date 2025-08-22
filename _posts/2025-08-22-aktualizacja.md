@@ -6,8 +6,8 @@ categories: [aktualizacje]
 lang: pl
 images:
 images:
-  - https://raw.githubusercontent.com/antonihelbigip/EduCraft/main/images/eLK49S3ES8vxFGuL.jpg
-  - https://raw.githubusercontent.com/antonihelbigip/EduCraft/main/images/L1EvnWqKu3qNUTtY.jpg
+  - images/eLK49S3ES8vxFGuL.jpg
+  - /images/L1EvnWqKu3qNUTtY.jpg
 ---
 
 Hej! 👋
