@@ -233,7 +233,7 @@ a:focus, button:focus { outline: 3px solid rgba(14,165,233,0.14); outline-offset
 /* ===== Dodatki stylów dla sekcji Aktualizacje / postów (wklej na końcu style.css) ===== */
 
 /* Updates container */
-#updates-list { 
+#updates-list {
   transition: background .18s ease;
   padding: 12px;
   box-sizing: border-box;
@@ -242,12 +242,36 @@ a:focus, button:focus { outline: 3px solid rgba(14,165,233,0.14); outline-offset
 /* Karta wpisu */
 .post-card {
   transition: transform .12s ease, box-shadow .12s ease;
+  display: block;
+  overflow: visible;
+  border-radius: 10px;
 }
 .post-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(2,6,23,0.08); }
 
+/* post thumb (miniaturka) - zamiast inline styles */
+.post-thumb { flex: 0 0 160px; max-width:160px; }
+.post-thumb img { width: 100%; height: 100%; object-fit: cover; display:block; border-radius:6px; }
+
 /* excerpt & full content */
 .post-excerpt { color: #0f1724; opacity: 0.95; }
-.post-full { color: #0f1724; background: transparent; }
+.post-full { color: #0f1724; background: transparent; /* initial visual */ }
+
+/* Dodane: płynne rozwijanie treści wpisu
+   NOTE: JavaScript ustawia inline style display:block/none i też przełącza klasę .open.
+   Tutaj dbamy o płynne max-height/opacity kiedy element jest widoczny oraz padding */
+.post-full {
+  /* keep display controlled by JS, but provide transition when class toggled */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding-top: 0;
+  transition: max-height .36s ease, opacity .24s ease, padding-top .24s ease;
+}
+.post-full.open {
+  max-height: 2200px; /* wystarczająco duże dla większości wpisów */
+  opacity: 1;
+  padding-top: 12px;
+}
 
 /* Markdown inside .post-full */
 .post-full h1, .post-full h2, .post-full h3 { margin: 0.6rem 0; color: var(--dark); }
@@ -262,10 +286,37 @@ a:focus, button:focus { outline: 3px solid rgba(14,165,233,0.14); outline-offset
 /* small hint line */
 .post-card .small { color: #6b7280; font-size: 13px; }
 
+/* przycisk 'Czytaj / Zwiń' - spójny wygląd */
+.btn-open {
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  border: 1px solid rgba(10,20,30,0.06);
+  background: transparent;
+  color: var(--dark);
+  transition: background .14s, transform .08s;
+}
+.btn-open:hover { background: rgba(10,20,30,0.04); transform: translateY(-1px); }
+
 /* scrollbar inside updates-list */
 #updates-list::-webkit-scrollbar { width:10px; height:10px; }
 #updates-list::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary), var(--accent)); border-radius:999px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06); }
 #updates-list::-webkit-scrollbar-track { background: rgba(0,0,0,0.02); border-radius:999px; }
+
+/* placeholder image fallback styling (jeśli używany) */
+.post-thumb .placeholder {
+  width:100%;
+  height:100%;
+  background: linear-gradient(180deg,#f1f5f9,#e6eef6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#6b7280;
+  font-weight:600;
+  border-radius:6px;
+}
 
 /* filter button active */
 .filter-btn.active, .lang-btn.active { background: var(--accent); color: #fff; border-color: transparent; box-shadow: 0 6px 18px rgba(22,163,74,0.08); }
@@ -281,4 +332,3 @@ a:focus, button:focus { outline: 3px solid rgba(14,165,233,0.14); outline-offset
   .post-card { padding:10px; }
   .post-excerpt { font-size: 14px; }
 }
-
